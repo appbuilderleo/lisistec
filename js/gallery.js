@@ -1,0 +1,300 @@
+/**
+ * LISIS Gallery Page JavaScript
+ * Handles gallery display, filtering, and modal functionality
+ */
+
+class Gallery {
+    constructor() {
+        this.images = [];
+        this.filteredImages = [];
+        this.currentFilter = 'all';
+        this.currentPage = 1;
+        this.imagesPerPage = 12;
+        this.currentImageIndex = 0;
+        this.apiBase = 'admin/api/';
+        this.imageBase = 'admin/uploads/images/';
+        
+        this.init();
+    }
+    
+    init() {
+        this.bindEvents();
+        this.loadImages();
+    }
+    
+    bindEvents() {
+        // Filter buttons
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                this.setFilter(e.target.dataset.filter);
+            });
+        });
+        
+        // Load more button
+        const loadMoreBtn = document.getElementById('loadMoreBtn');
+        if (loadMoreBtn) {
+            loadMoreBtn.addEventListener('click', () => {
+                this.loadMoreImages();
+            });
+        }
+        
+        // Modal events - use event delegation to handle dynamically created elements
+        document.addEventListener('click', (e) => {
+            if (e.target.id === 'modalClose' || e.target.closest('#modalClose')) {
+                this.closeModal();
+            }
+            if (e.target.classList.contains('modal-overlay')) {
+                this.closeModal();
+            }
+            if (e.target.id === 'modalPrev' || e.target.closest('#modalPrev')) {
+                this.showPreviousImage();
+            }
+            if (e.target.id === 'modalNext' || e.target.closest('#modalNext')) {
+                this.showNextImage();
+            }
+        });
+        
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            const modal = document.getElementById('imageModal');
+            if (modal && modal.classList.contains('show')) {
+                switch(e.key) {
+                    case 'Escape':
+                        this.closeModal();
+                        break;
+                    case 'ArrowLeft':
+                        this.showPreviousImage();
+                        break;
+                    case 'ArrowRight':
+                        this.showNextImage();
+                        break;
+                }
+            }
+        });
+    }
+    
+    async loadImages() {
+        const loading = document.getElementById('galleryLoading');
+        const noImages = document.getElementById('noImages');
+        const grid = document.getElementById('galleryGrid');
+        
+        try {
+            loading.style.display = 'block';
+            noImages.style.display = 'none';
+            
+            const response = await fetch(`${this.apiBase}images.php`);
+            const data = await response.json();
+            
+            if (data.images && data.images.length > 0) {
+                this.images = data.images;
+                this.applyFilter();
+                loading.style.display = 'none';
+            } else {
+                loading.style.display = 'none';
+                noImages.style.display = 'block';
+            }
+        } catch (error) {
+            console.error('Erro ao carregar imagens:', error);
+            loading.style.display = 'none';
+            noImages.style.display = 'block';
+        }
+    }
+    
+    setFilter(filter) {
+        // Update active filter button
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.classList.remove('active');
+        });
+        
+        document.querySelector(`[data-filter="${filter}"]`).classList.add('active');
+        
+        this.currentFilter = filter;
+        this.currentPage = 1;
+        this.applyFilter();
+    }
+    
+    applyFilter() {
+        if (this.currentFilter === 'all') {
+            this.filteredImages = [...this.images];
+        } else {
+            // Check both category_slug and category_name for filtering
+            this.filteredImages = this.images.filter(image => {
+                const categorySlug = image.category_slug ? image.category_slug.toLowerCase() : '';
+                const categoryName = image.category_name ? image.category_name.toLowerCase() : '';
+                const filterValue = this.currentFilter.toLowerCase();
+                
+                return categorySlug === filterValue || 
+                       categoryName === filterValue ||
+                       categorySlug.includes(filterValue) ||
+                       categoryName.includes(filterValue);
+            });
+        }
+        
+        this.renderImages();
+        this.updateLoadMoreButton();
+    }
+    
+    renderImages() {
+        const grid = document.getElementById('galleryGrid');
+        const loading = document.getElementById('galleryLoading');
+        const noImages = document.getElementById('noImages');
+        
+        // Hide loading and no images states
+        loading.style.display = 'none';
+        noImages.style.display = 'none';
+        
+        if (this.filteredImages.length === 0) {
+            noImages.style.display = 'block';
+            return;
+        }
+        
+        const startIndex = (this.currentPage - 1) * this.imagesPerPage;
+        const endIndex = startIndex + this.imagesPerPage;
+        const imagesToShow = this.filteredImages.slice(0, endIndex);
+        
+        grid.innerHTML = imagesToShow.map((image, index) => `
+            <div class="gallery-item" data-index="${index}" onclick="gallery.openModal(${index})">
+                <img src="admin/${image.file_path}" alt="${image.title || image.original_name}" loading="lazy">
+                <div class="gallery-overlay">
+                    <div class="gallery-icon">
+                        ${this.getCategoryIcon(image.category_slug)}
+                    </div>
+                    <div class="gallery-content">
+                        <h3>${image.title || image.original_name}</h3>
+                        <p>${image.description || 'Projeto desenvolvido pela equipa LISIS'}</p>
+                    </div>
+                </div>
+            </div>
+        `).join('');
+    }
+    
+    getCategoryIcon(category) {
+        const icons = {
+            'projetos': '<i class="fas fa-camera"></i>',
+            'servicos': '<i class="fas fa-cogs"></i>',
+            'parceiros': '<i class="fas fa-handshake"></i>',
+            'logos': '<i class="fas fa-palette"></i>',
+            'default': '<i class="fas fa-image"></i>'
+        };
+        
+        return icons[category] || icons.default;
+    }
+    
+    loadMoreImages() {
+        this.currentPage++;
+        this.renderImages();
+        this.updateLoadMoreButton();
+    }
+    
+    updateLoadMoreButton() {
+        const loadMoreBtn = document.getElementById('loadMoreBtn');
+        const totalPages = Math.ceil(this.filteredImages.length / this.imagesPerPage);
+        
+        if (this.currentPage >= totalPages) {
+            loadMoreBtn.style.display = 'none';
+        } else {
+            loadMoreBtn.style.display = 'block';
+        }
+    }
+    
+    openModal(index) {
+        this.currentImageIndex = index;
+        const image = this.filteredImages[index];
+        
+        if (!image) return;
+        
+        const modal = document.getElementById('imageModal');
+        const modalImage = document.getElementById('modalImage');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalDescription = document.getElementById('modalDescription');
+        const modalCategory = document.getElementById('modalCategory');
+        const modalDate = document.getElementById('modalDate');
+        
+        // Update modal content
+        modalImage.src = 'admin/' + image.file_path;
+        modalImage.alt = image.title || image.original_name;
+        modalTitle.textContent = image.title || image.original_name;
+        modalDescription.textContent = image.description || 'Projeto desenvolvido pela equipa LISIS com foco em soluções tecnológicas inovadoras.';
+        modalCategory.innerHTML = `<i class="fas fa-tag"></i> ${image.category_name || 'Projeto'}`;
+        modalDate.innerHTML = `<i class="fas fa-calendar"></i> ${this.formatDate(image.upload_date)}`;
+        
+        // Show modal with proper display and class
+        modal.style.display = 'flex';
+        setTimeout(() => {
+            modal.classList.add('show');
+        }, 10);
+        document.body.style.overflow = 'hidden';
+        
+        // Update navigation buttons
+        this.updateModalNavigation();
+    }
+    
+    closeModal() {
+        const modal = document.getElementById('imageModal');
+        modal.classList.remove('show');
+        setTimeout(() => {
+            modal.style.display = 'none';
+        }, 300);
+        document.body.style.overflow = '';
+    }
+    
+    showPreviousImage() {
+        if (this.currentImageIndex > 0) {
+            this.currentImageIndex--;
+            this.updateModalContent();
+        }
+    }
+    
+    showNextImage() {
+        if (this.currentImageIndex < this.filteredImages.length - 1) {
+            this.currentImageIndex++;
+            this.updateModalContent();
+        }
+    }
+    
+    updateModalContent() {
+        const image = this.filteredImages[this.currentImageIndex];
+        
+        if (!image) return;
+        
+        const modalImage = document.getElementById('modalImage');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalDescription = document.getElementById('modalDescription');
+        const modalCategory = document.getElementById('modalCategory');
+        const modalDate = document.getElementById('modalDate');
+        
+        modalImage.src = 'admin/' + image.file_path;
+        modalImage.alt = image.title || image.original_name;
+        modalTitle.textContent = image.title || image.original_name;
+        modalDescription.textContent = image.description || 'Projeto desenvolvido pela equipa LISIS com foco em soluções tecnológicas inovadoras.';
+        modalCategory.innerHTML = `<i class="fas fa-tag"></i> ${image.category_name || 'Projeto'}`;
+        modalDate.innerHTML = `<i class="fas fa-calendar"></i> ${this.formatDate(image.upload_date)}`;
+        
+        this.updateModalNavigation();
+    }
+    
+    updateModalNavigation() {
+        const modalPrev = document.getElementById('modalPrev');
+        const modalNext = document.getElementById('modalNext');
+        
+        // Show/hide navigation buttons based on current position
+        modalPrev.style.display = this.currentImageIndex > 0 ? 'flex' : 'none';
+        modalNext.style.display = this.currentImageIndex < this.filteredImages.length - 1 ? 'flex' : 'none';
+    }
+    
+    formatDate(dateString) {
+        if (!dateString) return 'Data não disponível';
+        
+        const date = new Date(dateString);
+        return date.toLocaleDateString('pt-PT', {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric'
+        });
+    }
+}
+
+// Initialize gallery when DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+    window.gallery = new Gallery();
+});

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Test</title>
+    <style>
+        .hidden { display: none !important; }
+        .modal { display: none; }
+        .modal.active { 
+            display: flex !important;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            align-items: center;
+            justify-content: center;
+        }
+        .dashboard { 
+            display: flex;
+            background: #f0f0f0; 
+            padding: 20px;
+            min-height: 100vh;
+        }
+        .dashboard.hidden { display: none; }
+    </style>
+</head>
+<body>
+    <h1>Simple Display Test</h1>
+    
+    <!-- Test 1: Modal NOT active (should be hidden) -->
+    <div id="loginModal1" class="modal">
+        <div style="background: white; padding: 20px;">
+            <h2>LOGIN MODAL (no active class)</h2>
+            <p>This should be HIDDEN</p>
+        </div>
+    </div>
+    
+    <!-- Test 2: Modal WITH active class (should be visible) -->
+    <div id="loginModal2" class="modal active">
+        <div style="background: white; padding: 20px;">
+            <h2>LOGIN MODAL (with active class)</h2>
+            <p>This should be VISIBLE</p>
+        </div>
+    </div>
+    
+    <!-- Test 3: Dashboard WITH hidden class (should be hidden) -->
+    <div id="adminDashboard1" class="dashboard hidden">
+        <h2>DASHBOARD (with hidden class)</h2>
+        <p>This should be HIDDEN</p>
+    </div>
+    
+    <!-- Test 4: Dashboard WITHOUT hidden class (should be visible) -->
+    <div id="adminDashboard2" class="dashboard">
+        <h2>DASHBOARD (no hidden class)</h2>
+        <p>This should be VISIBLE</p>
+    </div>
+    
+    <hr>
+    <button onclick="testToggle()">Toggle Classes</button>
+    
+    <script>
+        console.log('=== INITIAL STATE ===');
+        ['loginModal1', 'loginModal2', 'adminDashboard1', 'adminDashboard2'].forEach(id => {
+            const el = document.getElementById(id);
+            console.log(id + ':', {
+                className: el.className,
+                display: window.getComputedStyle(el).display,
+                hasHidden: el.classList.contains('hidden'),
+                hasActive: el.classList.contains('active')
+            });
+        });
+        
+        function testToggle() {
+            const modal = document.getElementById('loginModal2');
+            const dashboard = document.getElementById('adminDashboard2');
+            
+            console.log('=== BEFORE TOGGLE ===');
+            console.log('modal classes:', modal.className);
+            console.log('dashboard classes:', dashboard.className);
+            
+            modal.classList.remove('active');
+            dashboard.classList.remove('hidden');
+            
+            console.log('=== AFTER TOGGLE ===');
+            console.log('modal classes:', modal.className);
+            console.log('modal display:', window.getComputedStyle(modal).display);
+            console.log('dashboard classes:', dashboard.className);
+            console.log('dashboard display:', window.getComputedStyle(dashboard).display);
+        }
+    </script>
+</body>
+</html>

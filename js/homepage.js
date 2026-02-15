@@ -1,0 +1,290 @@
+/**
+ * LISIS Homepage Dynamic Content
+ * Carrega imagens das categorias para as seções corretas
+ */
+
+class HomepageContent {
+    constructor() {
+        this.apiBase = 'admin/api/';
+        this.init();
+    }
+
+    async init() {
+        await this.loadPartners();
+        await this.loadServiceImages();
+    }
+
+    async loadPartners() {
+        try {
+            // Carregar imagens da categoria "Parceiros"
+            const response = await fetch(`${this.apiBase}images.php?category=parceiros`);
+            const data = await response.json();
+            
+            if (data.images && data.images.length > 0) {
+                this.renderPartners(data.images);
+            } else {
+                console.log('Nenhuma imagem de parceiros encontrada, mantendo imagens estáticas');
+            }
+        } catch (error) {
+            console.error('Erro ao carregar parceiros:', error);
+            // Manter imagens estáticas em caso de erro
+        }
+    }
+
+    async loadServiceImages() {
+        try {
+            // Carregar imagens da categoria "Serviços" para usar como background ou exemplos
+            const response = await fetch(`${this.apiBase}images.php?category=servicos`);
+            const data = await response.json();
+            
+            if (data.images && data.images.length > 0) {
+                console.log(`${data.images.length} imagens de serviços carregadas`);
+                // Pode ser usado para backgrounds ou exemplos futuros
+            }
+        } catch (error) {
+            console.error('Erro ao carregar imagens de serviços:', error);
+        }
+    }
+
+    renderPartners(partners) {
+        const partnersGrid = document.querySelector('.partners-grid');
+        if (!partnersGrid) return;
+
+        console.log(`Adicionando ${partners.length} parceiros da base de dados`);
+
+        // Manter parceiros estáticos existentes e adicionar os novos
+        const staticPartners = [
+            { src: 'parceiros/a4d10aa8-5376-4fed-9ad8-c25d16f6c3c4.png', alt: 'Parceiro' },
+            { src: 'parceiros/logo-cemoqe-2.png', alt: 'CEMOQE' },
+            { src: 'parceiros/logotipo.png', alt: 'Parceiro' }
+        ];
+
+        // Adicionar parceiros da base de dados
+        partners.forEach(partner => {
+            const partnerDiv = document.createElement('div');
+            partnerDiv.className = 'partner-logo dynamic-partner';
+            partnerDiv.innerHTML = `
+                <img src="admin/${partner.file_path}" 
+                     alt="${partner.title || 'Parceiro'}" 
+                     title="${partner.title || 'Parceiro'}"
+                     loading="lazy"
+                     onerror="this.style.display='none'">
+            `;
+            partnersGrid.appendChild(partnerDiv);
+        });
+
+        // Contar total de parceiros (estáticos + dinâmicos)
+        const totalPartners = partnersGrid.children.length;
+        
+        // Se há mais de 6 parceiros, implementar carrossel
+        if (totalPartners > 6) {
+            this.initPartnersCarousel(partnersGrid);
+        } else {
+            // Ajustar grid para mostrar todos
+            partnersGrid.style.display = 'grid';
+            partnersGrid.style.gridTemplateColumns = `repeat(${Math.min(totalPartners, 4)}, 1fr)`;
+        }
+    }
+
+    initPartnersCarousel(partnersGrid) {
+        console.log('Inicializando carrossel de parceiros');
+        
+        // Converter grid em carrossel
+        partnersGrid.style.display = 'flex';
+        partnersGrid.style.overflow = 'hidden';
+        partnersGrid.style.position = 'relative';
+        
+        // Criar wrapper para animação
+        const wrapper = document.createElement('div');
+        wrapper.className = 'partners-carousel-wrapper';
+        wrapper.style.display = 'flex';
+        wrapper.style.transition = 'transform 0.5s ease';
+        wrapper.style.width = '100%';
+        
+        // Mover todos os logos para o wrapper
+        const logos = Array.from(partnersGrid.children);
+        logos.forEach(logo => {
+            logo.style.minWidth = '200px';
+            logo.style.flex = '0 0 200px';
+            wrapper.appendChild(logo);
+        });
+        
+        partnersGrid.appendChild(wrapper);
+        
+        // Adicionar controles de navegação
+        this.addCarouselControls(partnersGrid, wrapper, logos.length);
+        
+        // Auto-play
+        this.startCarouselAutoPlay(wrapper, logos.length);
+    }
+
+    addCarouselControls(container, wrapper, totalItems) {
+        // Botão anterior
+        const prevBtn = document.createElement('button');
+        prevBtn.className = 'carousel-btn carousel-prev';
+        prevBtn.innerHTML = '<i class="fas fa-chevron-left"></i>';
+        prevBtn.style.cssText = `
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(24, 67, 57, 0.8);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        `;
+        
+        // Botão próximo
+        const nextBtn = document.createElement('button');
+        nextBtn.className = 'carousel-btn carousel-next';
+        nextBtn.innerHTML = '<i class="fas fa-chevron-right"></i>';
+        nextBtn.style.cssText = prevBtn.style.cssText.replace('left: 10px', 'right: 10px');
+        
+        // Indicadores
+        const indicators = document.createElement('div');
+        indicators.className = 'carousel-indicators';
+        indicators.style.cssText = `
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 20px;
+        `;
+        
+        const visibleItems = Math.floor(container.offsetWidth / 200) || 3;
+        const totalSlides = Math.ceil(totalItems / visibleItems);
+        
+        for (let i = 0; i < totalSlides; i++) {
+            const dot = document.createElement('button');
+            dot.className = `carousel-dot ${i === 0 ? 'active' : ''}`;
+            dot.style.cssText = `
+                width: 12px;
+                height: 12px;
+                border-radius: 50%;
+                border: none;
+                background: ${i === 0 ? '#184339' : '#ccc'};
+                cursor: pointer;
+                transition: all 0.3s ease;
+            `;
+            indicators.appendChild(dot);
+        }
+        
+        container.appendChild(prevBtn);
+        container.appendChild(nextBtn);
+        container.parentNode.appendChild(indicators);
+        
+        // Event listeners
+        let currentSlide = 0;
+        
+        const updateCarousel = (slideIndex) => {
+            const translateX = -(slideIndex * visibleItems * 200);
+            wrapper.style.transform = `translateX(${translateX}px)`;
+            
+            // Atualizar indicadores
+            indicators.querySelectorAll('.carousel-dot').forEach((dot, index) => {
+                dot.style.background = index === slideIndex ? '#184339' : '#ccc';
+            });
+        };
+        
+        nextBtn.addEventListener('click', () => {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            updateCarousel(currentSlide);
+        });
+        
+        prevBtn.addEventListener('click', () => {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            updateCarousel(currentSlide);
+        });
+        
+        indicators.querySelectorAll('.carousel-dot').forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                currentSlide = index;
+                updateCarousel(currentSlide);
+            });
+        });
+        
+        // Hover effects
+        [prevBtn, nextBtn].forEach(btn => {
+            btn.addEventListener('mouseenter', () => {
+                btn.style.background = 'rgba(24, 67, 57, 1)';
+                btn.style.transform = 'translateY(-50%) scale(1.1)';
+            });
+            btn.addEventListener('mouseleave', () => {
+                btn.style.background = 'rgba(24, 67, 57, 0.8)';
+                btn.style.transform = 'translateY(-50%) scale(1)';
+            });
+        });
+    }
+
+    startCarouselAutoPlay(wrapper, totalItems) {
+        const visibleItems = 3;
+        const totalSlides = Math.ceil(totalItems / visibleItems);
+        let currentSlide = 0;
+        
+        setInterval(() => {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            const translateX = -(currentSlide * visibleItems * 200);
+            wrapper.style.transform = `translateX(${translateX}px)`;
+            
+            // Atualizar indicadores se existirem
+            const indicators = document.querySelectorAll('.carousel-dot');
+            indicators.forEach((dot, index) => {
+                dot.style.background = index === currentSlide ? '#184339' : '#ccc';
+            });
+        }, 4000); // Muda a cada 4 segundos
+    }
+
+    // Método para carregar logos da categoria "Logos" se necessário
+    async loadLogos() {
+        try {
+            const response = await fetch(`${this.apiBase}images.php?category=logos`);
+            const data = await response.json();
+            
+            if (data.images && data.images.length > 0) {
+                console.log(`${data.images.length} logos carregados`);
+                // Pode ser usado para seção de logos/trabalhos futuros
+                return data.images;
+            }
+        } catch (error) {
+            console.error('Erro ao carregar logos:', error);
+        }
+        return [];
+    }
+
+    // Método para carregar projetos em destaque
+    async loadFeaturedProjects() {
+        try {
+            const response = await fetch(`${this.apiBase}images.php?category=projetos&limit=3`);
+            const data = await response.json();
+            
+            if (data.images && data.images.length > 0) {
+                console.log(`${data.images.length} projetos em destaque carregados`);
+                return data.images;
+            }
+        } catch (error) {
+            console.error('Erro ao carregar projetos:', error);
+        }
+        return [];
+    }
+}
+
+// Inicializar quando a página carregar
+document.addEventListener('DOMContentLoaded', () => {
+    new HomepageContent();
+});
+
+// Também inicializar se o DOM já estiver carregado
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+        new HomepageContent();
+    });
+} else {
+    new HomepageContent();
+}
