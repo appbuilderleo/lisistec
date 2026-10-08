@@ -39,8 +39,8 @@ export default function Navbar() {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          isScrolled ? "glass-nav py-3 shadow-card" : "py-5 bg-transparent"
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 glass-nav ${
+          isScrolled ? "py-3 shadow-card" : "py-4"
         }`}
         role="banner"
       >

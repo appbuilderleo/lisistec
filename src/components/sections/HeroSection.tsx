@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { ArrowRight, ChevronDown, Code2, Smartphone, Settings, HeadphonesIcon } from "lucide-react";
+import { ArrowRight, Code2, Smartphone, Settings, HeadphonesIcon } from "lucide-react";
 
 const typewriterWords = [
   "Soluções Digitais",
@@ -130,25 +130,6 @@ export default function HeroSection() {
                 Ver Portfólio
               </Link>
             </div>
-
-            {/* Trust badges */}
-            <div className="flex items-center gap-6 mt-10">
-              {[
-                { value: "5+", label: "Projetos" },
-                { value: "3+", label: "Anos" },
-                { value: "100%", label: "Satisfação" },
-              ].map(({ value, label }) => (
-                <div
-                  key={label}
-                  className="flex flex-col items-center border-r border-border last:border-0 pr-6 last:pr-0"
-                >
-                  <span className="text-2xl font-heading font-700 text-primary">
-                    {value}
-                  </span>
-                  <span className="text-xs text-text-muted">{label}</span>
-                </div>
-              ))}
-            </div>
           </div>
 
           {/* Right: Visual */}
@@ -238,39 +219,23 @@ export default function HeroSection() {
             />
           </div>
         </div>
-      </div>
 
-      {/* Scroll indicator */}
-      <a
-        href="#stats"
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-text-faint hover:text-primary transition-colors cursor-pointer"
-        aria-label="Rolar para baixo"
-      >
-        <span className="text-xs tracking-widest uppercase">Explorar</span>
-        <ChevronDown size={20} className="animate-bounce" />
-      </a>
-
-      {/* Quick Services Bar */}
-      <div
-        className="absolute bottom-0 left-0 right-0 border-t border-border hidden lg:block"
-        style={{ background: "rgba(13, 31, 53, 0.6)", backdropFilter: "blur(12px)" }}
-        id="stats"
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-4 divide-x divide-border">
+        {/* Quick Services Bar (From Sitemap) */}
+        <div className="mt-16 pt-8 border-t border-border/40 w-full" id="stats">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {quickServices.map(({ icon: Icon, label, desc }) => (
               <div
                 key={label}
-                className="flex items-center gap-4 px-6 py-4 hover:bg-primary/5 transition-colors cursor-default"
+                className="glass-card p-5 flex items-center gap-4 hover:border-primary/40 transition-all group cursor-default"
               >
-                <div className="service-icon w-10 h-10 flex-shrink-0">
-                  <Icon size={20} />
+                <div className="w-11 h-11 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary group-hover:scale-110 group-hover:bg-primary group-hover:text-bg transition-all flex-shrink-0">
+                  <Icon size={22} />
                 </div>
                 <div>
-                  <p className="text-xs font-heading font-600 text-white">
+                  <p className="text-sm font-heading font-600 text-white group-hover:text-primary transition-colors">
                     {label}
                   </p>
-                  <p className="text-[11px] text-text-muted">{desc}</p>
+                  <p className="text-xs text-text-muted mt-0.5">{desc}</p>
                 </div>
               </div>
             ))}
