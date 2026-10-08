@@ -1,0 +1,24 @@
+{
+  "name": "Lisis Tecnologias e Serviços",
+  "short_name": "Lisis Tech",
+  "description": "Smart Solutions. Real Growth.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#020C1B",
+  "theme_color": "#00D4AA",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "categories": ["business", "technology"],
+  "lang": "pt-MZ",
+  "orientation": "portrait-primary"
+}
