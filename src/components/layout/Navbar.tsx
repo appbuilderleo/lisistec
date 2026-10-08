@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 
@@ -53,33 +54,14 @@ export default function Navbar() {
             className="flex items-center gap-3 group"
             aria-label="Lisis Tecnologias e Serviços - Página Inicial"
           >
-            <div className="relative w-10 h-10">
-              {/* SVG Logo - Triangle with neon glow */}
-              <svg viewBox="0 0 40 40" fill="none" className="w-10 h-10">
-                <polygon
-                  points="20,4 36,34 4,34"
-                  fill="none"
-                  stroke="#00D4AA"
-                  strokeWidth="2.5"
-                  strokeLinejoin="round"
-                />
-                <polygon
-                  points="20,12 30,30 10,30"
-                  fill="rgba(0,212,170,0.15)"
-                  stroke="#00D4AA"
-                  strokeWidth="1.5"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </div>
-            <div className="leading-tight">
-              <span className="block text-sm font-heading font-700 text-white tracking-wide">
-                LISIS
-              </span>
-              <span className="block text-[10px] text-text-muted tracking-widest uppercase">
-                Tecnologias
-              </span>
-            </div>
+            <Image
+              src="/logolisisnova.png"
+              alt="Lisis Tecnologias e Serviços"
+              width={160}
+              height={50}
+              priority
+              className="h-9 sm:h-11 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+            />
           </Link>
 
           {/* Desktop Links */}
@@ -140,23 +122,14 @@ export default function Navbar() {
           </button>
 
           {/* Logo in mobile menu */}
-          <div className="mb-8">
-            <svg viewBox="0 0 40 40" fill="none" className="w-14 h-14 mx-auto">
-              <polygon
-                points="20,4 36,34 4,34"
-                fill="none"
-                stroke="#00D4AA"
-                strokeWidth="2.5"
-                strokeLinejoin="round"
-              />
-              <polygon
-                points="20,12 30,30 10,30"
-                fill="rgba(0,212,170,0.15)"
-                stroke="#00D4AA"
-                strokeWidth="1.5"
-                strokeLinejoin="round"
-              />
-            </svg>
+          <div className="mb-8 flex justify-center">
+            <Image
+              src="/logolisisnova.png"
+              alt="Lisis Tecnologias e Serviços"
+              width={180}
+              height={55}
+              className="h-12 w-auto object-contain"
+            />
           </div>
 
           <ul className="flex flex-col items-center gap-6" role="list">

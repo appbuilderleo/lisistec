@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Mail, Phone, MapPin } from "lucide-react";
 
 function LinkedinIcon({ size = 16 }: { size?: number }) {
@@ -90,33 +91,16 @@ export default function Footer() {
           <div className="lg:col-span-2">
             <Link
               href="/"
-              className="flex items-center gap-3 mb-5"
+              className="inline-flex items-center gap-3 mb-5 group"
               aria-label="Lisis Tecnologias - Página Inicial"
             >
-              <svg viewBox="0 0 40 40" fill="none" className="w-10 h-10">
-                <polygon
-                  points="20,4 36,34 4,34"
-                  fill="none"
-                  stroke="#00D4AA"
-                  strokeWidth="2.5"
-                  strokeLinejoin="round"
-                />
-                <polygon
-                  points="20,12 30,30 10,30"
-                  fill="rgba(0,212,170,0.15)"
-                  stroke="#00D4AA"
-                  strokeWidth="1.5"
-                  strokeLinejoin="round"
-                />
-              </svg>
-              <div>
-                <span className="block font-heading font-700 text-white text-sm tracking-wide">
-                  LISIS TECNOLOGIAS
-                </span>
-                <span className="block text-[10px] text-text-muted tracking-widest uppercase">
-                  E Serviços
-                </span>
-              </div>
+              <Image
+                src="/logolisisnova.png"
+                alt="Lisis Tecnologias e Serviços"
+                width={170}
+                height={55}
+                className="h-10 sm:h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+              />
             </Link>
 
             <p className="text-text-muted text-sm leading-relaxed mb-6 max-w-xs">
