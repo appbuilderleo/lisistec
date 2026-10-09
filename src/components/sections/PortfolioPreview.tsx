@@ -1,42 +1,59 @@
 import Link from "next/link";
-import { ArrowRight, ExternalLink } from "lucide-react";
+import { ArrowRight, ExternalLink, ShoppingCart, HeartPulse, HeartHandshake, UtensilsCrossed } from "lucide-react";
+import { getWhatsAppUrl } from "@/lib/constants";
 
 const projects = [
   {
-    id: "web-platform",
-    title: "Plataforma Web Empresarial",
-    category: "Sites e Plataformas Web",
-    description: "Portal corporativo com gestão de conteúdo e área de cliente.",
-    tags: ["Next.js", "CockroachDB", "Vercel"],
-    gradientFrom: "rgba(59,130,246,0.3)",
-    gradientTo: "rgba(0,212,170,0.2)",
+    id: "stoka",
+    title: "STOKA - Gestão de Vendas & PDV",
+    category: "Comércio Local & Retalho",
+    description:
+      "Sistema de gestão de vendas para comércio local, integrando ponto de venda (PDV) e sistema de pagamentos. Desenhado para agilizar o atendimento em caixas de mercearias e pequenas lojas.",
+    tags: ["Ponto de Venda", "Gestão de Stock", "Pagamentos", "Retalho"],
+    url: "https://stoka-three.vercel.app/",
+    icon: ShoppingCart,
+    gradientFrom: "rgba(0,212,170,0.35)",
+    gradientTo: "rgba(0,136,255,0.2)",
+    accentColor: "#00D4AA",
   },
   {
-    id: "mobile-app",
-    title: "App de Gestão Comercial",
-    category: "Aplicações Móveis",
-    description: "Aplicação móvel para gestão de vendas e inventário em tempo real.",
-    tags: ["React Native", "Node.js", "PostgreSQL"],
-    gradientFrom: "rgba(168,85,247,0.3)",
-    gradientTo: "rgba(59,130,246,0.2)",
+    id: "medspa",
+    title: "MEDSPA - Clínica de Medicina Integrativa",
+    category: "Saúde & Bem-Estar",
+    description:
+      "Site oficial de clínica especializada em Medicina Funcional e Integrativa. Inclui apresentação de tratamentos, corpo clínico e sistema direto de agendamento de consultas via WhatsApp.",
+    tags: ["Medicina Integrativa", "Agendamento WhatsApp", "Clínica", "Saúde"],
+    url: "https://medspa-kappa.vercel.app/",
+    icon: HeartPulse,
+    gradientFrom: "rgba(0,136,255,0.35)",
+    gradientTo: "rgba(147,51,234,0.2)",
+    accentColor: "#0088FF",
   },
   {
-    id: "erp-system",
-    title: "Sistema ERP Integrado",
-    category: "Sistemas de Gestão",
-    description: "ERP completo para empresa de médio porte com módulos financeiros e RH.",
-    tags: ["React", "Express", "MySQL"],
-    gradientFrom: "rgba(0,212,170,0.3)",
-    gradientTo: "rgba(34,197,94,0.2)",
+    id: "convite",
+    title: "Convite Digital Interativo",
+    category: "Eventos & Celebrações",
+    description:
+      "Convite de casamento digital eletrónico com confirmação de presença (RSVP) em tempo real, contagem regressiva, localização GPS da cerimónia e todos os detalhes do evento para os convidados.",
+    tags: ["Convite Digital", "Confirmação RSVP", "Casamentos", "Mobile First"],
+    url: "https://convite-two-beige.vercel.app/",
+    icon: HeartHandshake,
+    gradientFrom: "rgba(245,158,11,0.35)",
+    gradientTo: "rgba(236,72,153,0.2)",
+    accentColor: "#F59E0B",
   },
   {
-    id: "ui-design",
-    title: "Design UX para FinTech",
-    category: "Design e UX/UI",
-    description: "Redesign completo de aplicação financeira com foco em usabilidade.",
-    tags: ["Figma", "Design System", "Prototyping"],
-    gradientFrom: "rgba(249,115,22,0.3)",
-    gradientTo: "rgba(0,212,170,0.2)",
+    id: "muliba",
+    title: "MULIBA - Gastronomia & Restaurante",
+    category: "Restauração & E-Commerce",
+    description:
+      "Site de restaurante moderno com sistema de cardápio digital incorporado, pedidos online de comida para take-away/entrega e sistema de reserva de mesas, tudo num só lugar.",
+    tags: ["Cardápio Digital", "Pedidos Online", "Reserva de Mesas", "Restaurante"],
+    url: "https://muliba.vercel.app/",
+    icon: UtensilsCrossed,
+    gradientFrom: "rgba(239,68,68,0.35)",
+    gradientTo: "rgba(245,158,11,0.2)",
+    accentColor: "#EF4444",
   },
 ];
 
@@ -51,103 +68,186 @@ export default function PortfolioPreview() {
         {/* Header */}
         <div style={{ display: "flex", flexWrap: "wrap", alignItems: "flex-end", justifyContent: "space-between", gap: "24px", marginBottom: "64px" }}>
           <div>
-            <div className="section-tag" style={{ marginBottom: "16px" }}>Portfólio</div>
+            <div className="section-tag" style={{ marginBottom: "16px" }}>Portfólio em Produção</div>
             <h2
               id="portfolio-heading"
               style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "clamp(1.75rem, 4vw, 3rem)", fontWeight: 700, color: "#ffffff" }}
             >
               Projetos em <span className="text-gradient">destaque</span>
             </h2>
-            <p style={{ color: "#8B9CC0", marginTop: "16px", maxWidth: "480px" }}>
-              Conheça alguns dos trabalhos que desenvolvemos para os nossos clientes.
+            <p style={{ color: "#8B9CC0", marginTop: "16px", maxWidth: "560px", lineHeight: 1.7 }}>
+              Conheça alguns dos websites e aplicações web desenvolvidos pela nossa equipa que já estão no ar. Clique nos links para aceder diretamente a cada projecto em nova aba.
             </p>
           </div>
           <Link href="/portfolio" className="btn-secondary" style={{ flexShrink: 0 }} id="portfolio-view-all-btn">
-            Ver todos <ArrowRight size={18} />
+            Ver Todos os Projetos <ArrowRight size={18} />
           </Link>
         </div>
 
         {/* Portfolio Grid */}
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "24px" }}>
-          {projects.map(({ id, title, category, description, tags, gradientFrom, gradientTo }) => (
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(290px, 1fr))", gap: "28px" }}>
+          {projects.map(({ id, title, category, description, tags, url, icon: Icon, gradientFrom, gradientTo, accentColor }) => (
             <article
               key={id}
               className="glass-card"
-              style={{ overflow: "hidden", cursor: "pointer" }}
+              style={{
+                overflow: "hidden",
+                display: "flex",
+                flexDirection: "column",
+                position: "relative",
+                transition: "transform 0.3s ease, border-color 0.3s ease",
+              }}
               aria-labelledby={`project-${id}-title`}
             >
-              {/* Visual preview */}
-              <div
+              {/* Visual preview header */}
+              <a
+                href={url}
+                target="_blank"
+                rel="noopener noreferrer"
+                title={`Abrir ${title} em nova aba`}
                 style={{
-                  height: "192px",
+                  height: "170px",
                   background: `linear-gradient(135deg, ${gradientFrom}, ${gradientTo})`,
                   position: "relative",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
                   overflow: "hidden",
+                  textDecoration: "none",
+                  borderBottom: "1px solid rgba(255,255,255,0.08)",
                 }}
               >
                 <div
                   style={{
-                    position: "absolute",
-                    inset: "16px",
-                    borderRadius: "8px",
-                    border: "1px solid rgba(255,255,255,0.1)",
+                    width: "68px",
+                    height: "68px",
+                    borderRadius: "20px",
+                    background: "rgba(2,12,27,0.75)",
+                    border: `1px solid ${accentColor}66`,
                     display: "flex",
-                    flexDirection: "column",
-                    gap: "8px",
-                    padding: "12px",
-                    opacity: 0.6,
+                    alignItems: "center",
+                    justifyContent: "center",
+                    boxShadow: "0 8px 24px rgba(0,0,0,0.3)",
+                    transition: "transform 0.3s ease",
                   }}
                 >
-                  <div style={{ display: "flex", gap: "6px" }}>
-                    <div style={{ width: "8px", height: "8px", borderRadius: "50%", background: "rgba(239,68,68,0.6)" }} />
-                    <div style={{ width: "8px", height: "8px", borderRadius: "50%", background: "rgba(234,179,8,0.6)" }} />
-                    <div style={{ width: "8px", height: "8px", borderRadius: "50%", background: "rgba(34,197,94,0.6)" }} />
-                  </div>
-                  <div style={{ display: "flex", gap: "8px", marginTop: "4px" }}>
-                    <div style={{ height: "8px", width: "64px", background: "rgba(255,255,255,0.2)", borderRadius: "4px" }} />
-                    <div style={{ height: "8px", width: "40px", background: "rgba(255,255,255,0.15)", borderRadius: "4px" }} />
-                  </div>
-                  <div style={{ flex: 1, display: "flex", gap: "8px", marginTop: "4px" }}>
-                    <div style={{ width: "33%", borderRadius: "4px", background: "rgba(255,255,255,0.1)" }} />
-                    <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: "6px" }}>
-                      <div style={{ height: "12px", background: "rgba(255,255,255,0.2)", borderRadius: "4px" }} />
-                      <div style={{ height: "12px", width: "75%", background: "rgba(255,255,255,0.15)", borderRadius: "4px" }} />
-                      <div style={{ height: "12px", width: "50%", background: "rgba(255,255,255,0.1)", borderRadius: "4px" }} />
-                    </div>
-                  </div>
+                  <Icon size={32} style={{ color: accentColor }} />
                 </div>
-                <ExternalLink size={24} style={{ color: "#ffffff", opacity: 0.7, position: "relative", zIndex: 1 }} aria-hidden="true" />
-              </div>
+
+                <div
+                  style={{
+                    position: "absolute",
+                    top: "14px",
+                    right: "14px",
+                    background: "rgba(2,12,27,0.8)",
+                    border: "1px solid rgba(255,255,255,0.15)",
+                    padding: "4px 10px",
+                    borderRadius: "6px",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "6px",
+                    fontSize: "0.75rem",
+                    color: "#ffffff",
+                    fontWeight: 600,
+                  }}
+                >
+                  <span>Online</span>
+                  <ExternalLink size={12} style={{ color: accentColor }} />
+                </div>
+              </a>
 
               {/* Content */}
-              <div style={{ padding: "24px" }}>
-                <span className="tag" style={{ marginBottom: "12px", display: "inline-block" }}>{category}</span>
+              <div style={{ padding: "26px", display: "flex", flexDirection: "column", flex: 1 }}>
+                <span className="tag" style={{ marginBottom: "12px", display: "inline-block", width: "fit-content", fontSize: "0.75rem" }}>
+                  {category}
+                </span>
+
                 <h3
                   id={`project-${id}-title`}
-                  style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 700, fontSize: "1.15rem", color: "#ffffff", marginBottom: "8px" }}
+                  style={{
+                    fontFamily: "'Space Grotesk', sans-serif",
+                    fontWeight: 700,
+                    fontSize: "1.2rem",
+                    color: "#ffffff",
+                    marginBottom: "10px",
+                  }}
                 >
-                  {title}
+                  <a
+                    href={url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{ color: "#ffffff", textDecoration: "none" }}
+                    title={`Abrir ${title} em nova aba`}
+                  >
+                    {title}
+                  </a>
                 </h3>
-                <p style={{ color: "#8B9CC0", fontSize: "0.875rem", marginBottom: "16px" }}>{description}</p>
-                <div style={{ display: "flex", flexWrap: "wrap", gap: "8px" }}>
+
+                <p style={{ color: "#8B9CC0", fontSize: "0.875rem", lineHeight: 1.6, marginBottom: "20px", flex: 1 }}>
+                  {description}
+                </p>
+
+                {/* Tags */}
+                <div style={{ display: "flex", flexWrap: "wrap", gap: "8px", marginBottom: "24px" }}>
                   {tags.map((t) => (
                     <span
                       key={t}
                       style={{
-                        fontSize: "12px",
+                        fontSize: "11px",
                         padding: "4px 10px",
                         borderRadius: "6px",
                         background: "#0D1F35",
                         border: "1px solid rgba(0,212,170,0.15)",
                         color: "#8B9CC0",
+                        fontWeight: 500,
                       }}
                     >
                       {t}
                     </span>
                   ))}
+                </div>
+
+                {/* Buttons */}
+                <div style={{ display: "flex", flexDirection: "column", gap: "10px", marginTop: "auto" }}>
+                  <a
+                    href={url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-primary"
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      gap: "8px",
+                      fontSize: "0.875rem",
+                      padding: "10px 16px",
+                      textDecoration: "none",
+                    }}
+                    id={`project-${id}-live-btn`}
+                  >
+                    <span>Ver Projecto Online</span>
+                    <ExternalLink size={15} />
+                  </a>
+
+                  <a
+                    href={getWhatsAppUrl(`Olá! Vi o projecto ${title} e gostaria de solicitar uma proposta similar para o meu negócio.`)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-secondary"
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      gap: "6px",
+                      fontSize: "0.825rem",
+                      padding: "8px 14px",
+                      textDecoration: "none",
+                    }}
+                    id={`project-${id}-whatsapp-btn`}
+                  >
+                    <span>Pedir Proposta no WhatsApp</span>
+                    <ArrowRight size={13} />
+                  </a>
                 </div>
               </div>
             </article>
