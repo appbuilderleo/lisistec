@@ -1,13 +1,5 @@
 {
-  "version": 2,
   "framework": "nextjs",
-  "buildCommand": "npm run build",
-  "outputDirectory": ".next",
-  "installCommand": "npm install",
-  "env": {
-    "DATABASE_URL": "@database_url",
-    "NEXT_PUBLIC_SITE_URL": "@next_public_site_url"
-  },
   "headers": [
     {
       "source": "/(.*)",
@@ -23,7 +15,6 @@
       ]
     }
   ],
-  "rewrites": [],
   "redirects": [
     {
       "source": "/home",
