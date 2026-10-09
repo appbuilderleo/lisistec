@@ -19,6 +19,7 @@ const solutions = [
     color: "#00D4AA",
     badge: "Consultoria",
     url: "https://ccnconsultores.com/",
+    heroImage: "/projects/ccn-hero.png",
   },
   {
     id: "crm-ccn",
@@ -36,6 +37,7 @@ const solutions = [
     color: "#0088FF",
     badge: "Sistema CRM",
     url: "https://crm.ccnconsultores.com/login",
+    heroImage: "/projects/crm-hero.png",
   },
   {
     id: "maputo-facim",
@@ -53,6 +55,7 @@ const solutions = [
     color: "#9333EA",
     badge: "Governo & Investimento",
     url: "https://maputofacim-kappa.vercel.app/en",
+    heroImage: "/projects/facim-hero.png",
   },
 ];
 
@@ -93,42 +96,108 @@ export default function SolutionsPreview() {
 
         {/* Solutions Cards */}
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: "32px" }}>
-          {solutions.map(({ id, icon: Icon, name, tagline, description, features, color, badge, url }) => (
+          {solutions.map(({ id, icon: Icon, name, tagline, description, features, color, badge, url, heroImage }) => (
             <article
               key={id}
               className="glass-card"
               style={{
-                padding: "36px 32px",
+                overflow: "hidden",
                 display: "flex",
                 flexDirection: "column",
                 position: "relative",
                 transition: "all 0.3s ease",
+                padding: 0,
               }}
               aria-labelledby={`solution-${id}-title`}
             >
-              {/* Header row */}
-              <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", marginBottom: "20px" }}>
+              {/* Hero cover screenshot */}
+              <a
+                href={url}
+                target="_blank"
+                rel="noopener noreferrer"
+                title={`Abrir ${name} em nova aba`}
+                style={{
+                  height: "200px",
+                  position: "relative",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  overflow: "hidden",
+                  textDecoration: "none",
+                  borderBottom: "1px solid rgba(255,255,255,0.08)",
+                  backgroundImage: `url(${heroImage})`,
+                  backgroundSize: "cover",
+                  backgroundPosition: "top center",
+                  backgroundRepeat: "no-repeat",
+                  flexShrink: 0,
+                }}
+              >
+                {/* Dark overlay */}
+                <div style={{
+                  position: "absolute",
+                  inset: 0,
+                  background: "linear-gradient(to bottom, rgba(2,12,27,0.4) 0%, rgba(2,12,27,0.6) 100%)",
+                  transition: "background 0.3s ease",
+                }} />
+
+                {/* Glassmorphic icon badge */}
                 <div
                   style={{
-                    width: "56px",
-                    height: "56px",
-                    borderRadius: "16px",
+                    position: "relative",
+                    zIndex: 2,
+                    width: "72px",
+                    height: "72px",
+                    borderRadius: "20px",
+                    background: "rgba(2,12,27,0.72)",
+                    backdropFilter: "blur(12px)",
+                    WebkitBackdropFilter: "blur(12px)",
+                    border: `1px solid ${color}55`,
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    background: `${color}22`,
-                    border: `1px solid ${color}44`,
+                    boxShadow: `0 8px 32px rgba(0,0,0,0.5), 0 0 0 1px ${color}22`,
+                    transition: "transform 0.3s ease",
                   }}
                 >
-                  <Icon size={26} style={{ color }} />
+                  <Icon size={30} style={{ color }} />
                 </div>
-                <span
-                  className="tag"
-                  style={{ background: `${color}22`, borderColor: `${color}44`, color }}
+
+                {/* Badge top-right */}
+                <div
+                  style={{
+                    position: "absolute",
+                    top: "12px",
+                    right: "12px",
+                    zIndex: 2,
+                    background: "rgba(2,12,27,0.80)",
+                    backdropFilter: "blur(8px)",
+                    WebkitBackdropFilter: "blur(8px)",
+                    border: `1px solid ${color}44`,
+                    padding: "4px 10px",
+                    borderRadius: "6px",
+                    fontSize: "0.72rem",
+                    color,
+                    fontWeight: 700,
+                    letterSpacing: "0.03em",
+                  }}
                 >
                   {badge}
-                </span>
-              </div>
+                </div>
+
+                {/* Bottom gradient */}
+                <div style={{
+                  position: "absolute",
+                  bottom: 0,
+                  left: 0,
+                  right: 0,
+                  height: "60px",
+                  background: "linear-gradient(to bottom, transparent, rgba(9,18,32,0.9))",
+                  zIndex: 1,
+                }} />
+              </a>
+
+              {/* Card body */}
+              <div style={{ padding: "28px 28px 32px", display: "flex", flexDirection: "column", flex: 1 }}>
 
               {/* Title & Tagline */}
               <h3
@@ -211,6 +280,7 @@ export default function SolutionsPreview() {
                   <span>Solicitar Solução Similar via WhatsApp</span>
                   <ArrowRight size={14} />
                 </a>
+              </div>
               </div>
             </article>
           ))}

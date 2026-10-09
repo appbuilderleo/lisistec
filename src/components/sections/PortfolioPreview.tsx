@@ -12,8 +12,7 @@ const projects = [
     tags: ["Ponto de Venda", "Gestão de Stock", "Pagamentos", "Retalho"],
     url: "https://stoka-three.vercel.app/",
     icon: ShoppingCart,
-    gradientFrom: "rgba(0,212,170,0.35)",
-    gradientTo: "rgba(0,136,255,0.2)",
+    heroImage: "/projects/stoka-hero.png",
     accentColor: "#00D4AA",
   },
   {
@@ -25,8 +24,7 @@ const projects = [
     tags: ["Medicina Integrativa", "Agendamento WhatsApp", "Clínica", "Saúde"],
     url: "https://medspa-kappa.vercel.app/",
     icon: HeartPulse,
-    gradientFrom: "rgba(0,136,255,0.35)",
-    gradientTo: "rgba(147,51,234,0.2)",
+    heroImage: "/projects/medspa-hero.png",
     accentColor: "#0088FF",
   },
   {
@@ -38,8 +36,7 @@ const projects = [
     tags: ["Convite Digital", "Confirmação RSVP", "Casamentos", "Mobile First"],
     url: "https://convite-two-beige.vercel.app/",
     icon: HeartHandshake,
-    gradientFrom: "rgba(245,158,11,0.35)",
-    gradientTo: "rgba(236,72,153,0.2)",
+    heroImage: "/projects/convite-hero.png",
     accentColor: "#F59E0B",
   },
   {
@@ -51,8 +48,7 @@ const projects = [
     tags: ["Cardápio Digital", "Pedidos Online", "Reserva de Mesas", "Restaurante"],
     url: "https://muliba.vercel.app/",
     icon: UtensilsCrossed,
-    gradientFrom: "rgba(239,68,68,0.35)",
-    gradientTo: "rgba(245,158,11,0.2)",
+    heroImage: "/projects/muliba-hero.png",
     accentColor: "#EF4444",
   },
 ];
@@ -86,7 +82,7 @@ export default function PortfolioPreview() {
 
         {/* Portfolio Grid */}
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(290px, 1fr))", gap: "28px" }}>
-          {projects.map(({ id, title, category, description, tags, url, icon: Icon, gradientFrom, gradientTo, accentColor }) => (
+          {projects.map(({ id, title, category, description, tags, url, icon: Icon, heroImage, accentColor }) => (
             <article
               key={id}
               className="glass-card"
@@ -99,15 +95,14 @@ export default function PortfolioPreview() {
               }}
               aria-labelledby={`project-${id}-title`}
             >
-              {/* Visual preview header */}
+              {/* Visual preview header — real hero screenshot as cover */}
               <a
                 href={url}
                 target="_blank"
                 rel="noopener noreferrer"
                 title={`Abrir ${title} em nova aba`}
                 style={{
-                  height: "170px",
-                  background: `linear-gradient(135deg, ${gradientFrom}, ${gradientTo})`,
+                  height: "200px",
                   position: "relative",
                   display: "flex",
                   alignItems: "center",
@@ -115,32 +110,62 @@ export default function PortfolioPreview() {
                   overflow: "hidden",
                   textDecoration: "none",
                   borderBottom: "1px solid rgba(255,255,255,0.08)",
+                  backgroundImage: `url(${heroImage})`,
+                  backgroundSize: "cover",
+                  backgroundPosition: "top center",
+                  backgroundRepeat: "no-repeat",
                 }}
               >
+                {/* Dark overlay for contrast */}
+                <div style={{
+                  position: "absolute",
+                  inset: 0,
+                  background: "linear-gradient(to bottom, rgba(2,12,27,0.45) 0%, rgba(2,12,27,0.65) 100%)",
+                  transition: "background 0.3s ease",
+                }} />
+
+                {/* Hover overlay — accent tint */}
+                <div style={{
+                  position: "absolute",
+                  inset: 0,
+                  background: `${accentColor}18`,
+                  opacity: 0,
+                  transition: "opacity 0.3s ease",
+                }} className="card-hover-tint" />
+
+                {/* Glassmorphic icon badge */}
                 <div
                   style={{
-                    width: "68px",
-                    height: "68px",
+                    position: "relative",
+                    zIndex: 2,
+                    width: "72px",
+                    height: "72px",
                     borderRadius: "20px",
-                    background: "rgba(2,12,27,0.75)",
-                    border: `1px solid ${accentColor}66`,
+                    background: "rgba(2,12,27,0.72)",
+                    backdropFilter: "blur(12px)",
+                    WebkitBackdropFilter: "blur(12px)",
+                    border: `1px solid ${accentColor}55`,
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    boxShadow: "0 8px 24px rgba(0,0,0,0.3)",
-                    transition: "transform 0.3s ease",
+                    boxShadow: `0 8px 32px rgba(0,0,0,0.5), 0 0 0 1px ${accentColor}22`,
+                    transition: "transform 0.3s ease, box-shadow 0.3s ease",
                   }}
                 >
                   <Icon size={32} style={{ color: accentColor }} />
                 </div>
 
+                {/* Online badge */}
                 <div
                   style={{
                     position: "absolute",
-                    top: "14px",
-                    right: "14px",
-                    background: "rgba(2,12,27,0.8)",
-                    border: "1px solid rgba(255,255,255,0.15)",
+                    top: "12px",
+                    right: "12px",
+                    zIndex: 2,
+                    background: "rgba(2,12,27,0.80)",
+                    backdropFilter: "blur(8px)",
+                    WebkitBackdropFilter: "blur(8px)",
+                    border: "1px solid rgba(255,255,255,0.18)",
                     padding: "4px 10px",
                     borderRadius: "6px",
                     display: "flex",
@@ -151,9 +176,21 @@ export default function PortfolioPreview() {
                     fontWeight: 600,
                   }}
                 >
+                  <span style={{ width: "7px", height: "7px", borderRadius: "50%", background: "#00D4AA", display: "inline-block", boxShadow: "0 0 6px #00D4AA" }} />
                   <span>Online</span>
                   <ExternalLink size={12} style={{ color: accentColor }} />
                 </div>
+
+                {/* Bottom gradient for smooth card transition */}
+                <div style={{
+                  position: "absolute",
+                  bottom: 0,
+                  left: 0,
+                  right: 0,
+                  height: "60px",
+                  background: "linear-gradient(to bottom, transparent, rgba(9,18,32,0.9))",
+                  zIndex: 1,
+                }} />
               </a>
 
               {/* Content */}
