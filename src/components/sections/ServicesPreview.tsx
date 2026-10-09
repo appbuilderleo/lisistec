@@ -1,177 +1,179 @@
 import Link from "next/link";
-import {
-  Globe,
-  Smartphone,
-  LayoutDashboard,
-  Headphones,
-  GitMerge,
-  ArrowRight,
-} from "lucide-react";
+import { Globe, Smartphone, LayoutDashboard, Headphones, GitMerge, ArrowRight } from "lucide-react";
+import { getWhatsAppUrl } from "@/lib/constants";
 
 const services = [
   {
     id: "web",
     icon: Globe,
     title: "Desenvolvimento Web",
-    description:
-      "Criamos websites e aplicações web modernas, rápidas e escaláveis usando as mais recentes tecnologias.",
+    description: "Criamos websites e aplicações web modernas, rápidas e escaláveis usando as mais recentes tecnologias.",
     features: ["Next.js & React", "APIs RESTful", "CMS & E-commerce"],
-    color: "from-blue-500/20 to-primary/10",
+    accentColor: "rgba(59,130,246,0.2)",
   },
   {
     id: "mobile",
     icon: Smartphone,
     title: "Aplicações Móveis",
-    description:
-      "Desenvolvemos apps nativas e híbridas para iOS e Android que os seus utilizadores vão adorar.",
+    description: "Desenvolvemos apps nativas e híbridas para iOS e Android que os seus utilizadores vão adorar.",
     features: ["React Native", "iOS & Android", "UI/UX Premium"],
-    color: "from-purple-500/20 to-primary/10",
+    accentColor: "rgba(168,85,247,0.2)",
   },
   {
     id: "sistemas",
     icon: LayoutDashboard,
     title: "Sistemas de Gestão",
-    description:
-      "ERP, CRM e sistemas de gestão personalizados para automatizar e otimizar os seus processos empresariais.",
+    description: "ERP, CRM e sistemas de gestão personalizados para automatizar e otimizar os seus processos empresariais.",
     features: ["ERP Customizado", "Relatórios em tempo real", "Multi-utilizador"],
-    color: "from-primary/20 to-blue-500/10",
+    accentColor: "rgba(0,212,170,0.15)",
   },
   {
     id: "consultoria",
     icon: Headphones,
     title: "Consultoria e Suporte",
-    description:
-      "Apoio técnico especializado e consultoria estratégica em tecnologia para o seu negócio crescer.",
+    description: "Apoio técnico especializado e consultoria estratégica em tecnologia para o seu negócio crescer.",
     features: ["Suporte 24/7", "Formação técnica", "Assessoria TI"],
-    color: "from-orange-500/20 to-primary/10",
+    accentColor: "rgba(249,115,22,0.2)",
   },
   {
     id: "integracao",
     icon: GitMerge,
     title: "Integração de Sistemas",
-    description:
-      "Conectamos os seus sistemas existentes para criar fluxos de trabalho automatizados e eficientes.",
+    description: "Conectamos os seus sistemas existentes para criar fluxos de trabalho automatizados e eficientes.",
     features: ["APIs & Webhooks", "Automação", "Migração de dados"],
-    color: "from-green-500/20 to-primary/10",
+    accentColor: "rgba(34,197,94,0.2)",
   },
 ];
 
 export default function ServicesPreview() {
   return (
     <section
-      className="py-24 relative"
+      style={{ padding: "96px 0", position: "relative" }}
       aria-labelledby="services-heading"
       id="services-section"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div style={{ maxWidth: "1280px", margin: "0 auto", padding: "0 24px" }}>
         {/* Header */}
-        <div className="text-center mb-16">
-          <div className="section-tag mx-auto w-fit">Os Nossos Serviços</div>
+        <div style={{ textAlign: "center", marginBottom: "64px" }}>
+          <div className="section-tag" style={{ margin: "0 auto 16px", display: "inline-flex" }}>
+            Os Nossos Serviços
+          </div>
           <h2
             id="services-heading"
-            className="text-4xl lg:text-5xl font-heading font-700 text-white mt-4 mb-4"
+            style={{
+              fontFamily: "'Space Grotesk', sans-serif",
+              fontSize: "clamp(1.75rem, 4vw, 3rem)",
+              fontWeight: 700,
+              color: "#ffffff",
+              marginBottom: "16px",
+            }}
           >
             Soluções completas para o{" "}
             <span className="text-gradient">seu negócio</span>
           </h2>
-          <p className="text-text-muted text-lg max-w-2xl mx-auto">
+          <p style={{ color: "#8B9CC0", fontSize: "1.1rem", maxWidth: "640px", margin: "0 auto", lineHeight: 1.7 }}>
             Oferecemos um conjunto completo de serviços de tecnologia para
             transformar e acelerar o crescimento da sua empresa.
           </p>
         </div>
 
         {/* Services Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {services.map(({ id, icon: Icon, title, description, features, color }) => (
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "24px" }}>
+          {services.map(({ id, icon: Icon, title, description, features, accentColor }) => (
             <article
               key={id}
-              className="glass-card p-8 group relative overflow-hidden"
+              className="glass-card"
+              style={{ padding: "32px", position: "relative", overflow: "hidden" }}
               aria-labelledby={`service-${id}-title`}
             >
-              {/* Background gradient */}
-              <div
-                className={`absolute inset-0 bg-gradient-to-br ${color} opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl`}
-                aria-hidden="true"
-              />
-
-              <div className="relative z-10">
-                <div className="service-icon mb-5">
-                  <Icon size={24} />
-                </div>
-
-                <h3
-                  id={`service-${id}-title`}
-                  className="text-xl font-heading font-700 text-white mb-3"
-                >
-                  {title}
-                </h3>
-
-                <p className="text-text-muted text-sm leading-relaxed mb-5">
-                  {description}
-                </p>
-
-                <ul className="space-y-2 mb-6">
-                  {features.map((f) => (
-                    <li
-                      key={f}
-                      className="flex items-center gap-2 text-sm text-text-muted"
-                    >
-                      <span
-                        className="w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0"
-                        aria-hidden="true"
-                      />
-                      {f}
-                    </li>
-                  ))}
-                </ul>
-
+              <div className="service-icon" style={{ marginBottom: "20px" }}>
+                <Icon size={24} />
+              </div>
+              <h3
+                id={`service-${id}-title`}
+                style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 700, fontSize: "1.15rem", color: "#ffffff", marginBottom: "12px" }}
+              >
+                {title}
+              </h3>
+              <p style={{ color: "#8B9CC0", fontSize: "0.9rem", lineHeight: 1.7, marginBottom: "20px" }}>
+                {description}
+              </p>
+              <ul style={{ display: "flex", flexDirection: "column", gap: "8px", marginBottom: "24px" }}>
+                {features.map((f) => (
+                  <li key={f} style={{ display: "flex", alignItems: "center", gap: "8px", fontSize: "0.875rem", color: "#8B9CC0" }}>
+                    <span style={{ width: "6px", height: "6px", borderRadius: "50%", background: "#00D4AA", flexShrink: 0 }} aria-hidden="true" />
+                    {f}
+                  </li>
+                ))}
+              </ul>
+              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "12px", marginTop: "auto" }}>
                 <Link
                   href={`/servicos#${id}`}
-                  className="inline-flex items-center gap-2 text-sm text-primary font-600 hover:gap-3 transition-all group/link"
+                  style={{ display: "inline-flex", alignItems: "center", gap: "6px", fontSize: "0.85rem", color: "#8B9CC0", fontWeight: 500, textDecoration: "none" }}
                   aria-label={`Saber mais sobre ${title}`}
                 >
-                  Saber mais
-                  <ArrowRight
-                    size={16}
-                    className="group-hover/link:translate-x-1 transition-transform"
-                  />
+                  Detalhes
+                  <ArrowRight size={14} />
                 </Link>
+                <a
+                  href={getWhatsAppUrl(`Olá! Gostaria de solicitar uma proposta para o serviço: ${title}.`)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: "6px",
+                    fontSize: "0.825rem",
+                    color: "#00D4AA",
+                    fontWeight: 600,
+                    textDecoration: "none",
+                    padding: "6px 12px",
+                    borderRadius: "6px",
+                    border: "1px solid rgba(0,212,170,0.3)",
+                    background: "rgba(0,212,170,0.08)",
+                  }}
+                  id={`service-${id}-whatsapp-btn`}
+                >
+                  Pedir Proposta
+                </a>
               </div>
             </article>
           ))}
 
           {/* CTA Card */}
-          <article className="glass-card p-8 flex flex-col items-center justify-center text-center border-dashed">
+          <article
+            className="glass-card"
+            style={{ padding: "32px", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", textAlign: "center", borderStyle: "dashed" }}
+          >
             <div
-              className="w-14 h-14 rounded-full bg-primary/10 border border-primary/30 flex items-center justify-center mb-4"
+              style={{ width: "56px", height: "56px", borderRadius: "50%", background: "rgba(0,212,170,0.1)", border: "1px solid rgba(0,212,170,0.3)", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "16px", fontSize: "24px" }}
               aria-hidden="true"
             >
-              <span className="text-2xl">🤝</span>
+              🤝
             </div>
-            <h3 className="text-white font-heading font-700 text-lg mb-2">
+            <h3 style={{ color: "#ffffff", fontFamily: "'Space Grotesk', sans-serif", fontWeight: 700, fontSize: "1.1rem", marginBottom: "8px" }}>
               Tem um projecto?
             </h3>
-            <p className="text-text-muted text-sm mb-5">
+            <p style={{ color: "#8B9CC0", fontSize: "0.875rem", marginBottom: "20px" }}>
               Vamos conversar sobre como podemos ajudar.
             </p>
-            <Link
-              href="/contacto"
-              className="btn-primary text-sm py-2.5"
+            <a
+              href={getWhatsAppUrl("Olá! Tenho um projecto e gostaria de solicitar uma proposta com a Lisis Tecnologias.")}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-primary"
+              style={{ fontSize: "0.875rem", padding: "10px 20px" }}
               id="services-cta-btn"
             >
-              Falar Connosco
+              Pedir Proposta no WhatsApp
               <ArrowRight size={16} />
-            </Link>
+            </a>
           </article>
         </div>
 
-        {/* View all link */}
-        <div className="text-center mt-10">
-          <Link
-            href="/servicos"
-            className="btn-secondary"
-            id="all-services-btn"
-          >
+        {/* View all */}
+        <div style={{ textAlign: "center", marginTop: "40px" }}>
+          <Link href="/servicos" className="btn-secondary" id="all-services-btn">
             Ver Todos os Serviços
             <ArrowRight size={18} />
           </Link>

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, ExternalLink } from "lucide-react";
+import { getWhatsAppUrl } from "@/lib/constants";
 
 export const metadata: Metadata = {
   title: "Portfólio",
@@ -169,9 +170,15 @@ export default function PortfolioPage() {
             <p className="text-text-muted mb-6">
               Vamos criar algo incrível juntos. Fale connosco e receba uma proposta personalizada.
             </p>
-            <Link href="/contacto" className="btn-primary" id="portfolio-cta-btn">
-              Iniciar Projecto <ArrowRight size={18} />
-            </Link>
+            <a
+              href={getWhatsAppUrl("Olá! Gostaria de iniciar um projecto e solicitar uma proposta com a Lisis Tecnologias.")}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-primary"
+              id="portfolio-cta-btn"
+            >
+              Solicitar Proposta no WhatsApp <ArrowRight size={18} />
+            </a>
           </div>
         </div>
       </section>

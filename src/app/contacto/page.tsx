@@ -1,37 +1,47 @@
 import type { Metadata } from "next";
 import ContactForm from "@/components/ContactForm";
-import { Mail, Phone, MapPin, Clock } from "lucide-react";
+import { Mail, Phone, MapPin, Clock, MessageCircle } from "lucide-react";
+import { CONTACTS, getWhatsAppUrl } from "@/lib/constants";
 
 export const metadata: Metadata = {
   title: "Contacto",
   description:
-    "Entre em contacto com a Lisis Tecnologias e Serviços. Estamos em Maputo, Moçambique, prontos para ajudar o seu negócio a crescer com tecnologia.",
+    "Entre em contacto com a Lisis Tecnologias e Serviços. Ligue para +258 84 464 7599, fale no WhatsApp (+258 87 464 7599) ou envie email para appbuilderleo@gmail.com.",
   alternates: { canonical: "/contacto" },
 };
 
 const contactInfo = [
   {
-    icon: Mail,
-    label: "Email",
-    value: "info@lisis-servicos.com",
-    href: "mailto:info@lisis-servicos.com",
+    icon: Phone,
+    label: "Chamadas",
+    value: CONTACTS.phone.display,
+    href: CONTACTS.phone.href,
+    badge: "Linha Direta",
   },
   {
-    icon: Phone,
-    label: "Telefone",
-    value: "+258 84 123 4567",
-    href: "tel:+258841234567",
+    icon: MessageCircle,
+    label: "WhatsApp",
+    value: CONTACTS.whatsapp.display,
+    href: getWhatsAppUrl("Olá! Gostaria de falar com a equipa da Lisis Tecnologias e Serviços."),
+    badge: "Resposta Rápida",
+    isWhatsApp: true,
+  },
+  {
+    icon: Mail,
+    label: "Email",
+    value: CONTACTS.email.address,
+    href: CONTACTS.email.href,
   },
   {
     icon: MapPin,
     label: "Localização",
-    value: "Maputo, Moçambique",
-    href: "https://maps.google.com/?q=Maputo+Mozambique",
+    value: CONTACTS.location.display,
+    href: CONTACTS.location.mapsUrl,
   },
   {
     icon: Clock,
     label: "Horário",
-    value: "Seg – Sex: 08h – 17h",
+    value: CONTACTS.hours.display,
     href: null,
   },
 ];
@@ -67,30 +77,47 @@ export default function ContactoPage() {
                   Dados da empresa
                 </h2>
                 <ul className="space-y-5">
-                  {contactInfo.map(({ icon: Icon, label, value, href }) => (
-                    <li key={label} className="flex items-start gap-4">
-                      <div className="service-icon w-10 h-10 flex-shrink-0">
-                        <Icon size={18} />
-                      </div>
-                      <div>
-                        <p className="text-xs text-text-muted font-600 uppercase tracking-wider mb-1">
-                          {label}
-                        </p>
-                        {href ? (
-                          <a
-                            href={href}
-                            className="text-white hover:text-primary transition-colors text-sm font-500"
-                            target={href.startsWith("http") ? "_blank" : undefined}
-                            rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
-                          >
-                            {value}
-                          </a>
-                        ) : (
-                          <p className="text-white text-sm font-500">{value}</p>
-                        )}
-                      </div>
-                    </li>
-                  ))}
+                  {contactInfo.map((item) => {
+                    const Icon = item.icon;
+                    return (
+                      <li key={item.label} className="flex items-start gap-4">
+                        <div
+                          className="service-icon w-10 h-10 flex-shrink-0"
+                          style={item.isWhatsApp ? { background: "rgba(37,211,102,0.15)", borderColor: "rgba(37,211,102,0.4)" } : undefined}
+                        >
+                          <Icon size={18} style={item.isWhatsApp ? { color: "#25D366" } : undefined} />
+                        </div>
+                        <div className="flex-1">
+                          <div className="flex items-center gap-2 mb-1">
+                            <p className="text-xs text-text-muted font-600 uppercase tracking-wider">
+                              {item.label}
+                            </p>
+                            {item.badge && (
+                              <span
+                                className="text-[10px] px-2 py-0.5 rounded-full font-600"
+                                style={item.isWhatsApp ? { background: "rgba(37,211,102,0.2)", color: "#25D366" } : { background: "rgba(0,212,170,0.15)", color: "#00D4AA" }}
+                              >
+                                {item.badge}
+                              </span>
+                            )}
+                          </div>
+                          {item.href ? (
+                            <a
+                              href={item.href}
+                              className="text-white hover:text-primary transition-colors text-sm font-500 block"
+                              style={item.isWhatsApp ? { color: "#25D366" } : undefined}
+                              target={item.href.startsWith("http") ? "_blank" : undefined}
+                              rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                            >
+                              {item.value}
+                            </a>
+                          ) : (
+                            <p className="text-white text-sm font-500">{item.value}</p>
+                          )}
+                        </div>
+                      </li>
+                    );
+                  })}
                 </ul>
               </div>
 

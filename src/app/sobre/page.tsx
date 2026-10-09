@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, Target, Eye, Heart, Users, CheckCircle } from "lucide-react";
+import { getWhatsAppUrl } from "@/lib/constants";
 
 export const metadata: Metadata = {
   title: "Sobre Nós",
@@ -70,9 +71,15 @@ export default function SobrePage() {
                 nossos clientes, entendendo os seus desafios e construindo
                 soluções que realmente fazem a diferença.
               </p>
-              <Link href="/contacto" className="btn-primary" id="sobre-cta-btn">
-                Trabalhe Connosco <ArrowRight size={18} />
-              </Link>
+              <a
+                href={getWhatsAppUrl("Olá! Gostaria de falar com a Lisis Tecnologias e Serviços sobre oportunidades de parceria e projectos.")}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-primary"
+                id="sobre-cta-btn"
+              >
+                Falar no WhatsApp <ArrowRight size={18} />
+              </a>
             </div>
 
             {/* Stats */}

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Mail, Phone, MapPin } from "lucide-react";
+import { Mail, Phone, MapPin, MessageCircle } from "lucide-react";
+import { CONTACTS, getWhatsAppUrl } from "@/lib/constants";
 
 function LinkedinIcon({ size = 16 }: { size?: number }) {
   return (
@@ -11,7 +12,6 @@ function LinkedinIcon({ size = 16 }: { size?: number }) {
     </svg>
   );
 }
-
 function InstagramIcon({ size = 16 }: { size?: number }) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -21,7 +21,6 @@ function InstagramIcon({ size = 16 }: { size?: number }) {
     </svg>
   );
 }
-
 function TwitterIcon({ size = 16 }: { size?: number }) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -29,7 +28,6 @@ function TwitterIcon({ size = 16 }: { size?: number }) {
     </svg>
   );
 }
-
 function YoutubeIcon({ size = 16 }: { size?: number }) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -70,72 +68,65 @@ const socials = [
 export default function Footer() {
   return (
     <footer
-      className="relative border-t border-border mt-24"
-      style={{ background: "rgba(2, 12, 27, 0.98)" }}
+      style={{ position: "relative", borderTop: "1px solid rgba(0,212,170,0.15)", marginTop: "96px", background: "rgba(2,12,27,0.98)" }}
       role="contentinfo"
     >
       {/* Top gradient line */}
       <div
-        className="absolute top-0 left-0 right-0 h-px"
-        style={{
-          background:
-            "linear-gradient(90deg, transparent, #00D4AA, transparent)",
-        }}
         aria-hidden="true"
+        style={{ position: "absolute", top: 0, left: 0, right: 0, height: "1px", background: "linear-gradient(90deg, transparent, #00D4AA, transparent)" }}
       />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-8">
+      <div style={{ maxWidth: "1280px", margin: "0 auto", padding: "64px 24px 32px" }}>
         {/* Main Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 mb-12">
+        <div className="footer-grid">
           {/* Brand Column */}
-          <div className="lg:col-span-2">
-            <Link
-              href="/"
-              className="inline-flex items-center gap-3 mb-5 group"
-              aria-label="Lisis Tecnologias - Página Inicial"
-            >
-              <Image
-                src="/logolisisnova.png"
-                alt="Lisis Tecnologias e Serviços"
-                width={170}
-                height={55}
-                className="h-10 sm:h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
-              />
+          <div>
+            <Link href="/" style={{ display: "inline-flex", alignItems: "center", gap: "12px", marginBottom: "20px" }} aria-label="Lisis Tecnologias - Página Inicial">
+              <Image src="/logolisisnova.png" alt="Lisis Tecnologias e Serviços" width={170} height={55} style={{ height: "40px", width: "auto", objectFit: "contain" }} />
             </Link>
-
-            <p className="text-text-muted text-sm leading-relaxed mb-6 max-w-xs">
-              Transformamos ideias em soluções digitais. Tecnologia, inovação e
-              pessoas para um futuro mais eficiente.
+            <p style={{ color: "#8B9CC0", fontSize: "0.875rem", lineHeight: 1.7, marginBottom: "24px", maxWidth: "280px" }}>
+              Transformamos ideias em soluções digitais. Tecnologia, inovação e pessoas para um futuro mais eficiente.
             </p>
-
-            {/* Contact Info */}
-            <ul className="space-y-3">
-              <li className="flex items-center gap-3 text-sm text-text-muted">
-                <Mail size={15} className="text-primary flex-shrink-0" />
-                <a
-                  href="mailto:info@lisis-servicos.com"
-                  className="hover:text-primary transition-colors"
-                >
-                  info@lisis-servicos.com
-                </a>
+            <ul style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+              <li style={{ display: "flex", alignItems: "center", gap: "12px", fontSize: "0.875rem", color: "#8B9CC0" }}>
+                <Phone size={15} style={{ color: "#00D4AA", flexShrink: 0 }} />
+                <span>
+                  Chamadas:{" "}
+                  <a href={CONTACTS.phone.href} style={{ color: "#8B9CC0", textDecoration: "none", transition: "color 0.2s ease" }}>
+                    {CONTACTS.phone.display}
+                  </a>
+                </span>
               </li>
-              <li className="flex items-center gap-3 text-sm text-text-muted">
-                <Phone size={15} className="text-primary flex-shrink-0" />
-                <a
-                  href="tel:+258841234567"
-                  className="hover:text-primary transition-colors"
-                >
-                  +258 84 123 4567
-                </a>
+              <li style={{ display: "flex", alignItems: "center", gap: "12px", fontSize: "0.875rem", color: "#8B9CC0" }}>
+                <MessageCircle size={15} style={{ color: "#25D366", flexShrink: 0 }} />
+                <span>
+                  WhatsApp:{" "}
+                  <a
+                    href={getWhatsAppUrl("Olá! Gostaria de falar com a Lisis Tecnologias e Serviços.")}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{ color: "#25D366", textDecoration: "none", transition: "color 0.2s ease", fontWeight: 500 }}
+                  >
+                    {CONTACTS.whatsapp.display}
+                  </a>
+                </span>
               </li>
-              <li className="flex items-start gap-3 text-sm text-text-muted">
-                <MapPin size={15} className="text-primary flex-shrink-0 mt-0.5" />
+              <li style={{ display: "flex", alignItems: "center", gap: "12px", fontSize: "0.875rem", color: "#8B9CC0" }}>
+                <Mail size={15} style={{ color: "#00D4AA", flexShrink: 0 }} />
+                <span>
+                  Email:{" "}
+                  <a href={CONTACTS.email.href} style={{ color: "#8B9CC0", textDecoration: "none", transition: "color 0.2s ease" }}>
+                    {CONTACTS.email.address}
+                  </a>
+                </span>
+              </li>
+              <li style={{ display: "flex", alignItems: "flex-start", gap: "12px", fontSize: "0.875rem", color: "#8B9CC0" }}>
+                <MapPin size={15} style={{ color: "#00D4AA", flexShrink: 0, marginTop: "2px" }} />
                 <span>Maputo, Moçambique</span>
               </li>
             </ul>
-
-            {/* Socials */}
-            <div className="flex items-center gap-4 mt-6">
+            <div style={{ display: "flex", alignItems: "center", gap: "16px", marginTop: "24px" }}>
               {socials.map(({ icon: Icon, href, label }) => (
                 <a
                   key={label}
@@ -143,7 +134,7 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
-                  className="w-9 h-9 rounded-lg border border-border flex items-center justify-center text-text-muted hover:text-primary hover:border-primary/40 transition-all hover:shadow-neon cursor-pointer"
+                  style={{ width: "36px", height: "36px", borderRadius: "8px", border: "1px solid rgba(0,212,170,0.15)", display: "flex", alignItems: "center", justifyContent: "center", color: "#8B9CC0", textDecoration: "none", transition: "all 0.2s ease" }}
                 >
                   <Icon size={16} />
                 </a>
@@ -153,44 +144,37 @@ export default function Footer() {
 
           {/* Serviços */}
           <div>
-            <h3 className="text-white font-heading font-600 text-sm mb-5 uppercase tracking-wider">
+            <h3 style={{ color: "#ffffff", fontFamily: "'Space Grotesk', sans-serif", fontWeight: 600, fontSize: "0.8rem", marginBottom: "20px", textTransform: "uppercase", letterSpacing: "0.08em" }}>
               Serviços
             </h3>
-            <ul className="space-y-3">
+            <ul style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
               {services.map((item) => (
                 <li key={item.href}>
-                  <Link href={item.href} className="footer-link">
-                    {item.label}
-                  </Link>
+                  <Link href={item.href} className="footer-link">{item.label}</Link>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Soluções */}
+          {/* Soluções + Empresa */}
           <div>
-            <h3 className="text-white font-heading font-600 text-sm mb-5 uppercase tracking-wider">
+            <h3 style={{ color: "#ffffff", fontFamily: "'Space Grotesk', sans-serif", fontWeight: 600, fontSize: "0.8rem", marginBottom: "20px", textTransform: "uppercase", letterSpacing: "0.08em" }}>
               Soluções
             </h3>
-            <ul className="space-y-3">
+            <ul style={{ display: "flex", flexDirection: "column", gap: "12px", marginBottom: "32px" }}>
               {solutions.map((item) => (
                 <li key={item.href}>
-                  <Link href={item.href} className="footer-link">
-                    {item.label}
-                  </Link>
+                  <Link href={item.href} className="footer-link">{item.label}</Link>
                 </li>
               ))}
             </ul>
-
-            <h3 className="text-white font-heading font-600 text-sm mb-5 mt-8 uppercase tracking-wider">
+            <h3 style={{ color: "#ffffff", fontFamily: "'Space Grotesk', sans-serif", fontWeight: 600, fontSize: "0.8rem", marginBottom: "20px", textTransform: "uppercase", letterSpacing: "0.08em" }}>
               Empresa
             </h3>
-            <ul className="space-y-3">
+            <ul style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
               {company.map((item) => (
                 <li key={item.href}>
-                  <Link href={item.href} className="footer-link">
-                    {item.label}
-                  </Link>
+                  <Link href={item.href} className="footer-link">{item.label}</Link>
                 </li>
               ))}
             </ul>
@@ -198,32 +182,24 @@ export default function Footer() {
 
           {/* Newsletter */}
           <div>
-            <h3 className="text-white font-heading font-600 text-sm mb-2 uppercase tracking-wider">
+            <h3 style={{ color: "#ffffff", fontFamily: "'Space Grotesk', sans-serif", fontWeight: 600, fontSize: "0.8rem", marginBottom: "8px", textTransform: "uppercase", letterSpacing: "0.08em" }}>
               Newsletter
             </h3>
-            <p className="text-text-muted text-sm mb-4">
+            <p style={{ color: "#8B9CC0", fontSize: "0.875rem", marginBottom: "16px" }}>
               Receba dicas e novidades tecnológicas.
             </p>
-            <form
-              action="/api/newsletter"
-              method="POST"
-              className="space-y-3"
-              aria-label="Subscrever newsletter"
-            >
+            <form action="/api/newsletter" method="POST" style={{ display: "flex", flexDirection: "column", gap: "12px" }} aria-label="Subscrever newsletter">
               <input
                 type="email"
                 name="email"
                 placeholder="O seu email"
                 required
-                className="form-input text-sm"
+                className="form-input"
+                style={{ fontSize: "0.875rem" }}
                 aria-label="Email para newsletter"
                 id="footer-newsletter-email"
               />
-              <button
-                type="submit"
-                className="btn-primary w-full text-sm py-2.5 justify-center"
-                id="footer-newsletter-submit"
-              >
+              <button type="submit" className="btn-primary" style={{ fontSize: "0.875rem", padding: "10px 20px", justifyContent: "center" }} id="footer-newsletter-submit">
                 Subscrever
               </button>
             </form>
@@ -231,33 +207,35 @@ export default function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div
-          className="border-t border-border pt-8 flex flex-col sm:flex-row items-center justify-between gap-4"
-        >
-          <p className="text-text-faint text-xs">
-            © {new Date().getFullYear()} Lisis Tecnologias e Serviços. Todos os
-            direitos reservados.
+        <div style={{ borderTop: "1px solid rgba(0,212,170,0.15)", paddingTop: "32px", display: "flex", flexWrap: "wrap", alignItems: "center", justifyContent: "space-between", gap: "16px" }}>
+          <p style={{ color: "#4A5E7A", fontSize: "0.75rem" }}>
+            © {new Date().getFullYear()} Lisis Tecnologias e Serviços. Todos os direitos reservados.
           </p>
-          <div className="flex items-center gap-6">
-            <Link
-              href="/privacidade"
-              className="text-text-faint text-xs hover:text-primary transition-colors"
-            >
-              Política de Privacidade
-            </Link>
-            <Link
-              href="/termos"
-              className="text-text-faint text-xs hover:text-primary transition-colors"
-            >
-              Termos de Uso
-            </Link>
+          <div style={{ display: "flex", alignItems: "center", gap: "24px" }}>
+            <Link href="/privacidade" style={{ color: "#4A5E7A", fontSize: "0.75rem", textDecoration: "none", transition: "color 0.2s" }}>Política de Privacidade</Link>
+            <Link href="/termos" style={{ color: "#4A5E7A", fontSize: "0.75rem", textDecoration: "none", transition: "color 0.2s" }}>Termos de Uso</Link>
           </div>
-          <div className="flex items-center gap-2">
-            <div className="w-2 h-2 rounded-full bg-primary animate-pulse" aria-hidden="true" />
-            <span className="text-text-faint text-xs">Feito em Moçambique 🇲🇿</span>
+          <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+            <div style={{ width: "8px", height: "8px", borderRadius: "50%", background: "#00D4AA", animation: "pulse-neon 3s ease-in-out infinite" }} aria-hidden="true" />
+            <span style={{ color: "#4A5E7A", fontSize: "0.75rem" }}>Feito em Moçambique 🇲🇿</span>
           </div>
         </div>
       </div>
+
+      <style>{`
+        .footer-grid {
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: 48px;
+          margin-bottom: 48px;
+        }
+        @media (min-width: 768px) {
+          .footer-grid { grid-template-columns: 1fr 1fr; }
+        }
+        @media (min-width: 1024px) {
+          .footer-grid { grid-template-columns: 2fr 1fr 1fr 1fr; }
+        }
+      `}</style>
     </footer>
   );
 }

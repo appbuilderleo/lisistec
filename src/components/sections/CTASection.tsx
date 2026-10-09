@@ -1,77 +1,104 @@
 import Link from "next/link";
-import { ArrowRight, MessageSquare, Phone } from "lucide-react";
+import { ArrowRight, MessageCircle, Phone } from "lucide-react";
+import { CONTACTS, getWhatsAppUrl } from "@/lib/constants";
 
 export default function CTASection() {
   return (
     <section
-      className="py-24 relative overflow-hidden"
+      style={{ padding: "96px 0", position: "relative", overflow: "hidden" }}
       aria-labelledby="cta-heading"
       id="cta-section"
     >
       {/* Background */}
       <div
-        className="absolute inset-0"
-        style={{
-          background:
-            "linear-gradient(135deg, rgba(0,212,170,0.08) 0%, rgba(0,136,255,0.05) 50%, transparent 100%)",
-        }}
         aria-hidden="true"
+        style={{
+          position: "absolute",
+          inset: 0,
+          background: "linear-gradient(135deg, rgba(0,212,170,0.08) 0%, rgba(0,136,255,0.05) 50%, transparent 100%)",
+          pointerEvents: "none",
+        }}
       />
-      <div className="absolute inset-0 bg-dots opacity-30" aria-hidden="true" />
+      <div className="bg-dots" aria-hidden="true" style={{ position: "absolute", inset: 0, opacity: 0.3 }} />
 
       {/* Glow */}
       <div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] opacity-20 blur-3xl rounded-full pointer-events-none"
-        style={{ background: "radial-gradient(ellipse, #00D4AA, transparent)" }}
         aria-hidden="true"
+        style={{
+          position: "absolute",
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+          width: "600px",
+          height: "300px",
+          borderRadius: "50%",
+          opacity: 0.2,
+          filter: "blur(48px)",
+          background: "radial-gradient(ellipse, #00D4AA, transparent)",
+          pointerEvents: "none",
+        }}
       />
 
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-        <div className="glass-card p-12 lg:p-16">
-          <div className="section-tag mx-auto w-fit mb-6">Vamos começar</div>
+      <div style={{ maxWidth: "896px", margin: "0 auto", padding: "0 24px", textAlign: "center", position: "relative", zIndex: 1 }}>
+        <div className="glass-card" style={{ padding: "64px 48px" }}>
+          <div className="section-tag" style={{ margin: "0 auto 24px", display: "inline-flex" }}>Vamos começar</div>
           <h2
             id="cta-heading"
-            className="text-4xl lg:text-5xl font-heading font-700 text-white mb-6 leading-tight"
+            style={{
+              fontFamily: "'Space Grotesk', sans-serif",
+              fontSize: "clamp(1.75rem, 4vw, 3rem)",
+              fontWeight: 700,
+              color: "#ffffff",
+              lineHeight: 1.2,
+              marginBottom: "24px",
+            }}
           >
-            Pronto para{" "}
-            <span className="text-gradient">transformar</span>
+            Pronto para <span className="text-gradient">transformar</span>
             <br />o seu negócio?
           </h2>
-          <p className="text-text-muted text-lg mb-10 max-w-2xl mx-auto">
+          <p style={{ color: "#8B9CC0", fontSize: "1.1rem", marginBottom: "40px", maxWidth: "512px", margin: "0 auto 40px", lineHeight: 1.7 }}>
             Estamos prontos para ajudar o seu negócio a crescer com tecnologia
             de ponta. Fale connosco hoje e receba uma proposta personalizada.
           </p>
 
-          <div className="flex flex-wrap gap-4 justify-center">
-            <Link
-              href="/contacto"
-              className="btn-primary text-base py-3.5 px-8"
+          <div style={{ display: "flex", flexWrap: "wrap", gap: "16px", justifyContent: "center" }}>
+            <a
+              href={getWhatsAppUrl("Olá! Gostaria de solicitar uma proposta para a Lisis Tecnologias e Serviços.")}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-primary"
+              style={{ fontSize: "1rem", padding: "14px 32px" }}
               id="cta-contact-btn"
             >
-              <MessageSquare size={20} />
-              Solicitar Proposta Grátis
-            </Link>
+              <MessageCircle size={20} />
+              Solicitar Proposta no WhatsApp
+            </a>
             <a
-              href="tel:+258841234567"
-              className="btn-secondary text-base py-3.5 px-8"
+              href={CONTACTS.phone.href}
+              className="btn-secondary"
+              style={{ fontSize: "1rem", padding: "14px 32px" }}
               id="cta-phone-btn"
             >
               <Phone size={20} />
-              Ligar Agora
+              Ligar ({CONTACTS.phone.display})
             </a>
           </div>
 
           {/* Trust indicators */}
-          <div className="flex flex-wrap items-center justify-center gap-8 mt-12 pt-8 border-t border-border">
-            {[
-              "✓ Proposta gratuita",
-              "✓ Sem compromisso",
-              "✓ Resposta em 24h",
-              "✓ Suporte dedicado",
-            ].map((item) => (
-              <span key={item} className="text-sm text-text-muted">
-                {item}
-              </span>
+          <div
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "32px",
+              marginTop: "48px",
+              paddingTop: "32px",
+              borderTop: "1px solid rgba(0,212,170,0.15)",
+            }}
+          >
+            {["✓ Proposta gratuita", "✓ Sem compromisso", "✓ Resposta em 24h", "✓ Suporte dedicado"].map((item) => (
+              <span key={item} style={{ fontSize: "0.875rem", color: "#8B9CC0" }}>{item}</span>
             ))}
           </div>
         </div>

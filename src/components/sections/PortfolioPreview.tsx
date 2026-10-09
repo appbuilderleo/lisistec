@@ -8,7 +8,8 @@ const projects = [
     category: "Sites e Plataformas Web",
     description: "Portal corporativo com gestão de conteúdo e área de cliente.",
     tags: ["Next.js", "CockroachDB", "Vercel"],
-    gradient: "from-blue-600/30 to-primary/20",
+    gradientFrom: "rgba(59,130,246,0.3)",
+    gradientTo: "rgba(0,212,170,0.2)",
   },
   {
     id: "mobile-app",
@@ -16,7 +17,8 @@ const projects = [
     category: "Aplicações Móveis",
     description: "Aplicação móvel para gestão de vendas e inventário em tempo real.",
     tags: ["React Native", "Node.js", "PostgreSQL"],
-    gradient: "from-purple-600/30 to-blue-500/20",
+    gradientFrom: "rgba(168,85,247,0.3)",
+    gradientTo: "rgba(59,130,246,0.2)",
   },
   {
     id: "erp-system",
@@ -24,7 +26,8 @@ const projects = [
     category: "Sistemas de Gestão",
     description: "ERP completo para empresa de médio porte com módulos financeiros e RH.",
     tags: ["React", "Express", "MySQL"],
-    gradient: "from-primary/30 to-green-500/20",
+    gradientFrom: "rgba(0,212,170,0.3)",
+    gradientTo: "rgba(34,197,94,0.2)",
   },
   {
     id: "ui-design",
@@ -32,100 +35,115 @@ const projects = [
     category: "Design e UX/UI",
     description: "Redesign completo de aplicação financeira com foco em usabilidade.",
     tags: ["Figma", "Design System", "Prototyping"],
-    gradient: "from-orange-500/30 to-primary/20",
+    gradientFrom: "rgba(249,115,22,0.3)",
+    gradientTo: "rgba(0,212,170,0.2)",
   },
 ];
 
 export default function PortfolioPreview() {
   return (
     <section
-      className="py-24 relative"
+      style={{ padding: "96px 0", position: "relative" }}
       aria-labelledby="portfolio-heading"
       id="portfolio-section"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div style={{ maxWidth: "1280px", margin: "0 auto", padding: "0 24px" }}>
         {/* Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
+        <div style={{ display: "flex", flexWrap: "wrap", alignItems: "flex-end", justifyContent: "space-between", gap: "24px", marginBottom: "64px" }}>
           <div>
-            <div className="section-tag">Portfólio</div>
+            <div className="section-tag" style={{ marginBottom: "16px" }}>Portfólio</div>
             <h2
               id="portfolio-heading"
-              className="text-4xl lg:text-5xl font-heading font-700 text-white mt-4"
+              style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "clamp(1.75rem, 4vw, 3rem)", fontWeight: 700, color: "#ffffff" }}
             >
-              Projetos em{" "}
-              <span className="text-gradient">destaque</span>
+              Projetos em <span className="text-gradient">destaque</span>
             </h2>
-            <p className="text-text-muted mt-4 max-w-xl">
+            <p style={{ color: "#8B9CC0", marginTop: "16px", maxWidth: "480px" }}>
               Conheça alguns dos trabalhos que desenvolvemos para os nossos clientes.
             </p>
           </div>
-          <Link
-            href="/portfolio"
-            className="btn-secondary flex-shrink-0"
-            id="portfolio-view-all-btn"
-          >
-            Ver todos
-            <ArrowRight size={18} />
+          <Link href="/portfolio" className="btn-secondary" style={{ flexShrink: 0 }} id="portfolio-view-all-btn">
+            Ver todos <ArrowRight size={18} />
           </Link>
         </div>
 
         {/* Portfolio Grid */}
-        <div className="grid md:grid-cols-2 gap-6">
-          {projects.map(({ id, title, category, description, tags, gradient }) => (
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "24px" }}>
+          {projects.map(({ id, title, category, description, tags, gradientFrom, gradientTo }) => (
             <article
               key={id}
-              className="glass-card overflow-hidden group cursor-pointer"
+              className="glass-card"
+              style={{ overflow: "hidden", cursor: "pointer" }}
               aria-labelledby={`project-${id}-title`}
             >
               {/* Visual preview */}
               <div
-                className={`h-48 bg-gradient-to-br ${gradient} relative flex items-center justify-center overflow-hidden`}
+                style={{
+                  height: "192px",
+                  background: `linear-gradient(135deg, ${gradientFrom}, ${gradientTo})`,
+                  position: "relative",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  overflow: "hidden",
+                }}
               >
-                {/* Mock UI elements */}
-                <div className="absolute inset-4 rounded-lg border border-white/10 flex flex-col gap-2 p-3 opacity-60 group-hover:opacity-90 transition-opacity">
-                  <div className="flex gap-1.5">
-                    <div className="w-2 h-2 rounded-full bg-red-400/60" />
-                    <div className="w-2 h-2 rounded-full bg-yellow-400/60" />
-                    <div className="w-2 h-2 rounded-full bg-green-400/60" />
+                <div
+                  style={{
+                    position: "absolute",
+                    inset: "16px",
+                    borderRadius: "8px",
+                    border: "1px solid rgba(255,255,255,0.1)",
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "8px",
+                    padding: "12px",
+                    opacity: 0.6,
+                  }}
+                >
+                  <div style={{ display: "flex", gap: "6px" }}>
+                    <div style={{ width: "8px", height: "8px", borderRadius: "50%", background: "rgba(239,68,68,0.6)" }} />
+                    <div style={{ width: "8px", height: "8px", borderRadius: "50%", background: "rgba(234,179,8,0.6)" }} />
+                    <div style={{ width: "8px", height: "8px", borderRadius: "50%", background: "rgba(34,197,94,0.6)" }} />
                   </div>
-                  <div className="flex gap-2 mt-1">
-                    <div className="h-2 w-16 bg-white/20 rounded" />
-                    <div className="h-2 w-10 bg-white/15 rounded" />
-                    <div className="h-2 w-12 bg-white/15 rounded" />
+                  <div style={{ display: "flex", gap: "8px", marginTop: "4px" }}>
+                    <div style={{ height: "8px", width: "64px", background: "rgba(255,255,255,0.2)", borderRadius: "4px" }} />
+                    <div style={{ height: "8px", width: "40px", background: "rgba(255,255,255,0.15)", borderRadius: "4px" }} />
                   </div>
-                  <div className="flex-1 flex gap-2 mt-1">
-                    <div className="w-1/3 rounded bg-white/10" />
-                    <div className="flex-1 flex flex-col gap-1.5">
-                      <div className="h-3 bg-white/20 rounded" />
-                      <div className="h-3 w-3/4 bg-white/15 rounded" />
-                      <div className="h-3 w-1/2 bg-white/10 rounded" />
+                  <div style={{ flex: 1, display: "flex", gap: "8px", marginTop: "4px" }}>
+                    <div style={{ width: "33%", borderRadius: "4px", background: "rgba(255,255,255,0.1)" }} />
+                    <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: "6px" }}>
+                      <div style={{ height: "12px", background: "rgba(255,255,255,0.2)", borderRadius: "4px" }} />
+                      <div style={{ height: "12px", width: "75%", background: "rgba(255,255,255,0.15)", borderRadius: "4px" }} />
+                      <div style={{ height: "12px", width: "50%", background: "rgba(255,255,255,0.1)", borderRadius: "4px" }} />
                     </div>
                   </div>
                 </div>
-                <ExternalLink
-                  size={24}
-                  className="text-white opacity-0 group-hover:opacity-70 transition-opacity relative z-10"
-                  aria-hidden="true"
-                />
+                <ExternalLink size={24} style={{ color: "#ffffff", opacity: 0.7, position: "relative", zIndex: 1 }} aria-hidden="true" />
               </div>
 
               {/* Content */}
-              <div className="p-6">
-                <span className="tag text-xs mb-3 inline-block">
-                  {category}
-                </span>
+              <div style={{ padding: "24px" }}>
+                <span className="tag" style={{ marginBottom: "12px", display: "inline-block" }}>{category}</span>
                 <h3
                   id={`project-${id}-title`}
-                  className="text-xl font-heading font-700 text-white mb-2"
+                  style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 700, fontSize: "1.15rem", color: "#ffffff", marginBottom: "8px" }}
                 >
                   {title}
                 </h3>
-                <p className="text-text-muted text-sm mb-4">{description}</p>
-                <div className="flex flex-wrap gap-2">
+                <p style={{ color: "#8B9CC0", fontSize: "0.875rem", marginBottom: "16px" }}>{description}</p>
+                <div style={{ display: "flex", flexWrap: "wrap", gap: "8px" }}>
                   {tags.map((t) => (
                     <span
                       key={t}
-                      className="text-xs px-2.5 py-1 rounded-md bg-bg-surface border border-border text-text-muted"
+                      style={{
+                        fontSize: "12px",
+                        padding: "4px 10px",
+                        borderRadius: "6px",
+                        background: "#0D1F35",
+                        border: "1px solid rgba(0,212,170,0.15)",
+                        color: "#8B9CC0",
+                      }}
                     >
                       {t}
                     </span>

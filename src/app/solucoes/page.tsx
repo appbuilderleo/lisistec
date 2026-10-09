@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Bot, GraduationCap, Package, ArrowRight, CheckCircle, Zap } from "lucide-react";
+import { getWhatsAppUrl } from "@/lib/constants";
 
 export const metadata: Metadata = {
   title: "Soluções",
@@ -153,14 +154,16 @@ export default function SolucoesPage() {
                     </div>
                   </div>
 
-                  <Link
-                    href="/contacto"
+                  <a
+                    href={getWhatsAppUrl(`Olá! Gostaria de solicitar uma demonstração e proposta para a solução ${name}.`)}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="btn-primary text-sm"
                     id={`solution-${id}-contact-btn`}
                     style={{ background: `linear-gradient(135deg, ${color}, ${color}CC)` }}
                   >
-                    Solicitar Demo <ArrowRight size={16} />
-                  </Link>
+                    Solicitar Demo no WhatsApp <ArrowRight size={16} />
+                  </a>
                 </div>
 
                 {/* Features */}

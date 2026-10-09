@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { ArrowRight, Code2, Smartphone, Settings, HeadphonesIcon } from "lucide-react";
+import { getWhatsAppUrl } from "@/lib/constants";
 
 const typewriterWords = [
   "Soluções Digitais",
@@ -43,7 +44,6 @@ export default function HeroSection() {
 
   useEffect(() => {
     const currentWord = typewriterWords[wordIndex];
-
     if (!isDeleting && charIndex < currentWord.length) {
       timeoutRef.current = setTimeout(() => {
         setDisplayText(currentWord.slice(0, charIndex + 1));
@@ -60,188 +60,161 @@ export default function HeroSection() {
       setIsDeleting(false);
       setWordIndex((i) => (i + 1) % typewriterWords.length);
     }
-
-    return () => {
-      if (timeoutRef.current) clearTimeout(timeoutRef.current);
-    };
+    return () => { if (timeoutRef.current) clearTimeout(timeoutRef.current); };
   }, [charIndex, isDeleting, wordIndex]);
 
   return (
     <section
-      className="relative min-h-screen flex flex-col items-center justify-center pt-24 pb-16 overflow-hidden bg-grid"
+      className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-grid"
+      style={{ paddingTop: "96px", paddingBottom: "64px" }}
       aria-label="Secção principal"
       id="hero"
     >
       {/* Animated background glow */}
       <div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full pointer-events-none"
-        style={{
-          background:
-            "radial-gradient(circle, rgba(0,212,170,0.05) 0%, transparent 70%)",
-        }}
         aria-hidden="true"
+        style={{
+          position: "absolute",
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+          width: "800px",
+          height: "800px",
+          borderRadius: "50%",
+          background: "radial-gradient(circle, rgba(0,212,170,0.05) 0%, transparent 70%)",
+          pointerEvents: "none",
+          zIndex: 0,
+        }}
       />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
+      <div className="relative z-10 w-full" style={{ maxWidth: "1280px", margin: "0 auto", padding: "0 24px" }}>
+        {/* Two-column layout */}
+        <div className="hero-two-col" style={{ display: "grid", alignItems: "center", gap: "64px" }}>
+
           {/* Left: Text Content */}
           <div>
-            {/* Badge */}
-            <div className="section-tag mb-6" role="text">
-              <span className="w-2 h-2 rounded-full bg-primary animate-pulse" aria-hidden="true" />
+            <div className="section-tag" style={{ marginBottom: "24px" }} role="text">
+              <span
+                aria-hidden="true"
+                style={{ width: "8px", height: "8px", borderRadius: "50%", background: "#00D4AA", display: "inline-block", animation: "pulse-neon 3s ease-in-out infinite" }}
+              />
               Smart Solutions. Real Growth.
             </div>
 
-            {/* Headline */}
-            <h1 className="hero-headline mb-4">
-              <span className="text-white">Transformamos </span>
+            <h1 className="hero-headline" style={{ marginBottom: "16px" }}>
+              <span style={{ color: "#ffffff" }}>Transformamos </span>
               <span className="text-gradient-hero">ideias </span>
-              <span className="text-white">em</span>
+              <span style={{ color: "#ffffff" }}>em</span>
               <br />
-              <span
-                className="text-primary"
-                style={{ textShadow: "0 0 30px rgba(0,212,170,0.4)" }}
-              >
+              <span style={{ color: "#00D4AA", textShadow: "0 0 30px rgba(0,212,170,0.4)" }}>
                 {displayText}
                 <span className="typed-cursor" aria-hidden="true" />
               </span>
             </h1>
 
-            <p className="hero-sub mt-6 mb-8 max-w-lg">
+            <p className="hero-sub" style={{ marginTop: "24px", marginBottom: "32px", maxWidth: "520px" }}>
               Tecnologia, inovação e pessoas para um futuro mais eficiente.
               Soluções digitais feitas em Moçambique, para o mundo.
             </p>
 
-            {/* CTA Buttons */}
-            <div className="flex flex-wrap gap-4">
-              <Link
-                href="/servicos"
+            <div style={{ display: "flex", flexWrap: "wrap", gap: "16px" }}>
+              <a
+                href={getWhatsAppUrl("Olá! Gostaria de solicitar uma proposta de serviços com a Lisis Tecnologias e Serviços.")}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="btn-primary"
-                id="hero-services-btn"
+                id="hero-proposal-btn"
               >
-                Conheça os nossos serviços
+                Solicitar Proposta
                 <ArrowRight size={18} />
-              </Link>
-              <Link
-                href="/portfolio"
-                className="btn-secondary"
-                id="hero-portfolio-btn"
-              >
-                Ver Portfólio
+              </a>
+              <Link href="/servicos" className="btn-secondary" id="hero-services-btn">
+                Conheça os nossos serviços
               </Link>
             </div>
           </div>
 
-          {/* Right: Visual */}
-          <div className="relative hidden lg:flex items-center justify-center">
+          {/* Right: Visual (hidden on mobile) */}
+          <div className="hero-visual" style={{ position: "relative", display: "flex", alignItems: "center", justifyContent: "center" }}>
             {/* Central floating card */}
-            <div
-              className="glass-card p-8 w-80 animate-float relative z-10"
-              style={{ animationDelay: "0s" }}
-            >
-              {/* Mock code window */}
-              <div className="flex items-center gap-2 mb-4">
-                <span className="w-3 h-3 rounded-full bg-red-500/70" />
-                <span className="w-3 h-3 rounded-full bg-yellow-500/70" />
-                <span className="w-3 h-3 rounded-full bg-green-500/70" />
-                <span className="ml-2 text-xs text-text-faint font-mono">
-                  lisis.app
-                </span>
+            <div className="glass-card animate-float" style={{ padding: "32px", width: "320px", position: "relative", zIndex: 10 }}>
+              <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "16px" }}>
+                <span style={{ width: "12px", height: "12px", borderRadius: "50%", background: "rgba(239,68,68,0.7)", display: "block" }} />
+                <span style={{ width: "12px", height: "12px", borderRadius: "50%", background: "rgba(234,179,8,0.7)", display: "block" }} />
+                <span style={{ width: "12px", height: "12px", borderRadius: "50%", background: "rgba(34,197,94,0.7)", display: "block" }} />
+                <span style={{ marginLeft: "8px", fontSize: "12px", color: "#4A5E7A", fontFamily: "monospace" }}>lisis.app</span>
               </div>
-              <div className="space-y-2 font-mono text-xs">
-                <div className="flex gap-2">
-                  <span className="text-blue-400">const</span>
-                  <span className="text-primary">solution</span>
-                  <span className="text-white">=</span>
-                  <span className="text-yellow-400">await</span>
+              <div style={{ fontFamily: "monospace", fontSize: "12px", display: "flex", flexDirection: "column", gap: "6px" }}>
+                <div style={{ display: "flex", gap: "6px" }}>
+                  <span style={{ color: "#60a5fa" }}>const</span>
+                  <span style={{ color: "#00D4AA" }}>solution</span>
+                  <span style={{ color: "#ffffff" }}>=</span>
+                  <span style={{ color: "#facc15" }}>await</span>
                 </div>
-                <div className="pl-4 flex gap-1">
-                  <span className="text-text-muted">lisis</span>
-                  <span className="text-white">.</span>
-                  <span className="text-primary">build</span>
-                  <span className="text-white">{"({"}</span>
+                <div style={{ paddingLeft: "16px" }}>
+                  <span style={{ color: "#8B9CC0" }}>lisis</span><span style={{ color: "#ffffff" }}>.</span><span style={{ color: "#00D4AA" }}>build</span><span style={{ color: "#ffffff" }}>{`({`}</span>
                 </div>
-                <div className="pl-8">
-                  <span className="text-text-muted">client:</span>
-                  <span className="text-green-400"> "you"</span>
-                  <span className="text-white">,</span>
-                </div>
-                <div className="pl-8">
-                  <span className="text-text-muted">goal:</span>
-                  <span className="text-green-400"> "growth"</span>
-                  <span className="text-white">,</span>
-                </div>
-                <div className="pl-4">
-                  <span className="text-white">{"});"}</span>
-                </div>
-                <div className="mt-3 flex items-center gap-2">
-                  <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-                  <span className="text-primary">✓ Build successful</span>
+                <div style={{ paddingLeft: "32px" }}><span style={{ color: "#8B9CC0" }}>client:</span><span style={{ color: "#4ade80" }}> &quot;you&quot;</span><span style={{ color: "#ffffff" }}>,</span></div>
+                <div style={{ paddingLeft: "32px" }}><span style={{ color: "#8B9CC0" }}>goal:</span><span style={{ color: "#4ade80" }}> &quot;growth&quot;</span><span style={{ color: "#ffffff" }}>,</span></div>
+                <div style={{ paddingLeft: "16px" }}><span style={{ color: "#ffffff" }}>{`});`}</span></div>
+                <div style={{ marginTop: "12px", display: "flex", alignItems: "center", gap: "8px" }}>
+                  <span style={{ width: "8px", height: "8px", borderRadius: "50%", background: "#00D4AA", display: "block", animation: "pulse-neon 3s infinite" }} />
+                  <span style={{ color: "#00D4AA" }}>✓ Build successful</span>
                 </div>
               </div>
             </div>
 
-            {/* Floating badge cards */}
-            <div
-              className="glass-card px-4 py-3 absolute -top-4 -left-4 animate-float flex items-center gap-3"
-              style={{ animationDelay: "1s" }}
-            >
-              <div className="w-8 h-8 rounded-lg bg-primary/20 flex items-center justify-center">
-                <Code2 size={16} className="text-primary" />
+            {/* Badge: Web App */}
+            <div className="glass-card" style={{ padding: "12px 16px", position: "absolute", top: "-16px", left: "-16px", display: "flex", alignItems: "center", gap: "12px", animation: "float 6s ease-in-out 1s infinite" }}>
+              <div style={{ width: "32px", height: "32px", borderRadius: "8px", background: "rgba(0,212,170,0.2)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                <Code2 size={16} style={{ color: "#00D4AA" }} />
               </div>
               <div>
-                <div className="text-xs text-white font-600">Web App</div>
-                <div className="text-[10px] text-text-muted">Entregue ✓</div>
+                <div style={{ fontSize: "12px", color: "#ffffff", fontWeight: 600 }}>Web App</div>
+                <div style={{ fontSize: "10px", color: "#8B9CC0" }}>Entregue ✓</div>
               </div>
             </div>
 
-            <div
-              className="glass-card px-4 py-3 absolute -bottom-4 -right-4 animate-float flex items-center gap-3"
-              style={{ animationDelay: "2s" }}
-            >
-              <div className="w-8 h-8 rounded-lg bg-blue-500/20 flex items-center justify-center">
-                <Smartphone size={16} className="text-blue-400" />
+            {/* Badge: Mobile App */}
+            <div className="glass-card" style={{ padding: "12px 16px", position: "absolute", bottom: "-16px", right: "-16px", display: "flex", alignItems: "center", gap: "12px", animation: "float 6s ease-in-out 2s infinite" }}>
+              <div style={{ width: "32px", height: "32px", borderRadius: "8px", background: "rgba(59,130,246,0.2)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                <Smartphone size={16} style={{ color: "#60a5fa" }} />
               </div>
               <div>
-                <div className="text-xs text-white font-600">Mobile App</div>
-                <div className="text-[10px] text-text-muted">Em progresso</div>
+                <div style={{ fontSize: "12px", color: "#ffffff", fontWeight: 600 }}>Mobile App</div>
+                <div style={{ fontSize: "10px", color: "#8B9CC0" }}>Em progresso</div>
               </div>
             </div>
-
-            {/* Glow ring */}
-            <div
-              className="absolute inset-0 rounded-full opacity-20 animate-pulse-neon pointer-events-none"
-              style={{
-                background:
-                  "radial-gradient(circle, rgba(0,212,170,0.15) 0%, transparent 60%)",
-              }}
-              aria-hidden="true"
-            />
           </div>
         </div>
 
-        {/* Quick Services Bar (From Sitemap) */}
-        <div className="mt-16 pt-8 border-t border-border/40 w-full" id="stats">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        {/* Quick Services Bar */}
+        <div style={{ marginTop: "64px", paddingTop: "32px", borderTop: "1px solid rgba(0,212,170,0.15)" }} id="stats">
+          <div className="services-grid">
             {quickServices.map(({ icon: Icon, label, desc }) => (
-              <div
-                key={label}
-                className="glass-card p-5 flex items-center gap-4 hover:border-primary/40 transition-all group cursor-default"
-              >
-                <div className="w-11 h-11 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary group-hover:scale-110 group-hover:bg-primary group-hover:text-bg transition-all flex-shrink-0">
+              <div key={label} className="glass-card" style={{ padding: "20px", display: "flex", alignItems: "center", gap: "16px", cursor: "default" }}>
+                <div style={{ width: "44px", height: "44px", borderRadius: "12px", background: "rgba(0,212,170,0.1)", border: "1px solid rgba(0,212,170,0.2)", display: "flex", alignItems: "center", justifyContent: "center", color: "#00D4AA", flexShrink: 0 }}>
                   <Icon size={22} />
                 </div>
                 <div>
-                  <p className="text-sm font-heading font-600 text-white group-hover:text-primary transition-colors">
-                    {label}
-                  </p>
-                  <p className="text-xs text-text-muted mt-0.5">{desc}</p>
+                  <p style={{ fontSize: "14px", fontFamily: "'Space Grotesk', sans-serif", fontWeight: 600, color: "#ffffff" }}>{label}</p>
+                  <p style={{ fontSize: "12px", color: "#8B9CC0", marginTop: "2px" }}>{desc}</p>
                 </div>
               </div>
             ))}
           </div>
         </div>
       </div>
+
+      <style>{`
+        .hero-two-col { grid-template-columns: 1fr; }
+        .hero-visual { display: none; }
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+        @media (min-width: 1024px) {
+          .hero-two-col { grid-template-columns: 1fr 1fr; }
+          .hero-visual { display: flex; }
+        }
+      `}</style>
     </section>
   );
 }

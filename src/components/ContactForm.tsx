@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { Send, CheckCircle, AlertCircle, Loader2 } from "lucide-react";
+import { Send, CheckCircle, AlertCircle, Loader2, MessageCircle } from "lucide-react";
+import { getWhatsAppUrl } from "@/lib/constants";
 
 interface FormData {
   name: string;
@@ -45,6 +46,18 @@ export default function ContactForm() {
     }
   };
 
+  const handleWhatsAppDirect = (e?: React.MouseEvent) => {
+    if (e) e.preventDefault();
+    let msg = "Olá! Gostaria de solicitar uma proposta de serviços com a Lisis Tecnologias e Serviços.";
+    if (form.name.trim()) {
+      msg = `Olá! Meu nome é ${form.name.trim()}.\n` +
+        (form.email.trim() ? `Email: ${form.email.trim()}\n` : "") +
+        (form.phone.trim() ? `Telefone: ${form.phone.trim()}\n` : "") +
+        (form.message.trim() ? `Mensagem: ${form.message.trim()}` : "Gostaria de solicitar uma proposta de serviços.");
+    }
+    window.open(getWhatsAppUrl(msg), "_blank");
+  };
+
   if (status === "success") {
     return (
       <div
@@ -59,15 +72,28 @@ export default function ContactForm() {
           Mensagem enviada!
         </h3>
         <p className="text-text-muted mb-6 max-w-sm">
-          Obrigado pelo contacto. A nossa equipa vai responder em até 24 horas.
+          Obrigado pelo contacto. Se preferir resposta imediata, inicie agora uma conversa no WhatsApp.
         </p>
-        <button
-          onClick={() => setStatus("idle")}
-          className="btn-secondary cursor-pointer"
-          id="contact-send-another-btn"
-        >
-          Enviar outra mensagem
-        </button>
+        <div className="flex flex-wrap gap-4 justify-center">
+          <a
+            href={getWhatsAppUrl("Olá! Acabei de enviar um formulário no site e gostaria de conversar no WhatsApp.")}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-primary"
+            style={{ background: "linear-gradient(135deg, #25D366, #128C7E)", borderColor: "rgba(37,211,102,0.4)" }}
+            id="contact-success-whatsapp-btn"
+          >
+            <MessageCircle size={18} />
+            Continuar no WhatsApp
+          </a>
+          <button
+            onClick={() => setStatus("idle")}
+            className="btn-secondary cursor-pointer"
+            id="contact-send-another-btn"
+          >
+            Enviar outra mensagem
+          </button>
+        </div>
       </div>
     );
   }
@@ -166,25 +192,42 @@ export default function ContactForm() {
         </p>
       </div>
 
-      <button
-        type="submit"
-        disabled={status === "loading"}
-        className="btn-primary w-full justify-center text-base py-3.5 disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer"
-        id="contact-submit-btn"
-        aria-disabled={status === "loading"}
-      >
-        {status === "loading" ? (
-          <>
-            <Loader2 size={20} className="animate-spin" aria-hidden="true" />
-            A enviar...
-          </>
-        ) : (
-          <>
-            <Send size={20} aria-hidden="true" />
-            Enviar Mensagem
-          </>
-        )}
-      </button>
+      <div className="flex flex-col sm:flex-row gap-4">
+        <button
+          type="button"
+          onClick={() => handleWhatsAppDirect()}
+          className="btn-primary flex-1 justify-center text-base py-3.5 cursor-pointer"
+          style={{
+            background: "linear-gradient(135deg, #25D366, #128C7E)",
+            borderColor: "rgba(37,211,102,0.4)",
+            color: "#ffffff",
+          }}
+          id="contact-whatsapp-btn"
+        >
+          <MessageCircle size={20} aria-hidden="true" />
+          Solicitar no WhatsApp
+        </button>
+
+        <button
+          type="submit"
+          disabled={status === "loading"}
+          className="btn-secondary flex-1 justify-center text-base py-3.5 disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer"
+          id="contact-submit-btn"
+          aria-disabled={status === "loading"}
+        >
+          {status === "loading" ? (
+            <>
+              <Loader2 size={20} className="animate-spin" aria-hidden="true" />
+              A enviar...
+            </>
+          ) : (
+            <>
+              <Send size={20} aria-hidden="true" />
+              Enviar Formulário
+            </>
+          )}
+        </button>
+      </div>
 
       <p className="text-xs text-text-faint text-center mt-4">
         Ao enviar, concorda com a nossa{" "}

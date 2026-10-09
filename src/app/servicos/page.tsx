@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Globe, Smartphone, LayoutDashboard, Headphones, GitMerge, ArrowRight, CheckCircle } from "lucide-react";
+import { getWhatsAppUrl } from "@/lib/constants";
 
 export const metadata: Metadata = {
   title: "Serviços",
@@ -114,9 +115,15 @@ export default function ServicosPage() {
             Soluções completas para o seu negócio. Desde o conceito ao
             lançamento e suporte contínuo.
           </p>
-          <Link href="/contacto" className="btn-primary" id="services-page-cta">
-            Solicitar Proposta <ArrowRight size={18} />
-          </Link>
+          <a
+            href={getWhatsAppUrl("Olá! Gostaria de solicitar uma proposta de serviços com a Lisis Tecnologias e Serviços.")}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-primary"
+            id="services-page-cta"
+          >
+            Solicitar Proposta no WhatsApp <ArrowRight size={18} />
+          </a>
         </div>
       </section>
 
@@ -152,14 +159,16 @@ export default function ServicosPage() {
                       <span key={t} className="tag text-xs">{t}</span>
                     ))}
                   </div>
-                  <Link
-                    href="/contacto"
+                  <a
+                    href={getWhatsAppUrl(`Olá! Gostaria de solicitar uma proposta para o serviço: ${title}.`)}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="btn-primary text-sm"
                     id={`service-${id}-contact-btn`}
                     style={{ background: `linear-gradient(135deg, ${color}, ${color}CC)` }}
                   >
-                    Solicitar este serviço <ArrowRight size={16} />
-                  </Link>
+                    Solicitar este serviço no WhatsApp <ArrowRight size={16} />
+                  </a>
                 </div>
 
                 <div className={index % 2 === 1 ? "lg:col-start-1" : ""}>

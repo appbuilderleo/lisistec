@@ -31,90 +31,112 @@ const testimonials = [
 
 export default function TestimonialsSection() {
   const [active, setActive] = useState(0);
-
   const prev = () => setActive((a) => (a - 1 + testimonials.length) % testimonials.length);
   const next = () => setActive((a) => (a + 1) % testimonials.length);
-
   const t = testimonials[active];
 
   return (
     <section
-      className="py-24 relative"
+      style={{ padding: "96px 0", position: "relative" }}
       aria-labelledby="testimonials-heading"
       id="testimonials"
     >
       <div
-        className="absolute inset-0 opacity-40"
-        style={{ background: "radial-gradient(ellipse at center, rgba(0,212,170,0.04) 0%, transparent 70%)" }}
         aria-hidden="true"
+        style={{
+          position: "absolute",
+          inset: 0,
+          opacity: 0.4,
+          background: "radial-gradient(ellipse at center, rgba(0,212,170,0.04) 0%, transparent 70%)",
+          pointerEvents: "none",
+        }}
       />
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+      <div style={{ maxWidth: "896px", margin: "0 auto", padding: "0 24px", position: "relative" }}>
         {/* Header */}
-        <div className="text-center mb-16">
-          <div className="section-tag mx-auto w-fit">Testemunhos</div>
+        <div style={{ textAlign: "center", marginBottom: "64px" }}>
+          <div className="section-tag" style={{ margin: "0 auto 16px", display: "inline-flex" }}>Testemunhos</div>
           <h2
             id="testimonials-heading"
-            className="text-4xl font-heading font-700 text-white mt-4"
+            style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "clamp(1.75rem, 4vw, 2.5rem)", fontWeight: 700, color: "#ffffff" }}
           >
-            O que dizem os nossos{" "}
-            <span className="text-gradient">clientes</span>
+            O que dizem os nossos <span className="text-gradient">clientes</span>
           </h2>
         </div>
 
         {/* Testimonial Card */}
-        <div className="glass-card p-10 text-center relative" role="region" aria-label="Testemunho actual" aria-live="polite">
-          <Quote
-            size={40}
-            className="text-primary/30 mx-auto mb-6"
-            aria-hidden="true"
-          />
+        <div
+          className="glass-card"
+          style={{ padding: "40px", textAlign: "center" }}
+          role="region"
+          aria-label="Testemunho actual"
+          aria-live="polite"
+        >
+          <Quote size={40} style={{ color: "rgba(0,212,170,0.3)", margin: "0 auto 24px" }} aria-hidden="true" />
 
           {/* Stars */}
-          <div className="flex justify-center gap-1 mb-6" role="img" aria-label={`${t.rating} estrelas`}>
+          <div style={{ display: "flex", justifyContent: "center", gap: "4px", marginBottom: "24px" }} role="img" aria-label={`${t.rating} estrelas`}>
             {Array.from({ length: t.rating }).map((_, i) => (
-              <Star key={i} size={18} className="text-primary fill-primary" aria-hidden="true" />
+              <Star key={i} size={18} style={{ color: "#00D4AA", fill: "#00D4AA" }} aria-hidden="true" />
             ))}
           </div>
 
-          <blockquote className="text-text text-lg leading-relaxed mb-8 max-w-2xl mx-auto italic">
+          <blockquote style={{ color: "#E2EAF4", fontSize: "1.1rem", lineHeight: 1.7, marginBottom: "32px", maxWidth: "640px", marginLeft: "auto", marginRight: "auto", fontStyle: "italic" }}>
             &ldquo;{t.text}&rdquo;
           </blockquote>
 
-          <div className="flex flex-col items-center gap-2">
+          <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "12px" }}>
             <div
-              className="w-14 h-14 rounded-full bg-gradient-to-br from-primary/30 to-blue-500/30 border border-primary/30 flex items-center justify-center text-xl font-heading font-700 text-white"
+              style={{
+                width: "56px",
+                height: "56px",
+                borderRadius: "50%",
+                background: "linear-gradient(135deg, rgba(0,212,170,0.3), rgba(59,130,246,0.3))",
+                border: "1px solid rgba(0,212,170,0.3)",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                fontFamily: "'Space Grotesk', sans-serif",
+                fontWeight: 700,
+                fontSize: "1.25rem",
+                color: "#ffffff",
+              }}
               aria-hidden="true"
             >
               {t.name[0]}
             </div>
             <div>
-              <p className="font-heading font-700 text-white">{t.name}</p>
-              <p className="text-text-muted text-sm">
-                {t.role} · {t.company}
-              </p>
+              <p style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 700, color: "#ffffff" }}>{t.name}</p>
+              <p style={{ color: "#8B9CC0", fontSize: "0.875rem" }}>{t.role} · {t.company}</p>
             </div>
           </div>
         </div>
 
         {/* Controls */}
-        <div className="flex items-center justify-center gap-4 mt-8">
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "16px", marginTop: "32px" }}>
           <button
             onClick={prev}
-            className="w-10 h-10 rounded-full border border-border flex items-center justify-center text-text-muted hover:text-primary hover:border-primary/40 transition-all cursor-pointer"
+            style={{ width: "40px", height: "40px", borderRadius: "50%", border: "1px solid rgba(0,212,170,0.15)", display: "flex", alignItems: "center", justifyContent: "center", color: "#8B9CC0", background: "transparent", cursor: "pointer", transition: "all 0.2s ease" }}
             aria-label="Testemunho anterior"
             id="testimonial-prev-btn"
           >
             <ChevronLeft size={18} />
           </button>
 
-          <div className="flex gap-2" role="tablist" aria-label="Seleccionar testemunho">
+          <div style={{ display: "flex", gap: "8px" }} role="tablist" aria-label="Seleccionar testemunho">
             {testimonials.map((_, i) => (
               <button
                 key={i}
                 onClick={() => setActive(i)}
-                className={`h-2 rounded-full transition-all cursor-pointer ${
-                  i === active ? "w-6 bg-primary" : "w-2 bg-border"
-                }`}
+                style={{
+                  height: "8px",
+                  width: i === active ? "24px" : "8px",
+                  borderRadius: "999px",
+                  background: i === active ? "#00D4AA" : "rgba(0,212,170,0.15)",
+                  border: "none",
+                  cursor: "pointer",
+                  transition: "all 0.3s ease",
+                  padding: 0,
+                }}
                 aria-label={`Testemunho ${i + 1}`}
                 aria-selected={i === active}
                 role="tab"
@@ -125,7 +147,7 @@ export default function TestimonialsSection() {
 
           <button
             onClick={next}
-            className="w-10 h-10 rounded-full border border-border flex items-center justify-center text-text-muted hover:text-primary hover:border-primary/40 transition-all cursor-pointer"
+            style={{ width: "40px", height: "40px", borderRadius: "50%", border: "1px solid rgba(0,212,170,0.15)", display: "flex", alignItems: "center", justifyContent: "center", color: "#8B9CC0", background: "transparent", cursor: "pointer", transition: "all 0.2s ease" }}
             aria-label="Próximo testemunho"
             id="testimonial-next-btn"
           >

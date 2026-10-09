@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
+import { getWhatsAppUrl } from "@/lib/constants";
 
 const navLinks = [
   { href: "/", label: "Início" },
@@ -81,13 +82,15 @@ export default function Navbar() {
 
           {/* CTA Button */}
           <div className="hidden lg:flex items-center gap-4">
-            <Link
-              href="/contacto"
+            <a
+              href={getWhatsAppUrl("Olá! Gostaria de solicitar uma proposta de serviços com a Lisis Tecnologias e Serviços.")}
+              target="_blank"
+              rel="noopener noreferrer"
               className="btn-primary text-sm py-2.5 px-5"
               id="nav-cta-btn"
             >
               Solicitar Proposta
-            </Link>
+            </a>
           </div>
 
           {/* Mobile Menu Toggle */}
@@ -151,9 +154,15 @@ export default function Navbar() {
           </ul>
 
           <div className="mt-10">
-            <Link href="/contacto" className="btn-primary" id="mobile-cta-btn">
+            <a
+              href={getWhatsAppUrl("Olá! Gostaria de solicitar uma proposta de serviços com a Lisis Tecnologias e Serviços.")}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-primary"
+              id="mobile-cta-btn"
+            >
               Solicitar Proposta
-            </Link>
+            </a>
           </div>
         </div>
       )}
