@@ -166,23 +166,12 @@ export default function CrmLoginPage() {
             </button>
           </form>
 
-          {/* First Login helper note */}
-          <div className="mt-8 pt-6 border-t border-slate-800/80">
-            <div className="p-3.5 rounded-xl bg-cyan-950/20 border border-cyan-500/20 text-xs text-slate-300 space-y-1">
-              <p className="font-semibold text-cyan-300 flex items-center gap-1.5">
-                <Shield size={14} />
-                Acesso Inicial do Administrador:
-              </p>
-              <p className="text-slate-400">
-                Email: <span className="text-slate-200 font-mono">admin@lisis.co.mz</span>
-              </p>
-              <p className="text-slate-400">
-                Palavra-passe: <span className="text-slate-200 font-mono">Admin@Lisis2026!</span>
-              </p>
-              <p className="text-[11px] text-slate-500 pt-1">
-                * Poderá alterar as suas credenciais a qualquer momento no separador Configurações.
-              </p>
-            </div>
+          {/* Security Notice */}
+          <div className="mt-6 pt-5 border-t border-slate-800/80 text-center">
+            <p className="text-xs text-slate-500 flex items-center justify-center gap-1.5">
+              <Shield size={13} className="text-cyan-500/70" />
+              <span>Acesso restrito e monitorizado aos gestores autorizados.</span>
+            </p>
           </div>
         </div>
 
