@@ -12,21 +12,33 @@ async function run() {
   const res = await client.query(
     "SELECT table_name FROM information_schema.tables WHERE table_schema = 'public'"
   );
-  console.log('Existing tables:', res.rows.map(r => r.table_name));
+  const tables = res.rows.map(r => r.table_name);
+  console.log('Existing tables in CockroachDB:', tables);
 
-  // Unlock tables that may be schema-locked
-  const tables = ['blog_posts', 'contact_messages', 'projects', 'newsletter_subscribers'];
-  for (const table of tables) {
+  // Also include newly defined tables if any
+  const targetTables = Array.from(new Set([
+    ...tables,
+    'admin_users',
+    'contact_messages',
+    'lead_notes',
+    'lead_activities',
+    'clients',
+    'blog_posts',
+    'projects',
+    'newsletter_subscribers'
+  ]));
+
+  for (const table of targetTables) {
     try {
-      await client.query(`ALTER TABLE IF EXISTS ${table} SET (schema_locked = false)`);
-      console.log(`Unlocked ${table}`);
+      await client.query(`ALTER TABLE IF EXISTS "${table}" SET (schema_locked = false)`);
+      console.log(`Unlocked table: ${table}`);
     } catch(e) {
-      console.log(`${table} unlock note:`, e.message);
+      console.log(`Table ${table} unlock info:`, e.message);
     }
   }
 
   await client.end();
-  console.log('Done!');
+  console.log('All tables unlocked successfully!');
 }
 
 run().catch(console.error);

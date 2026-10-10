@@ -214,6 +214,7 @@ export default function Footer() {
           <div style={{ display: "flex", alignItems: "center", gap: "24px" }}>
             <Link href="/privacidade" style={{ color: "#4A5E7A", fontSize: "0.75rem", textDecoration: "none", transition: "color 0.2s" }}>Política de Privacidade</Link>
             <Link href="/termos" style={{ color: "#4A5E7A", fontSize: "0.75rem", textDecoration: "none", transition: "color 0.2s" }}>Termos de Uso</Link>
+            <Link href="/crm/login" style={{ color: "#4A5E7A", fontSize: "0.75rem", textDecoration: "none", transition: "color 0.2s" }}>Área de Gestão (CRM)</Link>
           </div>
           <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
             <div style={{ width: "8px", height: "8px", borderRadius: "50%", background: "#00D4AA", animation: "pulse-neon 3s ease-in-out infinite" }} aria-hidden="true" />

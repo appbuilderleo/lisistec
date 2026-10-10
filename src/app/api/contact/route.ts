@@ -36,15 +36,32 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Save to CockroachDB
+    // Save lead to CockroachDB
     const contactMessage = await prisma.contactMessage.create({
       data: {
         name: name.trim(),
         email: email.trim().toLowerCase(),
         phone: phone?.trim() || null,
         message: message.trim(),
+        status: "NOVO",
+        priority: "MEDIA",
+        source: "site_contact",
+        read: false,
       },
     });
+
+    // Create initial activity log in CRM timeline
+    try {
+      await prisma.leadActivity.create({
+        data: {
+          leadId: contactMessage.id,
+          type: "NOVO_LEAD",
+          description: `Novo contacto recebido através do formulário do site (${contactMessage.email})`,
+        },
+      });
+    } catch (activityError) {
+      console.warn("Could not log initial lead activity:", activityError);
+    }
 
     return NextResponse.json(
       {

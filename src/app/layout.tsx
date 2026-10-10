@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
 import { Space_Grotesk, Inter } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
-import WhatsAppButton from "@/components/layout/WhatsAppButton";
+import AppShell from "@/components/layout/AppShell";
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
@@ -153,12 +151,9 @@ export default function RootLayout({
         <div className="orb-1" aria-hidden="true" />
         <div className="orb-2" aria-hidden="true" />
 
-        <Navbar />
-        <main id="main-content" tabIndex={-1}>
+        <AppShell>
           {children}
-        </main>
-        <Footer />
-        <WhatsAppButton />
+        </AppShell>
       </body>
     </html>
   );
