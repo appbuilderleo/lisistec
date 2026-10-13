@@ -38,6 +38,7 @@ function YoutubeIcon({ size = 16 }: { size?: number }) {
 }
 
 const services = [
+  { label: "Design & Branding", href: "/servicos#design" },
   { label: "Desenvolvimento Web", href: "/servicos#web" },
   { label: "Aplicações Móveis", href: "/servicos#mobile" },
   { label: "Sistemas de Gestão", href: "/servicos#sistemas" },
@@ -54,6 +55,7 @@ const solutions = [
 const company = [
   { label: "Sobre Nós", href: "/sobre" },
   { label: "Portfólio", href: "/portfolio" },
+  { label: "Galeria de Trabalhos", href: "/galeria" },
   { label: "Blog", href: "/blog" },
   { label: "Contacto", href: "/contacto" },
 ];

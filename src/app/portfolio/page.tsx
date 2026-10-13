@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, ExternalLink } from "lucide-react";
+import { ArrowRight, ExternalLink, Sparkles } from "lucide-react";
 import { getWhatsAppUrl } from "@/lib/constants";
 
 export const metadata: Metadata = {
@@ -12,6 +12,7 @@ export const metadata: Metadata = {
 
 const categories = [
   "Todos",
+  "Design & Identidade Visual",
   "Sites e Plataformas Web",
   "Sistemas de Gestão",
   "E-Commerce & Retalho",
@@ -19,6 +20,39 @@ const categories = [
 ];
 
 const projects = [
+  {
+    id: "cyan-software-logo",
+    title: "Logo & Identidade Tech — Cyan Software",
+    category: "Design & Identidade Visual",
+    description:
+      "Design de logotipo vetorial e isotipo geométrico de alta precisão para empresa de software e soluções cloud. Inclui aplicações em suportes digitais e normas de uso.",
+    tags: ["Logo Design", "Tech", "Minimalismo", "Vetor"],
+    gradient: "from-cyan-500/40 to-blue-600/30",
+    url: "/galeria",
+    year: "2026",
+  },
+  {
+    id: "real-estate-brand",
+    title: "Identidade Visual & Mockups — Imobiliária Premium",
+    category: "Design & Identidade Visual",
+    description:
+      "Manual de normas de identidade visual (brandbook), paleta cromática, tipografia corporativa e mockups 3D de papelaria institucional para agência imobiliária.",
+    tags: ["Brandbook", "Imobiliária", "Mockups 3D", "Identidade"],
+    gradient: "from-amber-500/40 to-orange-600/30",
+    url: "/galeria",
+    year: "2026",
+  },
+  {
+    id: "red-tow-truck-branding",
+    title: "Branding de Frota & Logotipo — Red Tow Truck",
+    category: "Design & Identidade Visual",
+    description:
+      "Construção visual e aplicação de marca em frotas comerciais de reboque e assistência 24h, uniformes de trabalho e sinalética exterior de alto impacto.",
+    tags: ["Logotipo", "Branding de Frota", "Sinalética", "Mockup"],
+    gradient: "from-rose-600/40 to-red-600/30",
+    url: "/galeria",
+    year: "2026",
+  },
   {
     id: "ccn-consultores",
     title: "CCN Consultores Moçambique",
@@ -120,80 +154,147 @@ export default function PortfolioPage() {
       {/* Projects Grid */}
       <section className="py-16" aria-label="Projetos">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Spotlight Banner for 9:16 Design & Branding Gallery */}
+          <div className="mb-12 p-8 rounded-2xl glass-card border border-cyan-500/30 bg-gradient-to-r from-cyan-950/40 via-blue-950/20 to-slate-900/60 flex flex-col md:flex-row items-center justify-between gap-6 shadow-2xl">
+            <div className="space-y-2">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-cyan-500/15 text-cyan-300 border border-cyan-500/30">
+                <Sparkles size={13} />
+                Nova Galeria de Fotos (Resolução 9:16)
+              </span>
+              <h2 className="text-2xl font-heading font-bold text-white">
+                Galeria de Design, Logotipos e Identidade Visual
+              </h2>
+              <p className="text-text-muted text-sm max-w-2xl leading-relaxed">
+                Explore a nossa coleção de criações de logos vetoriais, manuais de normas (brandbooks),
+                mockups 3D e aplicações de branding em formato vertical de alta resolução.
+              </p>
+            </div>
+            <Link
+              href="/galeria"
+              className="btn-primary text-sm px-6 py-3 whitespace-nowrap shrink-0 inline-flex items-center gap-2"
+              id="portfolio-to-gallery-banner-btn"
+            >
+              <span>Explorar Galeria (9:16)</span>
+              <ArrowRight size={16} />
+            </Link>
+          </div>
+
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {projects.map(({ id, title, category, description, tags, gradient, year, url }) => (
-              <article
-                key={id}
-                className="glass-card overflow-hidden group flex flex-col"
-                aria-labelledby={`project-page-${id}`}
-              >
-                {/* Visual Header */}
-                <a
-                  href={url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`h-44 bg-gradient-to-br ${gradient} relative flex items-center justify-center overflow-hidden p-6 text-center text-white font-heading font-700 text-lg transition-transform`}
-                  title={`Aceder a ${title} (abre em nova aba)`}
+            {projects.map(({ id, title, category, description, tags, gradient, year, url }) => {
+              const isInternal = url.startsWith("/");
+
+              return (
+                <article
+                  key={id}
+                  className="glass-card overflow-hidden group flex flex-col"
+                  aria-labelledby={`project-page-${id}`}
                 >
-                  <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors" />
-                  <span className="relative z-10 px-4 py-2 rounded-lg bg-black/40 backdrop-blur-sm border border-white/10 flex items-center gap-2">
-                    {title}
-                    <ExternalLink size={16} />
-                  </span>
-                  <span className="absolute top-3 right-3 text-xs text-white/70 bg-black/40 px-2.5 py-1 rounded-full border border-white/10">
-                    {year}
-                  </span>
-                </a>
-
-                {/* Content */}
-                <div className="p-6 flex flex-col flex-1">
-                  <span className="tag text-xs mb-3 inline-block w-fit">{category}</span>
-                  <h2 id={`project-page-${id}`} className="text-xl font-heading font-700 text-white mb-2">
-                    <a
+                  {/* Visual Header */}
+                  {isInternal ? (
+                    <Link
                       href={url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="hover:text-primary transition-colors"
+                      className={`h-44 bg-gradient-to-br ${gradient} relative flex items-center justify-center overflow-hidden p-6 text-center text-white font-heading font-700 text-lg transition-transform`}
+                      title={`Ver ${title} na Galeria`}
                     >
-                      {title}
-                    </a>
-                  </h2>
-                  <p className="text-text-muted text-sm mb-4 leading-relaxed flex-1">{description}</p>
-                  
-                  {/* Tags */}
-                  <div className="flex flex-wrap gap-2 mb-6">
-                    {tags.map((t) => (
-                      <span key={t} className="text-xs px-2.5 py-1 rounded-md bg-bg-surface border border-border text-text-muted">
-                        {t}
+                      <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors" />
+                      <span className="relative z-10 px-4 py-2 rounded-lg bg-black/40 backdrop-blur-sm border border-white/10 flex items-center gap-2">
+                        {title}
+                        <ArrowRight size={16} />
                       </span>
-                    ))}
-                  </div>
-
-                  {/* Actions */}
-                  <div className="flex flex-col gap-2 mt-auto">
+                      <span className="absolute top-3 right-3 text-xs text-white/70 bg-black/40 px-2.5 py-1 rounded-full border border-white/10">
+                        {year}
+                      </span>
+                    </Link>
+                  ) : (
                     <a
                       href={url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="btn-primary text-sm py-2.5 px-4 justify-center"
-                      id={`portfolio-visit-${id}`}
+                      className={`h-44 bg-gradient-to-br ${gradient} relative flex items-center justify-center overflow-hidden p-6 text-center text-white font-heading font-700 text-lg transition-transform`}
+                      title={`Aceder a ${title} (abre em nova aba)`}
                     >
-                      Aceder ao Site <ExternalLink size={15} />
+                      <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors" />
+                      <span className="relative z-10 px-4 py-2 rounded-lg bg-black/40 backdrop-blur-sm border border-white/10 flex items-center gap-2">
+                        {title}
+                        <ExternalLink size={16} />
+                      </span>
+                      <span className="absolute top-3 right-3 text-xs text-white/70 bg-black/40 px-2.5 py-1 rounded-full border border-white/10">
+                        {year}
+                      </span>
                     </a>
+                  )}
 
-                    <a
-                      href={getWhatsAppUrl(`Olá! Vi o projecto ${title} e gostaria de solicitar uma proposta para uma solução similar.`)}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="btn-secondary text-xs py-2 px-3 justify-center"
-                      id={`portfolio-wa-${id}`}
-                    >
-                      Pedir Proposta Similar via WhatsApp
-                    </a>
+                  {/* Content */}
+                  <div className="p-6 flex flex-col flex-1">
+                    <span className="tag text-xs mb-3 inline-block w-fit">{category}</span>
+                    <h2 id={`project-page-${id}`} className="text-xl font-heading font-700 text-white mb-2">
+                      {isInternal ? (
+                        <Link href={url} className="hover:text-primary transition-colors">
+                          {title}
+                        </Link>
+                      ) : (
+                        <a
+                          href={url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="hover:text-primary transition-colors"
+                        >
+                          {title}
+                        </a>
+                      )}
+                    </h2>
+                    <p className="text-text-muted text-sm mb-4 leading-relaxed flex-1">{description}</p>
+                    
+                    {/* Tags */}
+                    <div className="flex flex-wrap gap-2 mb-6">
+                      {tags.map((t) => (
+                        <span key={t} className="text-xs px-2.5 py-1 rounded-md bg-bg-surface border border-border text-text-muted">
+                          {t}
+                        </span>
+                      ))}
+                    </div>
+
+                    {/* Actions */}
+                    <div className="flex flex-col gap-2 mt-auto">
+                      {isInternal ? (
+                        <Link
+                          href={url}
+                          className="btn-primary text-sm py-2.5 px-4 justify-center"
+                          id={`portfolio-visit-${id}`}
+                          style={{
+                            background: "linear-gradient(135deg, rgba(0, 242, 254, 0.8), rgba(0, 136, 255, 0.8))",
+                            color: "#080b11",
+                            fontWeight: 700,
+                          }}
+                        >
+                          Ver na Galeria de Fotos (9:16) <ArrowRight size={15} />
+                        </Link>
+                      ) : (
+                        <a
+                          href={url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="btn-primary text-sm py-2.5 px-4 justify-center"
+                          id={`portfolio-visit-${id}`}
+                        >
+                          Aceder ao Site <ExternalLink size={15} />
+                        </a>
+                      )}
+
+                      <a
+                        href={getWhatsAppUrl(`Olá! Vi o projecto ${title} e gostaria de solicitar uma proposta para uma solução similar.`)}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="btn-secondary text-xs py-2 px-3 justify-center"
+                        id={`portfolio-wa-${id}`}
+                      >
+                        Pedir Proposta Similar via WhatsApp
+                      </a>
+                    </div>
                   </div>
-                </div>
-              </article>
-            ))}
+                </article>
+              );
+            })}
           </div>
         </div>
       </section>

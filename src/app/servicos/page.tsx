@@ -1,16 +1,36 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Globe, Smartphone, LayoutDashboard, Headphones, GitMerge, ArrowRight, CheckCircle } from "lucide-react";
+import { Globe, Smartphone, LayoutDashboard, Headphones, GitMerge, ArrowRight, CheckCircle, Palette, Sparkles } from "lucide-react";
 import { getWhatsAppUrl } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: "Serviços",
+  title: "Serviços de Tecnologia, Design e Branding",
   description:
-    "Oferecemos desenvolvimento web, aplicações móveis, sistemas de gestão, consultoria em TI e integração de sistemas em Moçambique.",
+    "Desenvolvimento de software, aplicações móveis, sistemas de gestão, design gráfico, criação de logos, manuais de identidade visual e branding em Moçambique.",
   alternates: { canonical: "/servicos" },
 };
 
 const services = [
+  {
+    id: "design",
+    icon: Palette,
+    title: "Design, Criação de Logo & Branding",
+    description:
+      "Construímos marcas fortes e inconfundíveis. Desde a concepção de logotipos vetoriais, tipografia e paleta de cores corporativa, até ao manual completo de identidade visual (brandbook) e mockups 3D de apresentação.",
+    features: [
+      "Conceção de logotipo vetorial exclusivo e de alta precisão",
+      "Manual de Normas de Identidade Visual (Brandbook detalhado)",
+      "Paleta cromática oficial (Pantone, CMYK, RGB, HEX)",
+      "Tipografia institucional e hierarquia visual",
+      "Papelaria institucional (cartões, papel timbrado, pastas)",
+      "Aplicações em frotas comerciais, vestuário e sinalética",
+      "Mockups 3D hiper-realistas para aprovação visual",
+      "Ficheiros finais em todos os formatos (AI, SVG, PDF, PNG alta resolução)",
+    ],
+    tech: ["Figma", "Adobe Illustrator", "Photoshop", "Brand Guidelines", "Vector Art"],
+    color: "#00F2FE",
+    galleryLink: "/galeria",
+  },
   {
     id: "web",
     icon: Globe,
@@ -159,16 +179,29 @@ export default function ServicosPage() {
                       <span key={t} className="tag text-xs">{t}</span>
                     ))}
                   </div>
-                  <a
-                    href={getWhatsAppUrl(`Olá! Gostaria de solicitar uma proposta para o serviço: ${title}.`)}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn-primary text-sm"
-                    id={`service-${id}-contact-btn`}
-                    style={{ background: `linear-gradient(135deg, ${color}, ${color}CC)` }}
-                  >
-                    Solicitar este serviço no WhatsApp <ArrowRight size={16} />
-                  </a>
+                  <div className="flex flex-wrap items-center gap-3">
+                    <a
+                      href={getWhatsAppUrl(`Olá! Gostaria de solicitar uma proposta para o serviço: ${title}.`)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn-primary text-sm"
+                      id={`service-${id}-contact-btn`}
+                      style={{ background: `linear-gradient(135deg, ${color}, ${color}CC)` }}
+                    >
+                      Solicitar no WhatsApp <ArrowRight size={16} />
+                    </a>
+                    {id === "design" && (
+                      <Link
+                        href="/galeria"
+                        className="btn-secondary text-sm inline-flex items-center gap-2"
+                        id="service-design-gallery-btn"
+                        style={{ border: "1px solid rgba(0, 242, 254, 0.4)", color: "#00F2FE" }}
+                      >
+                        <Sparkles size={16} />
+                        Ver Galeria de Fotos (9:16)
+                      </Link>
+                    )}
+                  </div>
                 </div>
 
                 <div className={index % 2 === 1 ? "lg:col-start-1" : ""}>

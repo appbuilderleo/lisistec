@@ -1,8 +1,17 @@
 import Link from "next/link";
-import { Globe, Smartphone, LayoutDashboard, Headphones, GitMerge, ArrowRight } from "lucide-react";
+import { Globe, Smartphone, LayoutDashboard, Headphones, GitMerge, ArrowRight, Palette } from "lucide-react";
 import { getWhatsAppUrl } from "@/lib/constants";
 
 const services = [
+  {
+    id: "design",
+    icon: Palette,
+    title: "Design, Logo & Branding",
+    description: "Criação de logotipos vetoriais, manuais de identidade visual completos, papelaria corporativa e posicionamento de marca.",
+    features: ["Criação de Logotipos", "Manual de Identidade Visual", "Branding & Mockups 3D"],
+    accentColor: "rgba(0,242,254,0.2)",
+    link: "/galeria",
+  },
   {
     id: "web",
     icon: Globe,
@@ -10,6 +19,7 @@ const services = [
     description: "Criamos websites e aplicações web modernas, rápidas e escaláveis usando as mais recentes tecnologias.",
     features: ["Next.js & React", "APIs RESTful", "CMS & E-commerce"],
     accentColor: "rgba(59,130,246,0.2)",
+    link: "/servicos#web",
   },
   {
     id: "mobile",
@@ -18,6 +28,7 @@ const services = [
     description: "Desenvolvemos apps nativas e híbridas para iOS e Android que os seus utilizadores vão adorar.",
     features: ["React Native", "iOS & Android", "UI/UX Premium"],
     accentColor: "rgba(168,85,247,0.2)",
+    link: "/servicos#mobile",
   },
   {
     id: "sistemas",
@@ -26,6 +37,7 @@ const services = [
     description: "ERP, CRM e sistemas de gestão personalizados para automatizar e otimizar os seus processos empresariais.",
     features: ["ERP Customizado", "Relatórios em tempo real", "Multi-utilizador"],
     accentColor: "rgba(0,212,170,0.15)",
+    link: "/servicos#sistemas",
   },
   {
     id: "consultoria",
@@ -34,6 +46,7 @@ const services = [
     description: "Apoio técnico especializado e consultoria estratégica em tecnologia para o seu negócio crescer.",
     features: ["Suporte 24/7", "Formação técnica", "Assessoria TI"],
     accentColor: "rgba(249,115,22,0.2)",
+    link: "/servicos#consultoria",
   },
   {
     id: "integracao",
@@ -42,6 +55,7 @@ const services = [
     description: "Conectamos os seus sistemas existentes para criar fluxos de trabalho automatizados e eficientes.",
     features: ["APIs & Webhooks", "Automação", "Migração de dados"],
     accentColor: "rgba(34,197,94,0.2)",
+    link: "/servicos#integracao",
   },
 ];
 
@@ -108,11 +122,11 @@ export default function ServicesPreview() {
               </ul>
               <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "12px", marginTop: "auto" }}>
                 <Link
-                  href={`/servicos#${id}`}
-                  style={{ display: "inline-flex", alignItems: "center", gap: "6px", fontSize: "0.85rem", color: "#8B9CC0", fontWeight: 500, textDecoration: "none" }}
-                  aria-label={`Saber mais sobre ${title}`}
+                  href={id === "design" ? "/galeria" : `/servicos#${id}`}
+                  style={{ display: "inline-flex", alignItems: "center", gap: "6px", fontSize: "0.85rem", color: id === "design" ? "#00F2FE" : "#8B9CC0", fontWeight: 500, textDecoration: "none" }}
+                  aria-label={id === "design" ? "Ver Galeria de Design" : `Saber mais sobre ${title}`}
                 >
-                  Detalhes
+                  {id === "design" ? "Ver Galeria" : "Detalhes"}
                   <ArrowRight size={14} />
                 </Link>
                 <a
