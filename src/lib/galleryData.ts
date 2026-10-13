@@ -90,6 +90,45 @@ export const galleryItems: GalleryItem[] = [
     year: "2026",
     color: "#E11D48",
   },
+  {
+    id: "cleaning-company-branding",
+    title: "Logo & Identidade — Limpeza Corporativa & Facilities",
+    category: "Criação de Logo",
+    subtitle: "Logotipo Vetorial & Símbolo de Higiene e Frescura",
+    description:
+      "Conceção visual e logotipo moderno para empresa especializada em serviços de limpeza corporativa e residencial. O design transmite frescura, higiene impecável, organização e elevado rigor técnico.",
+    image: "/galeria/Cleaning_company_logo_branding_2K_20261013131338.jpg",
+    tags: ["Limpeza Profissional", "Facilities", "Logo Vetorial", "Higiene & Frescura"],
+    clientOrConcept: "Empresa de Limpeza & Facilities",
+    year: "2026",
+    color: "#06B6D4",
+  },
+  {
+    id: "cleaning-service-identity",
+    title: "Manual & Aplicações — Serviços de Higienização",
+    category: "Manual de Identidade Visual",
+    subtitle: "Aplicações em Fardas, Materiais de Limpeza e Veículos",
+    description:
+      "Manual de identidade visual e desdobramento prático da marca para equipas operacionais de higienização. Garante uma imagem de alta confiança, apresentação impecável de funcionários e credibilidade perante o cliente.",
+    image: "/galeria/Cleaning_service_company_logo_2K_20261013131346.jpg",
+    tags: ["Manual de Identidade", "Fardamento", "Mockups Reais", "Comunicação de Marca"],
+    clientOrConcept: "Serviços Especializados de Higienização",
+    year: "2026",
+    color: "#10B981",
+  },
+  {
+    id: "house-real-estate-branding",
+    title: "Branding Arquitetónico — Habitação & Construção",
+    category: "Branding",
+    subtitle: "Símbolo Residencial & Construção de Marca Imobiliária",
+    description:
+      "Identidade corporativa refinada desenhada para o setor imobiliário, arquitetura e engenharia civil. Combina geometria habitacional moderna com tipografia sólida para atrair investidores e clientes exigentes.",
+    image: "/galeria/House_logo_branding_design_2K_20261013132636.jpg",
+    tags: ["Construção Civil", "Imobiliária & Habitação", "Arquitetura", "Branding Premium"],
+    clientOrConcept: "Habitação, Engenharia & Construção",
+    year: "2026",
+    color: "#F59E0B",
+  },
 ];
 
 export const designServicePillars = [

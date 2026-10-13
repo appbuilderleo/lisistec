@@ -16,8 +16,8 @@ import { galleryItems, designServicePillars } from "@/lib/galleryData";
 import { getWhatsAppUrl } from "@/lib/constants";
 
 export default function DesignBrandingShowcase() {
-  // Select top 3 or 4 gallery preview items
-  const previewItems = galleryItems.slice(0, 3);
+  // Select top 4 gallery preview items
+  const previewItems = galleryItems.slice(0, 4);
 
   const pillarIcons = [Sparkles, BookOpen, Layers, Palette];
 

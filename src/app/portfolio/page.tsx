@@ -54,6 +54,28 @@ const projects = [
     year: "2026",
   },
   {
+    id: "cleaning-services-brand",
+    title: "Logo & Identidade — Limpeza & Facilities",
+    category: "Design & Identidade Visual",
+    description:
+      "Conceito moderno de logotipo e manual de aplicações práticas para empresa de serviços de limpeza e higienização corporativa com fardamento e materiais de apoio.",
+    tags: ["Logo Design", "Facilities", "Higiene", "Brandbook"],
+    gradient: "from-teal-500/40 to-cyan-600/30",
+    url: "/galeria",
+    year: "2026",
+  },
+  {
+    id: "house-architecture-brand",
+    title: "Branding Arquitetónico — Habitação & Construção",
+    category: "Design & Identidade Visual",
+    description:
+      "Identidade corporativa refinada com símbolo arquitetónico para empresas de construção civil, remodelações e gestão imobiliária de alto padrão.",
+    tags: ["Construção Civil", "Arquitetura", "Branding Premium", "Imóveis"],
+    gradient: "from-amber-500/40 to-yellow-600/30",
+    url: "/galeria",
+    year: "2026",
+  },
+  {
     id: "ccn-consultores",
     title: "CCN Consultores Moçambique",
     category: "Sites e Plataformas Web",
