@@ -74,6 +74,19 @@ const projects = [
     year: "2025",
   },
   {
+    id: "frutas",
+    code: "PRJ // 05",
+    title: "Frutas · Distribuição de Frutas Selecionadas",
+    category: "Sites & Plataformas Web",
+    client: "Agronegócio, Supermercados & Restauração",
+    description:
+      "Plataforma digital de distribuição de frutas frescas selecionadas com experiência visual interactiva, catálogo de produtos, cesto de encomendas e integração directa com WhatsApp.",
+    tags: ["E-Commerce Alimentar", "Catálogo Digital", "Encomendas WhatsApp"],
+    image: "/projects/frutas-hero.png",
+    url: "https://frutas-zeta.vercel.app/",
+    year: "2026",
+  },
+  {
     id: "medspa",
     code: "PRJ // 05",
     title: "MEDSPA · Clínica de Medicina Integrativa",

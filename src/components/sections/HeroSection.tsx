@@ -44,6 +44,16 @@ const heroShowcases = [
     metrics: "Faturação Rápida · Multi-Caixa",
     tags: ["POS / PDV", "Controlo de Stock", "Retalho"],
   },
+  {
+    id: "frutas",
+    code: "SYS // 04",
+    title: "Frutas · Distribuição & E-Commerce Alimentar",
+    client: "Agronegócio, Supermercados & Restauração",
+    image: "/projects/frutas-hero.png",
+    url: "https://frutas-zeta.vercel.app/",
+    metrics: "Catálogo Interactivo · Pedidos WhatsApp",
+    tags: ["E-Commerce", "Logística Refrigerada", "Catálogo Digital"],
+  },
 ];
 
 export default function HeroSection() {
