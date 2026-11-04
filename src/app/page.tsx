@@ -9,9 +9,9 @@ import TestimonialsSection from "@/components/sections/TestimonialsSection";
 import CTASection from "@/components/sections/CTASection";
 
 export const metadata: Metadata = {
-  title: "Lisis Tecnologias e Serviços | Smart Solutions. Real Growth.",
+  title: "Lisis Tecnologias e Serviços | Engenharia de Software, Sistemas e Branding em Moçambique",
   description:
-    "Transformamos ideias em soluções digitais. Desenvolvimento de software, aplicações móveis, sistemas de gestão, design, criação de logos e branding em Moçambique.",
+    "Mais de 7 anos de experiência e mais de 15 projectos entregues em Moçambique. Desenvolvimento de software, portais institucionais, sistemas ERP/POS/CRM e identidade visual corporativa.",
   alternates: {
     canonical: "/",
   },
@@ -23,8 +23,8 @@ export default function HomePage() {
       <HeroSection />
       <StatsSection />
       <ServicesPreview />
-      <DesignBrandingShowcase />
       <SolutionsPreview />
+      <DesignBrandingShowcase />
       <PortfolioPreview />
       <TestimonialsSection />
       <CTASection />

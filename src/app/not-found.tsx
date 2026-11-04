@@ -1,54 +1,37 @@
 "use client";
 
 import Link from "next/link";
-import { Home, ArrowLeft } from "lucide-react";
+import { Home, ArrowLeft, Compass } from "lucide-react";
 
 export default function NotFound() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-grid pt-20">
-      <div className="text-center px-4">
-        {/* Animated 404 */}
-        <div className="relative mb-8">
-          <span
-            className="text-[12rem] font-heading font-700 leading-none select-none"
-            style={{
-              background: "linear-gradient(135deg, rgba(0,212,170,0.15) 0%, rgba(0,136,255,0.1) 100%)",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              backgroundClip: "text",
-            }}
-            aria-hidden="true"
-          >
-            404
-          </span>
-          <div
-            className="absolute inset-0 flex items-center justify-center"
-            aria-hidden="true"
-          >
-            <span className="text-8xl">🔍</span>
-          </div>
+    <div className="min-h-screen flex items-center justify-center bg-grid pt-24 pb-16 px-4">
+      <div className="arch-card p-10 sm:p-14 bg-bg-surface max-w-lg w-full text-center">
+        <div className="service-icon w-14 h-14 mx-auto mb-5">
+          <Compass size={26} />
         </div>
-
-        <h1 className="text-3xl font-heading font-700 text-white mb-4">
-          Página não encontrada
+        <span className="mono-index block mb-2">ERRO // 404</span>
+        <h1 className="text-3xl sm:text-4xl font-heading font-700 text-text mb-3">
+          Endereço não encontrado
         </h1>
-        <p className="text-text-muted text-lg mb-8 max-w-md mx-auto">
-          A página que procura não existe ou foi movida. Volte à página
-          inicial para continuar a explorar.
+        <p className="text-text-muted text-sm sm:text-base mb-8 leading-relaxed">
+          A página solicitada não existe ou foi movida. Utilize os botões abaixo
+          para regressar ao portal da Lisis Tecnologias.
         </p>
 
-        <div className="flex flex-wrap gap-4 justify-center">
-          <Link href="/" className="btn-primary" id="not-found-home-btn">
-            <Home size={18} />
-            Página Inicial
+        <div className="flex flex-wrap gap-3 justify-center">
+          <Link href="/" className="btn-primary text-sm" id="not-found-home-btn">
+            <Home size={16} />
+            <span>Página Inicial</span>
           </Link>
           <button
+            type="button"
             onClick={() => window.history.back()}
-            className="btn-secondary cursor-pointer"
+            className="btn-secondary text-sm cursor-pointer"
             id="not-found-back-btn"
           >
-            <ArrowLeft size={18} />
-            Voltar
+            <ArrowLeft size={16} />
+            <span>Voltar</span>
           </button>
         </div>
       </div>

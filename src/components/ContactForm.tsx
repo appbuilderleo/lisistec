@@ -1,7 +1,14 @@
 "use client";
 
 import { useState } from "react";
-import { Send, CheckCircle, AlertCircle, Loader2, MessageCircle } from "lucide-react";
+import Link from "next/link";
+import {
+  Send,
+  CheckCircle,
+  AlertCircle,
+  Loader2,
+  MessageCircle,
+} from "lucide-react";
 import { getWhatsAppUrl } from "@/lib/constants";
 
 interface FormData {
@@ -12,11 +19,20 @@ interface FormData {
 }
 
 export default function ContactForm() {
-  const [form, setForm] = useState<FormData>({ name: "", email: "", phone: "", message: "" });
-  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [form, setForm] = useState<FormData>({
+    name: "",
+    email: "",
+    phone: "",
+    message: "",
+  });
+  const [status, setStatus] = useState<
+    "idle" | "loading" | "success" | "error"
+  >("idle");
   const [errorMsg, setErrorMsg] = useState("");
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
@@ -37,58 +53,69 @@ export default function ContactForm() {
         setForm({ name: "", email: "", phone: "", message: "" });
       } else {
         const data = await res.json();
-        setErrorMsg(data.error || "Ocorreu um erro. Por favor tente novamente.");
+        setErrorMsg(
+          data.error || "Ocorreu um erro. Por favor tente novamente."
+        );
         setStatus("error");
       }
     } catch {
-      setErrorMsg("Sem ligação. Verifique a sua internet e tente novamente.");
+      setErrorMsg(
+        "Sem ligação. Verifique a sua internet ou utilize o botão do WhatsApp abaixo."
+      );
       setStatus("error");
     }
   };
 
   const handleWhatsAppDirect = (e?: React.MouseEvent) => {
     if (e) e.preventDefault();
-    let msg = "Olá! Gostaria de solicitar uma proposta de serviços com a Lisis Tecnologias e Serviços.";
+    let msg =
+      "Olá! Gostaria de solicitar uma proposta de serviços com a Lisis Tecnologias e Serviços.";
     if (form.name.trim()) {
-      msg = `Olá! Meu nome é ${form.name.trim()}.\n` +
+      msg =
+        `Olá! O meu nome é ${form.name.trim()}.\n` +
         (form.email.trim() ? `Email: ${form.email.trim()}\n` : "") +
         (form.phone.trim() ? `Telefone: ${form.phone.trim()}\n` : "") +
-        (form.message.trim() ? `Mensagem: ${form.message.trim()}` : "Gostaria de solicitar uma proposta de serviços.");
+        (form.message.trim()
+          ? `Mensagem: ${form.message.trim()}`
+          : "Gostaria de solicitar uma proposta de serviços.");
     }
-    window.open(getWhatsAppUrl(msg), "_blank");
+    window.open(getWhatsAppUrl(msg), "_blank", "noopener,noreferrer");
   };
 
   if (status === "success") {
     return (
       <div
-        className="flex flex-col items-center justify-center py-16 text-center"
+        className="flex flex-col items-center justify-center py-14 text-center"
         role="alert"
         aria-live="polite"
       >
-        <div className="w-20 h-20 rounded-full bg-primary/10 border border-primary/30 flex items-center justify-center mb-5">
-          <CheckCircle size={40} className="text-primary" aria-hidden="true" />
+        <div className="w-16 h-16 rounded-2xl bg-primary/10 border border-primary/30 flex items-center justify-center mb-5">
+          <CheckCircle size={34} className="text-primary" aria-hidden="true" />
         </div>
-        <h3 className="text-2xl font-heading font-700 text-white mb-3">
-          Mensagem enviada!
+        <h3 className="text-2xl font-heading font-700 text-text mb-2">
+          Pedido registado com sucesso
         </h3>
-        <p className="text-text-muted mb-6 max-w-sm">
-          Obrigado pelo contacto. Se preferir resposta imediata, inicie agora uma conversa no WhatsApp.
+        <p className="text-text-muted text-sm mb-6 max-w-sm">
+          Recebemos a sua mensagem. Se desejar atendimento imediato, continue a
+          conversa connosco no WhatsApp.
         </p>
-        <div className="flex flex-wrap gap-4 justify-center">
+        <div className="flex flex-wrap gap-3 justify-center">
           <a
-            href={getWhatsAppUrl("Olá! Acabei de enviar um formulário no site e gostaria de conversar no WhatsApp.")}
+            href={getWhatsAppUrl(
+              "Olá! Acabei de enviar um pedido pelo site da Lisis Tecnologias e gostaria de falar com a equipa."
+            )}
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-primary"
-            style={{ background: "linear-gradient(135deg, #25D366, #128C7E)", borderColor: "rgba(37,211,102,0.4)" }}
+            className="btn-primary text-sm"
             id="contact-success-whatsapp-btn"
           >
             <MessageCircle size={18} />
-            Continuar no WhatsApp
+            <span>Continuar no WhatsApp</span>
           </a>
           <button
+            type="button"
             onClick={() => setStatus("idle")}
-            className="btn-secondary cursor-pointer"
+            className="btn-secondary text-sm cursor-pointer"
             id="contact-send-another-btn"
           >
             Enviar outra mensagem
@@ -104,23 +131,28 @@ export default function ContactForm() {
       noValidate
       aria-label="Formulário de contacto"
     >
-      {/* Error message */}
       {status === "error" && (
         <div
-          className="flex items-start gap-3 p-4 mb-6 rounded-lg bg-red-500/10 border border-red-500/30"
+          className="flex items-start gap-3 p-4 mb-6 rounded-xl bg-rose-500/10 border border-rose-500/30"
           role="alert"
           aria-live="polite"
         >
-          <AlertCircle size={18} className="text-red-400 flex-shrink-0 mt-0.5" aria-hidden="true" />
-          <p className="text-red-400 text-sm">{errorMsg}</p>
+          <AlertCircle
+            size={18}
+            className="text-rose-500 shrink-0 mt-0.5"
+            aria-hidden="true"
+          />
+          <p className="text-rose-500 text-sm">{errorMsg}</p>
         </div>
       )}
 
       <div className="grid sm:grid-cols-2 gap-5 mb-5">
-        {/* Name */}
         <div>
           <label htmlFor="contact-name" className="form-label">
-            Nome completo <span className="text-red-400" aria-label="obrigatório">*</span>
+            Nome ou Instituição{" "}
+            <span className="text-rose-500" aria-label="obrigatório">
+              *
+            </span>
           </label>
           <input
             id="contact-name"
@@ -129,16 +161,18 @@ export default function ContactForm() {
             value={form.name}
             onChange={handleChange}
             required
-            placeholder="O seu nome"
+            placeholder="Ex: João Mondlane / Empresa Lda"
             className="form-input"
             aria-required="true"
           />
         </div>
 
-        {/* Email */}
         <div>
           <label htmlFor="contact-email" className="form-label">
-            Email <span className="text-red-400" aria-label="obrigatório">*</span>
+            Email Corporativo{" "}
+            <span className="text-rose-500" aria-label="obrigatório">
+              *
+            </span>
           </label>
           <input
             id="contact-email"
@@ -147,17 +181,16 @@ export default function ContactForm() {
             value={form.email}
             onChange={handleChange}
             required
-            placeholder="o.seu@email.com"
+            placeholder="nome@empresa.co.mz"
             className="form-input"
             aria-required="true"
           />
         </div>
       </div>
 
-      {/* Phone */}
       <div className="mb-5">
         <label htmlFor="contact-phone" className="form-label">
-          Telefone (opcional)
+          Telefone / WhatsApp (opcional)
         </label>
         <input
           id="contact-phone"
@@ -165,15 +198,17 @@ export default function ContactForm() {
           type="tel"
           value={form.phone}
           onChange={handleChange}
-          placeholder="+258 84 000 0000"
+          placeholder="+258 84 / 87 000 0000"
           className="form-input"
         />
       </div>
 
-      {/* Message */}
-      <div className="mb-8">
+      <div className="mb-7">
         <label htmlFor="contact-message" className="form-label">
-          Mensagem <span className="text-red-400" aria-label="obrigatório">*</span>
+          Descrição do Projecto ou Necessidade{" "}
+          <span className="text-rose-500" aria-label="obrigatório">
+            *
+          </span>
         </label>
         <textarea
           id="contact-message"
@@ -182,58 +217,54 @@ export default function ContactForm() {
           onChange={handleChange}
           required
           rows={5}
-          placeholder="Descreva o seu projecto ou questão..."
+          placeholder="Indique o tipo de sistema, portal web, aplicação móvel ou identidade visual que pretende desenvolver..."
           className="form-input resize-none"
           aria-required="true"
           minLength={10}
         />
-        <p className="text-xs text-text-faint mt-1 text-right">
+        <p className="text-xs font-mono text-text-faint mt-1 text-right">
           {form.message.length}/2000
         </p>
       </div>
 
-      <div className="flex flex-col sm:flex-row gap-4">
+      <div className="flex flex-col sm:flex-row gap-3.5">
         <button
           type="button"
-          onClick={() => handleWhatsAppDirect()}
-          className="btn-primary flex-1 justify-center text-base py-3.5 cursor-pointer"
-          style={{
-            background: "linear-gradient(135deg, #25D366, #128C7E)",
-            borderColor: "rgba(37,211,102,0.4)",
-            color: "#ffffff",
-          }}
+          onClick={handleWhatsAppDirect}
+          className="btn-primary flex-1 py-3.5 text-sm cursor-pointer"
           id="contact-whatsapp-btn"
         >
-          <MessageCircle size={20} aria-hidden="true" />
-          Solicitar no WhatsApp
+          <MessageCircle size={18} aria-hidden="true" />
+          <span>Enviar Directo via WhatsApp</span>
         </button>
 
         <button
           type="submit"
           disabled={status === "loading"}
-          className="btn-secondary flex-1 justify-center text-base py-3.5 disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer"
+          className="btn-secondary flex-1 py-3.5 text-sm disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer"
           id="contact-submit-btn"
           aria-disabled={status === "loading"}
         >
           {status === "loading" ? (
             <>
-              <Loader2 size={20} className="animate-spin" aria-hidden="true" />
-              A enviar...
+              <Loader2 size={18} className="animate-spin" aria-hidden="true" />
+              <span>A registar...</span>
             </>
           ) : (
             <>
-              <Send size={20} aria-hidden="true" />
-              Enviar Formulário
+              <Send size={18} aria-hidden="true" />
+              <span>Submeter Formulário</span>
             </>
           )}
         </button>
       </div>
 
       <p className="text-xs text-text-faint text-center mt-4">
-        Ao enviar, concorda com a nossa{" "}
-        <a href="/privacidade" className="text-primary hover:underline">
+        Os seus dados são tratados com confidencialidade segundo a nossa{" "}
+        <Link href="/privacidade" className="text-primary hover:underline">
           Política de Privacidade
-        </a>.
+        </Link>
+        .
       </p>
     </form>
   );

@@ -1,99 +1,160 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, Target, Eye, Heart, Users, CheckCircle } from "lucide-react";
-import { getWhatsAppUrl } from "@/lib/constants";
+import {
+  ArrowRight,
+  ArrowUpRight,
+  Target,
+  Eye,
+  ShieldCheck,
+  CheckCircle2,
+  Building2,
+  Code2,
+  Database,
+  Palette,
+  Headphones,
+} from "lucide-react";
+import { getWhatsAppUrl, COMPANY_STATS, TRUSTED_CLIENTS } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: "Sobre Nós",
+  title: "Sobre a Lisis Tecnologias | +7 Anos de Engenharia Digital em Moçambique",
   description:
-    "Somos uma equipa jovem, apaixonada por tecnologia e comprometida em impulsionar a digitalização de Moçambique. Conheça a nossa missão, visão e valores.",
+    "Com mais de 7 anos de experiência e mais de 15 projectos entregues, a Lisis Tecnologias desenvolve software, sistemas de gestão e identidades visuais para instituições públicas e empresas em Moçambique.",
   alternates: { canonical: "/sobre" },
 };
 
-const values = [
+const pillars = [
   {
+    code: "01",
     icon: Target,
     title: "Missão",
-    desc: "Transformar ideias em soluções digitais que impulsionam negócios e melhoram vidas em Moçambique e além.",
+    desc: "Construir sistemas digitais, plataformas institucionais e identidades visuais que modernizam a administração pública, o ensino superior e o sector empresarial em Moçambique.",
   },
   {
+    code: "02",
     icon: Eye,
     title: "Visão",
-    desc: "Ser a empresa de tecnologia de referência em Moçambique, reconhecida pela inovação e excelência das nossas soluções.",
+    desc: "Consolidar a posição de parceiro tecnológico de referência para instituições governamentais, universidades e empresas moçambicanas que exigem engenharia fiável e suporte local.",
   },
   {
-    icon: Heart,
-    title: "Valores",
-    desc: "Inovação, integridade, foco no cliente e compromisso com a qualidade em tudo o que fazemos.",
+    code: "03",
+    icon: ShieldCheck,
+    title: "Compromisso Técnico",
+    desc: "Rigor na arquitectura de dados, cumprimento de prazos contratuais, documentação clara, formação presencial das equipas e acompanhamento contínuo pós-entrega.",
   },
 ];
 
-const team = [
-  { name: "Leo Appbuilder", role: "CEO & Fundador", initials: "LA", color: "#00D4AA" },
-  { name: "Maria Silva", role: "CTO", initials: "MS", color: "#0088FF" },
-  { name: "João Matos", role: "Lead Developer", initials: "JM", color: "#9333EA" },
-  { name: "Ana Costa", role: "UI/UX Designer", initials: "AC", color: "#F59E0B" },
+const engineeringUnits = [
+  {
+    code: "UNIDADE // 01",
+    icon: Code2,
+    name: "Engenharia Web & Portais",
+    role: "Plataformas Governamentais & Corporativas",
+    desc: "Arquitectura de portais institucionais bilingues, plataformas de investimento e aplicações web de alta disponibilidade.",
+  },
+  {
+    code: "UNIDADE // 02",
+    icon: Database,
+    name: "Sistemas de Gestão & POS",
+    role: "ERP, CRM, Académico & Retalho",
+    desc: "Desenvolvimento de sistemas transaccionais para supermercados, escolas, universidades e consultoras.",
+  },
+  {
+    code: "UNIDADE // 03",
+    icon: Palette,
+    name: "Design & Identidade Corporativa",
+    role: "Logotipos Vetoriais & Brandbooks",
+    desc: "Construção geométrica de marcas, manuais de normas técnicas, estacionário e sinalética de frotas.",
+  },
+  {
+    code: "UNIDADE // 04",
+    icon: Headphones,
+    name: "Consultoria, Formação & SLA",
+    role: "Suporte Técnico & Operações",
+    desc: "Capacitação de utilizadores, migração de dados, auditoria de redes e suporte técnico dedicado em Maputo.",
+  },
 ];
 
 const reasons = [
-  "Equipa local com conhecimento do mercado moçambicano",
-  "Tecnologias modernas e soluções escaláveis",
-  "Suporte técnico dedicado e personalizado",
-  "Preços competitivos e propostas transparentes",
-  "Experiência em múltiplos sectores de negócio",
-  "Metodologia ágil com entregas rápidas",
+  "Mais de 7 anos de actuação contínua no mercado moçambicano",
+  "Mais de 15 projectos entregues e em operação real",
+  "Experiência comprovada com Ministérios, Universidades e Sector Privado",
+  "Domínio integrado de Engenharia de Software e Design de Identidade",
+  "Produtos próprios validados no terreno (STOKA POS, Lisis School, CRM)",
+  "Suporte técnico local em Maputo com formação directa das equipas",
 ];
 
 export default function SobrePage() {
   return (
-    <div className="min-h-screen pt-28">
-      {/* Hero */}
-      <section className="py-20 bg-grid" aria-labelledby="sobre-heading">
+    <div className="min-h-screen pt-28 pb-16">
+      {/* Hero Section */}
+      <section className="py-16 lg:py-24 bg-grid border-b border-border" aria-labelledby="sobre-heading">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <div>
-              <div className="section-tag">Sobre a Lisis</div>
+          <div className="grid lg:grid-cols-12 gap-12 items-center">
+            <div className="lg:col-span-7 space-y-6">
+              <div className="section-tag">Institucional // Desde 2019</div>
               <h1
                 id="sobre-heading"
-                className="text-4xl lg:text-5xl font-heading font-700 text-white mt-4 mb-6"
+                className="text-4xl sm:text-5xl lg:text-6xl font-heading font-700 text-text leading-tight"
               >
-                Uma equipa apaixonada por{" "}
-                <span className="text-gradient">tecnologia</span>
+                Mais de 7 anos a construir{" "}
+                <span className="text-gradient">infraestrutura digital</span> em Moçambique.
               </h1>
-              <p className="text-text-muted text-lg leading-relaxed mb-6">
-                Somos uma equipa jovem, apaixonada por tecnologia e comprometida
-                em impulsionar a digitalização de Moçambique. Nascemos com a
-                missão de tornar a tecnologia acessível e impactante para
-                empresas de todas as dimensões.
+              <p className="text-text-muted text-base sm:text-lg leading-relaxed">
+                A Lisis Tecnologias e Serviços é uma empresa moçambicana de
+                engenharia de software, sistemas de gestão e design corporativo
+                sedeada em Maputo. Ao longo de mais de 7 anos de actividade,
+                entregámos mais de 15 projectos de alta responsabilidade para o
+                sector público, ensino superior, comércio e serviços.
               </p>
-              <p className="text-text-muted leading-relaxed mb-8">
-                Desde a nossa fundação, temos trabalhado lado a lado com os
-                nossos clientes, entendendo os seus desafios e construindo
-                soluções que realmente fazem a diferença.
+              <p className="text-text-muted text-sm sm:text-base leading-relaxed">
+                Trabalhamos lado a lado com direcções executivas e equipas
+                técnicas para desenhar soluções que resolvem problemas reais de
+                atendimento, controlo financeiro, gestão académica e
+                posicionamento institucional.
               </p>
-              <a
-                href={getWhatsAppUrl("Olá! Gostaria de falar com a Lisis Tecnologias e Serviços sobre oportunidades de parceria e projectos.")}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-primary"
-                id="sobre-cta-btn"
-              >
-                Falar no WhatsApp <ArrowRight size={18} />
-              </a>
+
+              <div className="flex flex-wrap gap-4 pt-2">
+                <a
+                  href={getWhatsAppUrl(
+                    "Olá! Gostaria de falar com a direcção da Lisis Tecnologias sobre um projecto institucional ou parceria."
+                  )}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-primary"
+                  id="sobre-cta-btn"
+                >
+                  <span>Falar com a Nossa Equipa</span>
+                  <ArrowRight size={18} />
+                </a>
+                <Link href="/portfolio" className="btn-secondary">
+                  <span>Ver Projectos Entregues</span>
+                  <ArrowUpRight size={18} />
+                </Link>
+              </div>
             </div>
 
-            {/* Stats */}
-            <div className="grid grid-cols-2 gap-4">
-              {[
-                { value: "5+", label: "Projetos Entregues", icon: "🚀" },
-                { value: "3+", label: "Anos de Experiência", icon: "⭐" },
-                { value: "100%", label: "Foco no Cliente", icon: "🤝" },
-                { value: "4", label: "Produtos Próprios", icon: "💡" },
-              ].map(({ value, label, icon }) => (
-                <div key={label} className="glass-card p-6 text-center">
-                  <span className="text-3xl mb-2 block" aria-hidden="true">{icon}</span>
-                  <span className="text-3xl font-heading font-700 text-primary block">{value}</span>
-                  <span className="text-sm text-text-muted mt-1 block">{label}</span>
+            {/* Quantitative Stats Grid */}
+            <div className="lg:col-span-5 grid sm:grid-cols-2 gap-4">
+              {COMPANY_STATS.map(({ code, value, suffix, label, description }) => (
+                <div
+                  key={code}
+                  className="arch-card p-6 bg-bg-surface flex flex-col justify-between"
+                >
+                  <span className="mono-index text-xs mb-3 block">
+                    INDICADOR // {code}
+                  </span>
+                  <div>
+                    <span className="text-4xl font-heading font-700 text-primary block">
+                      {value}
+                      {suffix}
+                    </span>
+                    <h2 className="font-heading font-700 text-base text-text mt-2">
+                      {label}
+                    </h2>
+                    <p className="text-xs text-text-muted mt-1 leading-relaxed">
+                      {description}
+                    </p>
+                  </div>
                 </div>
               ))}
             </div>
@@ -101,21 +162,77 @@ export default function SobrePage() {
         </div>
       </section>
 
-      {/* Mission, Vision, Values */}
-      <section className="py-20" aria-labelledby="values-heading">
+      {/* Trusted Institutions & Clients Section */}
+      <section className="py-20 border-b border-border bg-bg-surface/40" aria-labelledby="clients-list-heading">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 id="values-heading" className="text-3xl font-heading font-700 text-white">
-              O que nos <span className="text-gradient">guia</span>
+          <div className="max-w-3xl mb-12">
+            <div className="section-tag mb-4">01 // Histórico de Entregas</div>
+            <h2
+              id="clients-list-heading"
+              className="text-3xl sm:text-4xl font-heading font-700 text-text"
+            >
+              Instituições e empresas que confiaram na{" "}
+              <span className="text-gradient">Lisis Tecnologias.</span>
+            </h2>
+            <p className="text-text-muted text-sm sm:text-base mt-3 leading-relaxed">
+              O nosso portfólio inclui órgãos governamentais, instituições de
+              ensino superior, entidades de certificação, empresas de
+              consultoria e redes de supermercados.
+            </p>
+          </div>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            {TRUSTED_CLIENTS.map((client, idx) => (
+              <article
+                key={client.id}
+                className="arch-card p-6 bg-bg-surface flex flex-col justify-between"
+              >
+                <div>
+                  <div className="flex items-center justify-between gap-2 mb-4">
+                    <span className="tag">{client.badge}</span>
+                    <span className="mono-index text-xs">0{idx + 1}</span>
+                  </div>
+                  <div className="flex items-start gap-2.5 mb-2">
+                    <Building2 size={18} className="text-primary shrink-0 mt-0.5" />
+                    <h3 className="font-heading font-700 text-base text-text leading-snug">
+                      {client.name}
+                    </h3>
+                  </div>
+                  <p className="font-mono text-[11px] text-primary uppercase tracking-wider mb-3">
+                    {client.sector}
+                  </p>
+                </div>
+                <p className="text-xs text-text-muted leading-relaxed pt-3 border-t border-border">
+                  {client.scope}
+                </p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Mission, Vision, Values */}
+      <section className="py-20 border-b border-border" aria-labelledby="values-heading">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="mb-12">
+            <div className="section-tag mb-4">02 // Princípios Directores</div>
+            <h2 id="values-heading" className="text-3xl sm:text-4xl font-heading font-700 text-text">
+              O que orienta a nossa <span className="text-gradient">engenharia.</span>
             </h2>
           </div>
+
           <div className="grid md:grid-cols-3 gap-6">
-            {values.map(({ icon: Icon, title, desc }) => (
-              <div key={title} className="glass-card p-8 text-center">
-                <div className="service-icon mx-auto mb-5">
-                  <Icon size={24} />
+            {pillars.map(({ code, icon: Icon, title, desc }) => (
+              <div key={title} className="arch-card p-8 bg-bg-surface">
+                <div className="flex items-center justify-between mb-6">
+                  <div className="service-icon">
+                    <Icon size={22} />
+                  </div>
+                  <span className="mono-index">PILAR // {code}</span>
                 </div>
-                <h3 className="text-xl font-heading font-700 text-white mb-3">{title}</h3>
+                <h3 className="text-xl font-heading font-700 text-text mb-3">
+                  {title}
+                </h3>
                 <p className="text-text-muted text-sm leading-relaxed">{desc}</p>
               </div>
             ))}
@@ -123,29 +240,37 @@ export default function SobrePage() {
         </div>
       </section>
 
-      {/* Team */}
-      <section className="py-20" aria-labelledby="team-heading">
+      {/* Multidisciplinary Units */}
+      <section className="py-20 border-b border-border bg-bg-surface/40" aria-labelledby="units-heading">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <div className="section-tag mx-auto w-fit">
-              <Users size={14} /> A Nossa Equipa
-            </div>
-            <h2 id="team-heading" className="text-3xl font-heading font-700 text-white mt-4">
-              As pessoas por <span className="text-gradient">trás da Lisis</span>
+          <div className="mb-12">
+            <div className="section-tag mb-4">03 // Estrutura Operacional</div>
+            <h2 id="units-heading" className="text-3xl sm:text-4xl font-heading font-700 text-text">
+              Núcleos de especialização <span className="text-gradient">técnica.</span>
             </h2>
           </div>
+
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {team.map(({ name, role, initials, color }) => (
-              <article key={name} className="glass-card p-6 text-center" aria-label={`${name}, ${role}`}>
-                <div
-                  className="w-20 h-20 rounded-2xl flex items-center justify-center text-2xl font-heading font-700 text-white mx-auto mb-4"
-                  style={{ background: `${color}25`, border: `2px solid ${color}40` }}
-                  aria-hidden="true"
-                >
-                  {initials}
+            {engineeringUnits.map(({ code, icon: Icon, name, role, desc }) => (
+              <article
+                key={code}
+                className="arch-card p-6 bg-bg-surface flex flex-col justify-between"
+              >
+                <div>
+                  <span className="mono-index text-xs block mb-4">{code}</span>
+                  <div className="service-icon mb-5">
+                    <Icon size={22} />
+                  </div>
+                  <h3 className="font-heading font-700 text-lg text-text">
+                    {name}
+                  </h3>
+                  <p className="font-mono text-xs text-primary mt-1 mb-3">
+                    {role}
+                  </p>
+                  <p className="text-text-muted text-xs sm:text-sm leading-relaxed">
+                    {desc}
+                  </p>
                 </div>
-                <h3 className="font-heading font-700 text-white">{name}</h3>
-                <p className="text-text-muted text-sm mt-1">{role}</p>
               </article>
             ))}
           </div>
@@ -155,26 +280,55 @@ export default function SobrePage() {
       {/* Why Choose Us */}
       <section className="py-20" aria-labelledby="why-heading">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="glass-card p-10 lg:p-16">
-            <div className="grid lg:grid-cols-2 gap-12 items-center">
-              <div>
-                <div className="section-tag">Porque a Lisis</div>
-                <h2 id="why-heading" className="text-3xl font-heading font-700 text-white mt-4 mb-6">
-                  Porque escolher <span className="text-gradient">a Lisis?</span>
+          <div className="arch-card p-8 sm:p-12 lg:p-14 bg-bg-surface">
+            <div className="grid lg:grid-cols-12 gap-10 items-center">
+              <div className="lg:col-span-5 space-y-4">
+                <div className="section-tag">04 // Diferenciais Lisis</div>
+                <h2
+                  id="why-heading"
+                  className="text-3xl sm:text-4xl font-heading font-700 text-text"
+                >
+                  Porquê escolher a <span className="text-gradient">Lisis Tecnologias?</span>
                 </h2>
-                <p className="text-text-muted leading-relaxed">
-                  Somos mais do que uma empresa de tecnologia — somos o parceiro
-                  de crescimento digital que o seu negócio precisa.
+                <p className="text-text-muted text-sm sm:text-base leading-relaxed">
+                  Combinamos capacidade técnica de desenvolvimento à medida com
+                  conhecimento profundo das operações públicas e privadas em
+                  Moçambique.
                 </p>
+                <div className="pt-2">
+                  <a
+                    href={getWhatsAppUrl(
+                      "Olá! Gostaria de agendar uma reunião com a equipa da Lisis Tecnologias."
+                    )}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-primary text-sm"
+                  >
+                    <span>Agendar Reunião Técnica</span>
+                    <ArrowRight size={16} />
+                  </a>
+                </div>
               </div>
-              <ul className="space-y-4">
-                {reasons.map((r) => (
-                  <li key={r} className="flex items-start gap-3">
-                    <CheckCircle size={20} className="text-primary flex-shrink-0 mt-0.5" aria-hidden="true" />
-                    <span className="text-text-muted text-sm">{r}</span>
-                  </li>
-                ))}
-              </ul>
+
+              <div className="lg:col-span-7">
+                <ul className="grid sm:grid-cols-2 gap-4">
+                  {reasons.map((r) => (
+                    <li
+                      key={r}
+                      className="flex items-start gap-3 p-4 rounded-xl bg-bg-elevated border border-border"
+                    >
+                      <CheckCircle2
+                        size={18}
+                        className="text-primary shrink-0 mt-0.5"
+                        aria-hidden="true"
+                      />
+                      <span className="text-text-secondary text-xs sm:text-sm font-500">
+                        {r}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
           </div>
         </div>

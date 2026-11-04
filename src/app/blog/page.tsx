@@ -1,175 +1,189 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, Calendar, Clock, Tag } from "lucide-react";
+import {
+  ArrowRight,
+  Calendar,
+  Clock,
+  Terminal,
+  Database,
+  Layers,
+  Smartphone,
+  Palette,
+  ShieldCheck,
+  BookOpen,
+} from "lucide-react";
+import { blogPosts } from "@/lib/blogData";
 
 export const metadata: Metadata = {
-  title: "Blog",
+  title: "Publicações Técnicas & Artigos | Lisis Tecnologias",
   description:
-    "Artigos, dicas e novidades sobre tecnologia, desenvolvimento de software, IA e transformação digital em Moçambique.",
+    "Análises técnicas sobre desenvolvimento de software, sistemas ERP/POS/CRM, portais governamentais e identidade visual corporativa em Moçambique.",
   alternates: { canonical: "/blog" },
 };
 
-const posts = [
-  {
-    id: "ia-negocios",
-    title: "Como a tecnologia impulsiona os negócios em Moçambique",
-    excerpt:
-      "Descubra como empresas moçambicanas estão a usar tecnologia digital para crescer, reduzir custos e melhorar a experiência dos seus clientes.",
-    date: "10 Abr 2025",
-    readTime: "5 min",
-    tags: ["Tecnologia", "Negócios", "Moçambique"],
-    gradient: "from-primary/20 to-blue-500/10",
-  },
-  {
-    id: "tendencias-ti-2025",
-    title: "5 tendências de TI para 2025 que deve conhecer",
-    excerpt:
-      "Inteligência artificial, cloud computing, cybersecurity e mais. Conheça as tendências que vão moldar o sector de tecnologia em 2025.",
-    date: "25 Mar 2025",
-    readTime: "7 min",
-    tags: ["TI", "Tendências", "2025"],
-    gradient: "from-purple-500/20 to-primary/10",
-  },
-  {
-    id: "sistema-gestao",
-    title: "Vantagens de um sistema de gestão para a sua empresa",
-    excerpt:
-      "Saiba como um sistema ERP personalizado pode transformar a operação da sua empresa, reduzir erros e aumentar a produtividade.",
-    date: "18 Mar 2025",
-    readTime: "4 min",
-    tags: ["ERP", "Gestão", "Produtividade"],
-    gradient: "from-blue-500/20 to-primary/10",
-  },
-  {
-    id: "react-native-mozambique",
-    title: "Desenvolvimento mobile em Moçambique: desafios e oportunidades",
-    excerpt:
-      "Uma análise do mercado de apps móveis em Moçambique, os desafios de conectividade e como criar apps que funcionam mesmo offline.",
-    date: "5 Mar 2025",
-    readTime: "6 min",
-    tags: ["Mobile", "React Native", "Mercado"],
-    gradient: "from-orange-500/20 to-primary/10",
-  },
-  {
-    id: "seo-mozambique",
-    title: "SEO para empresas moçambicanas: guia prático",
-    excerpt:
-      "Como optimizar o seu site para aparecer no topo dos resultados de pesquisa no Google em Moçambique e aumentar o tráfego orgânico.",
-    date: "20 Fev 2025",
-    readTime: "8 min",
-    tags: ["SEO", "Marketing Digital"],
-    gradient: "from-green-500/20 to-primary/10",
-  },
-  {
-    id: "seguranca-dados",
-    title: "Segurança de dados: o que toda empresa deve saber",
-    excerpt:
-      "Proteja os dados da sua empresa e dos seus clientes. Um guia sobre boas práticas de cybersecurity para negócios de qualquer dimensão.",
-    date: "10 Fev 2025",
-    readTime: "5 min",
-    tags: ["Segurança", "Cybersecurity", "Dados"],
-    gradient: "from-red-500/20 to-primary/10",
-  },
-];
+const postIcons: Record<string, typeof Terminal> = {
+  "ia-negocios": Terminal,
+  "sistema-gestao": Database,
+  "tendencias-ti-2025": Layers,
+  "react-native-mozambique": Smartphone,
+  "seo-mozambique": Palette,
+  "seguranca-dados": ShieldCheck,
+};
 
 export default function BlogPage() {
+  const featured = blogPosts[0];
+  const rest = blogPosts.slice(1);
+
   return (
-    <div className="min-h-screen pt-28">
+    <div className="min-h-screen pt-28 pb-16">
       {/* Hero */}
-      <section className="py-20 bg-grid" aria-labelledby="blog-page-heading">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="section-tag mx-auto w-fit">Blog & Notícias</div>
-          <h1
-            id="blog-page-heading"
-            className="text-4xl lg:text-6xl font-heading font-700 text-white mt-4 mb-6"
-          >
-            Fique por <span className="text-gradient">dentro</span>
-          </h1>
-          <p className="text-text-muted text-xl max-w-2xl mx-auto">
-            Dicas, novidades e tendências do mundo digital. Conteúdo criado pela
-            equipa Lisis para impulsionar o seu negócio.
-          </p>
+      <section
+        className="py-16 lg:py-24 bg-grid border-b border-border"
+        aria-labelledby="blog-page-heading"
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-3xl">
+            <div className="section-tag mb-4">
+              <BookOpen size={14} /> Caderno Técnico // Publicações
+            </div>
+            <h1
+              id="blog-page-heading"
+              className="text-4xl sm:text-5xl lg:text-6xl font-heading font-700 text-text leading-tight mb-6"
+            >
+              Engenharia, gestão e{" "}
+              <span className="text-gradient">transformação digital.</span>
+            </h1>
+            <p className="text-text-muted text-base sm:text-lg leading-relaxed">
+              Artigos técnicos redigidos pela equipa da Lisis Tecnologias sobre
+              sistemas de gestão, portais institucionais, aplicações móveis e
+              branding em Moçambique.
+            </p>
+          </div>
         </div>
       </section>
 
       {/* Blog Grid */}
-      <section className="py-16" aria-label="Artigos do blog">
+      <section className="py-16 lg:py-20" aria-label="Artigos do blog">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Featured Post */}
           <article
-            className="glass-card mb-8 overflow-hidden group"
+            className="arch-card mb-12 p-7 sm:p-10 bg-bg-surface"
             aria-labelledby="featured-post-title"
           >
-            <div className={`grid lg:grid-cols-2`}>
-              <div className={`h-64 lg:h-auto bg-gradient-to-br ${posts[0].gradient} relative flex items-center justify-center`}>
-                <div className="text-6xl" aria-hidden="true">📱</div>
-                <span className="absolute top-4 left-4 tag">Destaque</span>
+            <div className="grid lg:grid-cols-12 gap-8 items-center">
+              <div className="lg:col-span-5 p-8 rounded-2xl bg-bg-elevated border border-border flex flex-col justify-between min-h-[240px]">
+                <div className="flex items-center justify-between gap-2">
+                  <span className="tag">Destaque Editorial</span>
+                  <span className="mono-index">{featured.code}</span>
+                </div>
+                <div className="my-6">
+                  <div className="service-icon w-14 h-14 mb-4">
+                    <Terminal size={26} />
+                  </div>
+                  <p className="font-mono text-xs uppercase tracking-wider text-primary font-600">
+                    {featured.category}
+                  </p>
+                </div>
+                <div className="flex items-center gap-4 text-xs font-mono text-text-muted pt-4 border-t border-border">
+                  <span className="flex items-center gap-1.5">
+                    <Calendar size={13} className="text-primary" />
+                    {featured.date}
+                  </span>
+                  <span className="flex items-center gap-1.5">
+                    <Clock size={13} className="text-primary" />
+                    {featured.readTime} de leitura
+                  </span>
+                </div>
               </div>
-              <div className="p-8 lg:p-10 flex flex-col justify-center">
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {posts[0].tags.map((t) => (
-                    <span key={t} className="tag text-xs">{t}</span>
+
+              <div className="lg:col-span-7 space-y-5">
+                <div className="flex flex-wrap gap-2">
+                  {featured.tags.map((t) => (
+                    <span key={t} className="tag">
+                      {t}
+                    </span>
                   ))}
                 </div>
-                <h2 id="featured-post-title" className="text-2xl lg:text-3xl font-heading font-700 text-white mb-4">
-                  {posts[0].title}
-                </h2>
-                <p className="text-text-muted mb-6">{posts[0].excerpt}</p>
-                <div className="flex items-center gap-4 text-sm text-text-muted mb-6">
-                  <span className="flex items-center gap-1.5">
-                    <Calendar size={14} className="text-primary" aria-hidden="true" />
-                    {posts[0].date}
-                  </span>
-                  <span className="flex items-center gap-1.5">
-                    <Clock size={14} className="text-primary" aria-hidden="true" />
-                    {posts[0].readTime} de leitura
-                  </span>
-                </div>
-                <Link
-                  href={`/blog/${posts[0].id}`}
-                  className="btn-primary self-start"
-                  id={`blog-post-featured-btn`}
+                <h2
+                  id="featured-post-title"
+                  className="text-2xl sm:text-3xl lg:text-4xl font-heading font-700 text-text leading-tight"
                 >
-                  Ler Artigo <ArrowRight size={16} />
-                </Link>
+                  <Link
+                    href={`/blog/${featured.id}`}
+                    className="hover:text-primary transition-colors"
+                  >
+                    {featured.title}
+                  </Link>
+                </h2>
+                <p className="text-text-muted text-sm sm:text-base leading-relaxed">
+                  {featured.excerpt}
+                </p>
+                <div className="pt-2">
+                  <Link
+                    href={`/blog/${featured.id}`}
+                    className="btn-primary text-sm"
+                    id="blog-post-featured-btn"
+                  >
+                    <span>Ler Artigo Completo</span>
+                    <ArrowRight size={16} />
+                  </Link>
+                </div>
               </div>
             </div>
           </article>
 
           {/* Rest of Posts */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {posts.slice(1).map(({ id, title, excerpt, date, readTime, tags, gradient }) => (
-              <article
-                key={id}
-                className="glass-card overflow-hidden group flex flex-col"
-                aria-labelledby={`blog-post-${id}-title`}
-              >
-                {/* Visual */}
-                <div className={`h-40 bg-gradient-to-br ${gradient} relative flex items-center justify-center`}>
-                  <div className="text-4xl" aria-hidden="true">
-                    {id === "tendencias-ti-2025" ? "🚀" :
-                     id === "sistema-gestao" ? "⚙️" :
-                     id === "react-native-mozambique" ? "📱" :
-                     id === "seo-mozambique" ? "🔍" : "🔐"}
-                  </div>
-                </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-7">
+            {rest.map(({ id, code, title, excerpt, date, readTime, category, tags }) => {
+              const Icon = postIcons[id] || Terminal;
+              return (
+                <article
+                  key={id}
+                  className="arch-card p-6 sm:p-7 bg-bg-surface flex flex-col justify-between"
+                  aria-labelledby={`blog-post-${id}-title`}
+                >
+                  <div>
+                    <div className="flex items-center justify-between gap-2 mb-5 pb-4 border-b border-border">
+                      <div className="service-icon w-11 h-11">
+                        <Icon size={20} />
+                      </div>
+                      <span className="mono-index text-xs">{code}</span>
+                    </div>
 
-                <div className="p-6 flex flex-col flex-1">
-                  <div className="flex flex-wrap gap-1.5 mb-3">
-                    {tags.slice(0, 2).map((t) => (
-                      <span key={t} className="tag text-xs">{t}</span>
-                    ))}
-                  </div>
-                  <h2
-                    id={`blog-post-${id}-title`}
-                    className="text-lg font-heading font-700 text-white mb-2 flex-1"
-                  >
-                    {title}
-                  </h2>
-                  <p className="text-text-muted text-sm mb-4 line-clamp-2">{excerpt}</p>
+                    <p className="font-mono text-xs uppercase tracking-wider text-primary font-600 mb-2">
+                      {category}
+                    </p>
 
-                  <div className="flex items-center justify-between mt-auto">
-                    <div className="flex items-center gap-3 text-xs text-text-muted">
+                    <h2
+                      id={`blog-post-${id}-title`}
+                      className="text-xl font-heading font-700 text-text mb-3 leading-snug"
+                    >
+                      <Link
+                        href={`/blog/${id}`}
+                        className="hover:text-primary transition-colors"
+                      >
+                        {title}
+                      </Link>
+                    </h2>
+
+                    <p className="text-text-muted text-sm mb-5 leading-relaxed">
+                      {excerpt}
+                    </p>
+
+                    <div className="flex flex-wrap gap-1.5 mb-6">
+                      {tags.map((t) => (
+                        <span
+                          key={t}
+                          className="font-mono text-[11px] px-2.5 py-0.5 rounded bg-bg-elevated border border-border text-text-secondary"
+                        >
+                          {t}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="flex items-center justify-between pt-4 border-t border-border mt-auto">
+                    <div className="flex items-center gap-3 text-xs font-mono text-text-muted">
                       <span className="flex items-center gap-1">
                         <Calendar size={12} aria-hidden="true" /> {date}
                       </span>
@@ -179,41 +193,48 @@ export default function BlogPage() {
                     </div>
                     <Link
                       href={`/blog/${id}`}
-                      className="text-primary text-sm font-600 hover:underline inline-flex items-center gap-1"
+                      className="text-primary text-xs font-mono font-600 hover:underline inline-flex items-center gap-1"
                       aria-label={`Ler artigo: ${title}`}
                       id={`blog-post-${id}-btn`}
                     >
-                      Ler <ArrowRight size={14} />
+                      <span>Ler</span>
+                      <ArrowRight size={13} />
                     </Link>
                   </div>
-                </div>
-              </article>
-            ))}
+                </article>
+              );
+            })}
           </div>
         </div>
       </section>
 
       {/* Newsletter CTA */}
-      <section className="py-16" aria-labelledby="blog-newsletter-heading">
-        <div className="max-w-2xl mx-auto px-4 text-center">
-          <div className="glass-card p-10">
-            <Tag size={32} className="text-primary mx-auto mb-4" aria-hidden="true" />
-            <h2 id="blog-newsletter-heading" className="text-2xl font-heading font-700 text-white mb-3">
-              Subscreva a nossa newsletter
+      <section className="py-12" aria-labelledby="blog-newsletter-heading">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="arch-card p-8 sm:p-10 bg-bg-surface text-center">
+            <span className="mono-index block mb-2">
+              BOLETIM TÉCNICO // LISIS TECNOLOGIAS
+            </span>
+            <h2
+              id="blog-newsletter-heading"
+              className="text-2xl font-heading font-700 text-text mb-3"
+            >
+              Receba artigos técnicos e estudos de caso no seu email
             </h2>
-            <p className="text-text-muted mb-6">
-              Receba os melhores artigos sobre tecnologia directamente no seu email.
+            <p className="text-text-muted text-sm mb-6 max-w-md mx-auto">
+              Publicações periódicas sobre engenharia de software, gestão
+              empresarial e transformação digital em Moçambique.
             </p>
             <form
               action="/api/newsletter"
               method="POST"
-              className="flex gap-3 max-w-md mx-auto"
+              className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto"
               aria-label="Subscrever newsletter"
             >
               <input
                 type="email"
                 name="email"
-                placeholder="O seu email"
+                placeholder="O seu email corporativo"
                 required
                 className="form-input flex-1"
                 id="blog-newsletter-email"
@@ -221,7 +242,7 @@ export default function BlogPage() {
               />
               <button
                 type="submit"
-                className="btn-primary flex-shrink-0"
+                className="btn-primary shrink-0"
                 id="blog-newsletter-submit"
               >
                 Subscrever

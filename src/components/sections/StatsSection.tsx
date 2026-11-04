@@ -1,13 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-
-const stats = [
-  { value: 5,   suffix: "+", label: "Projetos Entregues",  description: "Soluções digitais de sucesso" },
-  { value: 3,   suffix: "+", label: "Anos de Experiência", description: "Foco em tecnologia" },
-  { value: 100, suffix: "%", label: "Foco no Cliente",     description: "Satisfação garantida" },
-  { value: 4,   suffix: "",  label: "Soluções Próprias",   description: "Produtos inovadores" },
-];
+import { COMPANY_STATS } from "@/lib/constants";
 
 function CountUp({ target, suffix }: { target: number; suffix: string }) {
   const [count, setCount] = useState(0);
@@ -15,13 +9,21 @@ function CountUp({ target, suffix }: { target: number; suffix: string }) {
   const started = useRef(false);
 
   useEffect(() => {
+    const prefersReduced = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+    if (prefersReduced) {
+      setCount(target);
+      return;
+    }
+
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting && !started.current) {
           started.current = true;
           let start = 0;
-          const duration = 1500;
-          const step = Math.ceil(target / (duration / 16));
+          const duration = 1200;
+          const step = Math.max(1, Math.ceil(target / (duration / 16)));
           const timer = setInterval(() => {
             start = Math.min(start + step, target);
             setCount(start);
@@ -29,7 +31,7 @@ function CountUp({ target, suffix }: { target: number; suffix: string }) {
           }, 16);
         }
       },
-      { threshold: 0.5 }
+      { threshold: 0.4 }
     );
     if (ref.current) observer.observe(ref.current);
     return () => observer.disconnect();
@@ -37,7 +39,8 @@ function CountUp({ target, suffix }: { target: number; suffix: string }) {
 
   return (
     <span ref={ref} className="counter">
-      {count}{suffix}
+      {count}
+      {suffix}
     </span>
   );
 }
@@ -45,37 +48,36 @@ function CountUp({ target, suffix }: { target: number; suffix: string }) {
 export default function StatsSection() {
   return (
     <section
-      style={{ padding: "80px 0", position: "relative" }}
-      aria-label="Estatísticas da Lisis"
+      className="py-16 lg:py-20 relative border-y border-border bg-bg-surface/60"
+      aria-label="Indicadores de maturidade da Lisis Tecnologias"
       id="about-stats"
     >
-      <div
-        aria-hidden="true"
-        style={{
-          position: "absolute",
-          inset: 0,
-          opacity: 0.3,
-          background: "linear-gradient(180deg, transparent, rgba(0,212,170,0.03), transparent)",
-          pointerEvents: "none",
-        }}
-      />
-      <div style={{ maxWidth: "1280px", margin: "0 auto", padding: "0 24px" }}>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: "24px" }}>
-          {stats.map(({ value, suffix, label, description }) => (
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 divide-y sm:divide-y-0 sm:divide-x divide-border">
+          {COMPANY_STATS.map(({ code, value, suffix, label, description }, idx) => (
             <article
-              key={label}
-              className="glass-card"
-              style={{ padding: "32px", textAlign: "center" }}
+              key={code}
+              className={`py-6 sm:py-2 ${idx === 0
+                  ? "sm:pr-8"
+                  : idx === COMPANY_STATS.length - 1
+                    ? "sm:pl-8"
+                    : "sm:px-8"
+                }`}
               aria-label={`${label}: ${value}${suffix}`}
             >
+              <div className="flex items-center justify-between mb-3">
+                <span className="mono-index">MÉTRICA // {code}</span>
+                <span className="w-1.5 h-1.5 rounded-full bg-primary" aria-hidden="true" />
+              </div>
               <span className="stat-value">
                 <CountUp target={value} suffix={suffix} />
               </span>
-              <h3 style={{ color: "#ffffff", fontFamily: "'Space Grotesk', sans-serif", fontWeight: 600, fontSize: "14px", marginTop: "12px", marginBottom: "4px" }}>
+              <h2 className="font-heading font-700 text-base text-text mt-3 mb-1.5">
                 {label}
-              </h3>
-              <p style={{ color: "#8B9CC0", fontSize: "12px" }}>{description}</p>
-              <div className="section-divider" style={{ margin: "16px auto 0" }} aria-hidden="true" />
+              </h2>
+              <p className="text-xs text-text-muted leading-relaxed">
+                {description}
+              </p>
             </article>
           ))}
         </div>

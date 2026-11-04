@@ -8,149 +8,85 @@ import {
   BookOpen,
   Layers,
   ArrowRight,
-  MessageCircle,
+  ArrowUpRight,
   Eye,
-  CheckCircle,
+  CheckCircle2,
 } from "lucide-react";
 import { galleryItems, designServicePillars } from "@/lib/galleryData";
 import { getWhatsAppUrl } from "@/lib/constants";
 
 export default function DesignBrandingShowcase() {
-  // Select top 4 gallery preview items
   const previewItems = galleryItems.slice(0, 4);
-
   const pillarIcons = [Sparkles, BookOpen, Layers, Palette];
 
   return (
     <section
       id="design-branding-section"
-      style={{ padding: "96px 0", position: "relative" }}
+      className="py-24 lg:py-28 relative border-t border-border"
       aria-labelledby="design-branding-heading"
     >
-      {/* Ambient background glow */}
-      <div
-        className="absolute top-1/2 left-1/4 -translate-y-1/2 w-[500px] h-[500px] bg-cyan-500/5 rounded-full blur-[140px] pointer-events-none"
-        aria-hidden="true"
-      />
-      <div
-        className="absolute top-1/3 right-10 w-[450px] h-[450px] bg-amber-500/5 rounded-full blur-[130px] pointer-events-none"
-        aria-hidden="true"
-      />
-
-      <div style={{ maxWidth: "1280px", margin: "0 auto", padding: "0 24px" }} className="relative z-10">
-        {/* Section Header */}
-        <div style={{ textAlign: "center", marginBottom: "64px" }}>
-          <div className="section-tag" style={{ margin: "0 auto 16px", display: "inline-flex" }}>
-            <Palette size={14} style={{ marginRight: "6px" }} />
-            Design & Identidade Visual
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        {/* Top Architectural Header */}
+        <div className="grid lg:grid-cols-12 gap-8 items-end mb-16">
+          <div className="lg:col-span-7">
+            <div className="section-tag mb-4">
+              03 // Design, Logotipos & Brandbooks
+            </div>
+            <h2
+              id="design-branding-heading"
+              className="text-3xl sm:text-4xl lg:text-5xl font-heading font-700 text-text leading-tight"
+            >
+              Identidade visual construída com{" "}
+              <span className="text-gradient">precisão geométrica.</span>
+            </h2>
           </div>
-          <h2
-            id="design-branding-heading"
-            style={{
-              fontFamily: "'Space Grotesk', sans-serif",
-              fontSize: "clamp(1.75rem, 4vw, 3rem)",
-              fontWeight: 700,
-              color: "#ffffff",
-              marginBottom: "16px",
-              lineHeight: 1.2,
-            }}
-          >
-            Design, Criação de Logo, Manual de Identidade Visual e{" "}
-            <span className="text-gradient">Branding</span>
-          </h2>
-          <p
-            style={{
-              color: "#8B9CC0",
-              fontSize: "1.1rem",
-              maxWidth: "680px",
-              margin: "0 auto",
-              lineHeight: 1.7,
-            }}
-          >
-            Uma marca forte não é apenas um desenho; é a reputação visual da sua empresa. Criamos identidades marcantes,
-            profissionais e memoráveis que geram credibilidade imediata no mercado.
-          </p>
+          <div className="lg:col-span-5">
+            <p className="text-text-muted text-sm sm:text-base leading-relaxed">
+              Uma marca institucional sólida exige mais do que um símbolo: exige
+              normas técnicas de reprodução, paleta cromática oficial,
+              estacionário e aplicação impecável em viaturas, fardas e suportes
+              digitais.
+            </p>
+          </div>
         </div>
 
-        {/* 4 Pillars Grid */}
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
-            gap: "24px",
-            marginBottom: "64px",
-          }}
-        >
+        {/* 4 Pillars Ledger */}
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-14">
           {designServicePillars.map((pillar, idx) => {
             const Icon = pillarIcons[idx % pillarIcons.length];
             return (
               <div
                 key={pillar.id}
-                className="glass-card"
-                style={{
-                  padding: "32px 24px",
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "space-between",
-                  position: "relative",
-                  transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
-                  border: `1px solid rgba(255, 255, 255, 0.08)`,
-                }}
+                className="arch-card p-6 flex flex-col justify-between bg-bg-surface"
               >
                 <div>
-                  <div
-                    style={{
-                      width: "48px",
-                      height: "48px",
-                      borderRadius: "14px",
-                      background: `${pillar.color}15`,
-                      border: `1px solid ${pillar.color}35`,
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      color: pillar.color,
-                      marginBottom: "20px",
-                    }}
-                  >
-                    <Icon size={24} />
+                  <div className="flex items-center justify-between gap-2 mb-5">
+                    <div className="service-icon w-11 h-11">
+                      <Icon size={20} />
+                    </div>
+                    <span className="mono-index text-xs">
+                      PILAR // {pillar.code}
+                    </span>
                   </div>
 
-                  <h3
-                    style={{
-                      fontFamily: "'Space Grotesk', sans-serif",
-                      fontWeight: 700,
-                      fontSize: "1.2rem",
-                      color: "#ffffff",
-                      marginBottom: "12px",
-                    }}
-                  >
+                  <h3 className="font-heading font-700 text-lg text-text mb-2.5">
                     {pillar.title}
                   </h3>
 
-                  <p
-                    style={{
-                      color: "#8B9CC0",
-                      fontSize: "0.88rem",
-                      lineHeight: 1.65,
-                      marginBottom: "20px",
-                    }}
-                  >
+                  <p className="text-text-muted text-xs sm:text-sm leading-relaxed mb-5">
                     {pillar.description}
                   </p>
 
-                  <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "8px" }}>
+                  <ul className="space-y-2 pt-4 border-t border-border">
                     {pillar.features.map((feat, fIdx) => (
                       <li
                         key={fIdx}
-                        style={{
-                          display: "flex",
-                          alignItems: "flex-start",
-                          gap: "8px",
-                          fontSize: "0.82rem",
-                          color: "#CAD5E8",
-                        }}
+                        className="flex items-start gap-2 text-xs text-text-secondary"
                       >
-                        <CheckCircle size={14} style={{ color: pillar.color, flexShrink: 0, marginTop: "2px" }} />
+                        <CheckCircle2
+                          size={14}
+                          className="text-primary shrink-0 mt-0.5"
+                        />
                         <span>{feat}</span>
                       </li>
                     ))}
@@ -161,220 +97,115 @@ export default function DesignBrandingShowcase() {
           })}
         </div>
 
-        {/* 9:16 Gallery Spotlight Banner & Cards */}
-        <div
-          className="glass-card"
-          style={{
-            padding: "48px 32px",
-            background: "linear-gradient(135deg, rgba(12, 16, 24, 0.85) 0%, rgba(16, 23, 38, 0.7) 100%)",
-            border: "1px solid rgba(0, 242, 254, 0.2)",
-            borderRadius: "24px",
-            position: "relative",
-            overflow: "hidden",
-          }}
-        >
-          <div
-            style={{
-              display: "flex",
-              flexWrap: "wrap",
-              alignItems: "flex-end",
-              justifyContent: "space-between",
-              gap: "24px",
-              marginBottom: "36px",
-            }}
-          >
+        {/* 9:16 Vertical Lookbook Container */}
+        <div className="arch-card p-6 sm:p-10 bg-bg-surface">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
             <div>
-              <div
-                style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: "6px",
-                  fontSize: "0.75rem",
-                  fontWeight: 700,
-                  textTransform: "uppercase",
-                  letterSpacing: "0.08em",
-                  color: "#00F2FE",
-                  marginBottom: "10px",
-                }}
-              >
-                <Sparkles size={14} />
-                Galeria de Trabalhos Recentes (Formato 9:16)
-              </div>
-              <h3
-                style={{
-                  fontFamily: "'Space Grotesk', sans-serif",
-                  fontSize: "clamp(1.5rem, 3vw, 2.2rem)",
-                  fontWeight: 700,
-                  color: "#ffffff",
-                }}
-              >
-                Amostras dos Nossos <span className="text-gradient">Projetos de Design</span>
+              <span className="mono-index block mb-2">
+                PORTFÓLIO VISUAL // FORMATO VERTICAL 9:16
+              </span>
+              <h3 className="text-2xl sm:text-3xl font-heading font-700 text-text">
+                Amostras de Projectos de{" "}
+                <span className="text-gradient">Branding & Identidade</span>
               </h3>
-              <p style={{ color: "#8B9CC0", fontSize: "0.95rem", marginTop: "8px", maxWidth: "560px" }}>
-                Confira prévias de criações de logotipos, manuais corporativos e peças de branding desenvolvidas para os nossos clientes.
+              <p className="text-text-muted text-sm mt-2 max-w-xl">
+                Explore criações de logotipos vetoriais, manuais de identidade
+                visual, grelhas de construção e aplicações em frotas comerciais.
               </p>
             </div>
 
-            <div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
+            <div className="flex flex-wrap gap-3">
               <Link
                 href="/galeria"
-                className="btn-primary"
-                style={{
-                  padding: "12px 24px",
-                  fontSize: "0.9rem",
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: "8px",
-                }}
+                className="btn-primary text-sm py-2.5 px-5"
                 id="home-view-gallery-btn"
               >
-                <span>Ver Galeria Completa</span>
+                <span>Abrir Galeria Completa (9:16)</span>
                 <ArrowRight size={16} />
               </Link>
+              <a
+                href={getWhatsAppUrl(
+                  "Olá! Gostaria de solicitar uma proposta para Criação de Logotipo e Manual de Identidade Visual com a Lisis."
+                )}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-secondary text-sm py-2.5 px-5"
+              >
+                <span>Orçamento de Branding</span>
+                <ArrowUpRight size={16} />
+              </a>
             </div>
           </div>
 
-          {/* 3 cards with 9:16 Aspect Ratio */}
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
-              gap: "24px",
-            }}
-          >
+          {/* 4 Cards with 9:16 Aspect Ratio */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {previewItems.map((item) => (
-              <div
+              <article
                 key={item.id}
-                className="group relative rounded-2xl overflow-hidden border border-slate-800/80 hover:border-cyan-500/40 transition-all duration-300 shadow-xl"
+                className="group relative rounded-2xl overflow-hidden border border-border hover:border-primary transition-all duration-300 shadow-card"
                 style={{
                   aspectRatio: "9 / 16",
-                  background: "#080b11",
+                  background: "#06101E",
                 }}
               >
-                {/* 9:16 Image */}
                 <Image
                   src={item.image}
                   alt={item.title}
                   fill
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                   className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
                 />
 
-                {/* Gradient Overlays */}
+                {/* Legibility Scrim Over Image */}
                 <div
-                  className="absolute inset-0 bg-gradient-to-t from-[#07090e] via-[#07090e]/40 to-transparent opacity-85 group-hover:opacity-90 transition-opacity"
+                  className="absolute inset-0 bg-gradient-to-t from-[#040D1A] via-[#040D1A]/45 to-transparent opacity-90 group-hover:opacity-95 transition-opacity"
                   aria-hidden="true"
                 />
 
-                {/* Top Badge */}
-                <div className="absolute top-4 left-4 z-10">
-                  <span
-                    className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-semibold backdrop-blur-md"
-                    style={{
-                      background: "rgba(7, 9, 14, 0.75)",
-                      color: item.color,
-                      border: `1px solid ${item.color}40`,
-                    }}
-                  >
-                    <Sparkles size={12} />
+                {/* Top Category Pill */}
+                <div className="absolute top-3.5 left-3.5 right-3.5 flex items-center justify-between z-10">
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-mono font-600 backdrop-blur-md bg-[#040D1A]/80 text-[#00D4AA] border border-[#00D4AA]/35">
                     {item.category}
                   </span>
                 </div>
 
-                {/* Bottom Content */}
+                {/* Bottom Caption */}
                 <div className="absolute bottom-0 left-0 right-0 p-5 z-10 flex flex-col justify-end">
-                  <span className="text-[11px] text-slate-400 font-mono tracking-wider uppercase mb-1">
+                  <span className="text-[10px] text-slate-300 font-mono tracking-wider uppercase mb-1">
                     {item.subtitle}
                   </span>
-                  <h4 className="text-base font-heading font-bold text-white mb-2 leading-snug">
+                  <h4 className="text-base font-heading font-700 text-white mb-2 leading-snug">
                     {item.title}
                   </h4>
                   <p className="text-xs text-slate-300 line-clamp-2 leading-relaxed mb-4">
                     {item.description}
                   </p>
 
-                  <div className="flex items-center justify-between pt-3 border-t border-slate-800/80">
+                  <div className="flex items-center justify-between pt-3 border-t border-white/15">
                     <Link
                       href="/galeria"
-                      className="inline-flex items-center gap-1.5 text-xs font-semibold text-cyan-400 hover:text-cyan-300 transition-colors"
+                      className="inline-flex items-center gap-1.5 text-xs font-mono font-600 text-[#00D4AA] hover:underline"
                     >
-                      <Eye size={14} />
-                      <span>Ver na Galeria</span>
+                      <Eye size={13} />
+                      <span>Inspecionar</span>
                     </Link>
 
                     <a
-                      href={getWhatsAppUrl(`Olá! Gostei do projeto de design "${item.title}" e gostaria de solicitar uma proposta similar para a minha empresa.`)}
+                      href={getWhatsAppUrl(
+                        `Olá! Gostei do projecto de design "${item.title}" e gostaria de solicitar uma proposta semelhante.`
+                      )}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-semibold bg-[#25D366]/20 text-[#25D366] hover:bg-[#25D366]/30 transition-colors"
-                      title="Solicitar orçamento deste design"
+                      className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-xs font-heading font-600 bg-white/15 text-white hover:bg-[#00D4AA] hover:text-[#040D1A] transition-colors"
+                      title="Solicitar orçamento deste estilo"
                     >
-                      <MessageCircle size={13} />
-                      <span>WhatsApp</span>
+                      <span>Pedir igual</span>
+                      <ArrowUpRight size={12} />
                     </a>
                   </div>
                 </div>
-              </div>
+              </article>
             ))}
-          </div>
-
-          {/* Bottom Banner CTA */}
-          <div
-            style={{
-              marginTop: "32px",
-              padding: "20px 24px",
-              background: "rgba(0, 242, 254, 0.05)",
-              border: "1px solid rgba(0, 242, 254, 0.15)",
-              borderRadius: "16px",
-              display: "flex",
-              flexWrap: "wrap",
-              alignItems: "center",
-              justifyContent: "space-between",
-              gap: "16px",
-            }}
-          >
-            <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-              <div
-                style={{
-                  width: "40px",
-                  height: "40px",
-                  borderRadius: "12px",
-                  background: "rgba(0, 242, 254, 0.15)",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  color: "#00F2FE",
-                  flexShrink: 0,
-                }}
-              >
-                <Palette size={20} />
-              </div>
-              <div>
-                <p style={{ color: "#ffffff", fontWeight: 600, fontSize: "0.95rem", margin: 0 }}>
-                  Precisa de um Logo, Manual de Identidade Visual ou Redesign Completo?
-                </p>
-                <p style={{ color: "#8B9CC0", fontSize: "0.82rem", margin: 0 }}>
-                  A nossa equipa de designers entrega ficheiros 100% vetoriais, prontos para frotas, registo de marca e marketing digital.
-                </p>
-              </div>
-            </div>
-
-            <a
-              href={getWhatsAppUrl("Olá! Gostaria de solicitar uma proposta para Criação de Logo e Manual de Identidade Visual com a Lisis.")}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-secondary"
-              style={{
-                fontSize: "0.85rem",
-                padding: "10px 20px",
-                background: "linear-gradient(135deg, #25D366, #128C7E)",
-                borderColor: "rgba(37,211,102,0.4)",
-                color: "#ffffff",
-              }}
-            >
-              <MessageCircle size={16} />
-              Solicitar Orçamento de Design
-            </a>
           </div>
         </div>
       </div>

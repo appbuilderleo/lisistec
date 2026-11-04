@@ -1,294 +1,210 @@
 import Link from "next/link";
-import { ArrowRight, ExternalLink, ShoppingCart, HeartPulse, HeartHandshake, UtensilsCrossed } from "lucide-react";
+import Image from "next/image";
+import {
+  ArrowRight,
+  ExternalLink,
+  ArrowUpRight,
+  ShoppingCart,
+  HeartPulse,
+  HeartHandshake,
+  UtensilsCrossed,
+} from "lucide-react";
 import { getWhatsAppUrl } from "@/lib/constants";
 
 const projects = [
   {
     id: "stoka",
-    title: "STOKA - Gestão de Vendas & PDV",
-    category: "Comércio Local & Retalho",
+    code: "PRJ // 01",
+    title: "STOKA: Gestão de Vendas, Stock e PDV",
+    category: "Retalho & Supermercados",
     description:
-      "Sistema de gestão de vendas para comércio local, integrando ponto de venda (PDV) e sistema de pagamentos. Desenhado para agilizar o atendimento em caixas de mercearias e pequenas lojas.",
-    tags: ["Ponto de Venda", "Gestão de Stock", "Pagamentos", "Retalho"],
+      "Sistema comercial completo que integra ponto de venda (POS), controlo de stock multi-armazém, alerta de rotura e relatórios de caixa para supermercados, mercearias e lojas em Moçambique.",
+    tags: ["Ponto de Venda", "Gestão de Stock", "Faturação", "Retalho"],
     url: "https://stoka-three.vercel.app/",
     icon: ShoppingCart,
     heroImage: "/projects/stoka-hero.png",
-    accentColor: "#00D4AA",
   },
   {
     id: "medspa",
-    title: "MEDSPA - Clínica de Medicina Integrativa",
-    category: "Saúde & Bem-Estar",
+    code: "PRJ // 02",
+    title: "MEDSPA: Clínica de Medicina Integrativa",
+    category: "Saúde & Clínicas",
     description:
-      "Site oficial de clínica especializada em Medicina Funcional e Integrativa. Inclui apresentação de tratamentos, corpo clínico e sistema direto de agendamento de consultas via WhatsApp.",
-    tags: ["Medicina Integrativa", "Agendamento WhatsApp", "Clínica", "Saúde"],
+      "Plataforma digital para clínica de especialidades médicas. Apresenta especialidades clínicas, equipa médica e marcação directa de consultas integrada ao atendimento via WhatsApp.",
+    tags: ["Portal Clínico", "Marcação de Consultas", "Saúde"],
     url: "https://medspa-kappa.vercel.app/",
     icon: HeartPulse,
     heroImage: "/projects/medspa-hero.png",
-    accentColor: "#0088FF",
-  },
-  {
-    id: "convite",
-    title: "Convite Digital Interativo",
-    category: "Eventos & Celebrações",
-    description:
-      "Convite de casamento digital eletrónico com confirmação de presença (RSVP) em tempo real, contagem regressiva, localização GPS da cerimónia e todos os detalhes do evento para os convidados.",
-    tags: ["Convite Digital", "Confirmação RSVP", "Casamentos", "Mobile First"],
-    url: "https://convite-two-beige.vercel.app/",
-    icon: HeartHandshake,
-    heroImage: "/projects/convite-hero.png",
-    accentColor: "#F59E0B",
   },
   {
     id: "muliba",
-    title: "MULIBA - Gastronomia & Restaurante",
-    category: "Restauração & E-Commerce",
+    code: "PRJ // 03",
+    title: "MULIBA: Gastronomia & Encomendas Online",
+    category: "Restauração & Comércio",
     description:
-      "Site de restaurante moderno com sistema de cardápio digital incorporado, pedidos online de comida para take-away/entrega e sistema de reserva de mesas, tudo num só lugar.",
-    tags: ["Cardápio Digital", "Pedidos Online", "Reserva de Mesas", "Restaurante"],
+      "Plataforma digital para restauração com menu interactivo por categorias, encomendas para entrega ou recolha e sistema de reserva de mesas em tempo real.",
+    tags: ["Menu Digital", "Encomendas Online", "Reservas"],
     url: "https://muliba.vercel.app/",
     icon: UtensilsCrossed,
     heroImage: "/projects/muliba-hero.png",
-    accentColor: "#EF4444",
+  },
+  {
+    id: "convite",
+    code: "PRJ // 04",
+    title: "Plataforma de Convites & Credenciamento RSVP",
+    category: "Eventos & Protocolo",
+    description:
+      "Aplicação web interactiva para eventos corporativos e cerimónias, com confirmação de presença (RSVP) em tempo real, contagem decrescente e localização GPS.",
+    tags: ["Credenciamento RSVP", "Eventos", "Mobile First"],
+    url: "https://convite-two-beige.vercel.app/",
+    icon: HeartHandshake,
+    heroImage: "/projects/convite-hero.png",
   },
 ];
 
 export default function PortfolioPreview() {
   return (
     <section
-      style={{ padding: "96px 0", position: "relative" }}
+      className="py-24 lg:py-28 relative border-t border-border"
       aria-labelledby="portfolio-heading"
       id="portfolio-section"
     >
-      <div style={{ maxWidth: "1280px", margin: "0 auto", padding: "0 24px" }}>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div style={{ display: "flex", flexWrap: "wrap", alignItems: "flex-end", justifyContent: "space-between", gap: "24px", marginBottom: "64px" }}>
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14">
           <div>
-            <div className="section-tag" style={{ marginBottom: "16px" }}>Portfólio em Produção</div>
+            <div className="section-tag mb-4">04 // Portfólio Seleccionado</div>
             <h2
               id="portfolio-heading"
-              style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "clamp(1.75rem, 4vw, 3rem)", fontWeight: 700, color: "#ffffff" }}
+              className="text-3xl sm:text-4xl lg:text-5xl font-heading font-700 text-text"
             >
-              Projetos em <span className="text-gradient">destaque</span>
+              Mais de 15 projectos <span className="text-gradient">entregues.</span>
             </h2>
-            <p style={{ color: "#8B9CC0", marginTop: "16px", maxWidth: "560px", lineHeight: 1.7 }}>
-              Conheça alguns dos websites e aplicações web desenvolvidos pela nossa equipa que já estão no ar. Clique nos links para aceder diretamente a cada projecto em nova aba.
+            <p className="text-text-muted mt-3 max-w-xl text-sm sm:text-base leading-relaxed">
+              Inspeccione aplicações web e sistemas comerciais desenhados e
+              colocados em produção pela equipa da Lisis Tecnologias.
             </p>
           </div>
-          <Link href="/portfolio" className="btn-secondary" style={{ flexShrink: 0 }} id="portfolio-view-all-btn">
-            Ver Todos os Projetos <ArrowRight size={18} />
+          <Link
+            href="/portfolio"
+            className="btn-secondary shrink-0"
+            id="portfolio-view-all-btn"
+          >
+            <span>Explorar Todo o Portfólio</span>
+            <ArrowRight size={18} />
           </Link>
         </div>
 
-        {/* Portfolio Grid */}
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(290px, 1fr))", gap: "28px" }}>
-          {projects.map(({ id, title, category, description, tags, url, icon: Icon, heroImage, accentColor }) => (
-            <article
-              key={id}
-              className="glass-card"
-              style={{
-                overflow: "hidden",
-                display: "flex",
-                flexDirection: "column",
-                position: "relative",
-                transition: "transform 0.3s ease, border-color 0.3s ease",
-              }}
-              aria-labelledby={`project-${id}-title`}
-            >
-              {/* Visual preview header — real hero screenshot as cover */}
-              <a
-                href={url}
-                target="_blank"
-                rel="noopener noreferrer"
-                title={`Abrir ${title} em nova aba`}
-                style={{
-                  height: "200px",
-                  position: "relative",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  overflow: "hidden",
-                  textDecoration: "none",
-                  borderBottom: "1px solid rgba(255,255,255,0.08)",
-                  backgroundImage: `url(${heroImage})`,
-                  backgroundSize: "cover",
-                  backgroundPosition: "top center",
-                  backgroundRepeat: "no-repeat",
-                }}
+        {/* 2x2 Bento Showcase */}
+        <div className="grid md:grid-cols-2 gap-8">
+          {projects.map(
+            ({ id, code, title, category, description, tags, url, icon: Icon, heroImage }) => (
+              <article
+                key={id}
+                className="arch-card overflow-hidden flex flex-col bg-bg-surface"
+                aria-labelledby={`project-${id}-title`}
               >
-                {/* Dark overlay for contrast */}
-                <div style={{
-                  position: "absolute",
-                  inset: 0,
-                  background: "linear-gradient(to bottom, rgba(2,12,27,0.45) 0%, rgba(2,12,27,0.65) 100%)",
-                  transition: "background 0.3s ease",
-                }} />
-
-                {/* Hover overlay — accent tint */}
-                <div style={{
-                  position: "absolute",
-                  inset: 0,
-                  background: `${accentColor}18`,
-                  opacity: 0,
-                  transition: "opacity 0.3s ease",
-                }} className="card-hover-tint" />
-
-                {/* Glassmorphic icon badge */}
-                <div
-                  style={{
-                    position: "relative",
-                    zIndex: 2,
-                    width: "72px",
-                    height: "72px",
-                    borderRadius: "20px",
-                    background: "rgba(2,12,27,0.72)",
-                    backdropFilter: "blur(12px)",
-                    WebkitBackdropFilter: "blur(12px)",
-                    border: `1px solid ${accentColor}55`,
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    boxShadow: `0 8px 32px rgba(0,0,0,0.5), 0 0 0 1px ${accentColor}22`,
-                    transition: "transform 0.3s ease, box-shadow 0.3s ease",
-                  }}
+                {/* Clean Screenshot Preview */}
+                <a
+                  href={url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  title={`Abrir ${title} em nova aba`}
+                  className="group relative block aspect-[16/9] w-full overflow-hidden border-b border-border bg-[#06101E]"
                 >
-                  <Icon size={32} style={{ color: accentColor }} />
-                </div>
+                  <Image
+                    src={heroImage}
+                    alt={title}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    className="object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#040D1A]/75 via-transparent to-transparent" />
 
-                {/* Online badge */}
-                <div
-                  style={{
-                    position: "absolute",
-                    top: "12px",
-                    right: "12px",
-                    zIndex: 2,
-                    background: "rgba(2,12,27,0.80)",
-                    backdropFilter: "blur(8px)",
-                    WebkitBackdropFilter: "blur(8px)",
-                    border: "1px solid rgba(255,255,255,0.18)",
-                    padding: "4px 10px",
-                    borderRadius: "6px",
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "6px",
-                    fontSize: "0.75rem",
-                    color: "#ffffff",
-                    fontWeight: 600,
-                  }}
-                >
-                  <span style={{ width: "7px", height: "7px", borderRadius: "50%", background: "#00D4AA", display: "inline-block", boxShadow: "0 0 6px #00D4AA" }} />
-                  <span>Online</span>
-                  <ExternalLink size={12} style={{ color: accentColor }} />
-                </div>
-
-                {/* Bottom gradient for smooth card transition */}
-                <div style={{
-                  position: "absolute",
-                  bottom: 0,
-                  left: 0,
-                  right: 0,
-                  height: "60px",
-                  background: "linear-gradient(to bottom, transparent, rgba(9,18,32,0.9))",
-                  zIndex: 1,
-                }} />
-              </a>
-
-              {/* Content */}
-              <div style={{ padding: "26px", display: "flex", flexDirection: "column", flex: 1 }}>
-                <span className="tag" style={{ marginBottom: "12px", display: "inline-block", width: "fit-content", fontSize: "0.75rem" }}>
-                  {category}
-                </span>
-
-                <h3
-                  id={`project-${id}-title`}
-                  style={{
-                    fontFamily: "'Space Grotesk', sans-serif",
-                    fontWeight: 700,
-                    fontSize: "1.2rem",
-                    color: "#ffffff",
-                    marginBottom: "10px",
-                  }}
-                >
-                  <a
-                    href={url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style={{ color: "#ffffff", textDecoration: "none" }}
-                    title={`Abrir ${title} em nova aba`}
-                  >
-                    {title}
-                  </a>
-                </h3>
-
-                <p style={{ color: "#8B9CC0", fontSize: "0.875rem", lineHeight: 1.6, marginBottom: "20px", flex: 1 }}>
-                  {description}
-                </p>
-
-                {/* Tags */}
-                <div style={{ display: "flex", flexWrap: "wrap", gap: "8px", marginBottom: "24px" }}>
-                  {tags.map((t) => (
-                    <span
-                      key={t}
-                      style={{
-                        fontSize: "11px",
-                        padding: "4px 10px",
-                        borderRadius: "6px",
-                        background: "#0D1F35",
-                        border: "1px solid rgba(0,212,170,0.15)",
-                        color: "#8B9CC0",
-                        fontWeight: 500,
-                      }}
-                    >
-                      {t}
+                  <div className="absolute top-3.5 left-3.5 flex items-center gap-2">
+                    <span className="px-2.5 py-1 rounded-md bg-[#040D1A]/85 backdrop-blur-md border border-white/15 font-mono text-[11px] font-600 text-[#00D4AA]">
+                      {code}
                     </span>
-                  ))}
-                </div>
+                    <span className="px-2.5 py-1 rounded-md bg-[#040D1A]/80 backdrop-blur-md border border-white/15 font-mono text-[11px] text-white">
+                      {category}
+                    </span>
+                  </div>
 
-                {/* Buttons */}
-                <div style={{ display: "flex", flexDirection: "column", gap: "10px", marginTop: "auto" }}>
-                  <a
-                    href={url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn-primary"
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      gap: "8px",
-                      fontSize: "0.875rem",
-                      padding: "10px 16px",
-                      textDecoration: "none",
-                    }}
-                    id={`project-${id}-live-btn`}
-                  >
-                    <span>Ver Projecto Online</span>
-                    <ExternalLink size={15} />
-                  </a>
+                  <div className="absolute top-3.5 right-3.5 px-2.5 py-1 rounded-md bg-[#040D1A]/85 backdrop-blur-md border border-white/15 flex items-center gap-1.5 text-xs font-mono text-white">
+                    <span className="w-2 h-2 rounded-full bg-[#00D4AA]" />
+                    <span>Online</span>
+                    <ExternalLink size={12} className="text-[#00D4AA]" />
+                  </div>
+                </a>
 
-                  <a
-                    href={getWhatsAppUrl(`Olá! Vi o projecto ${title} e gostaria de solicitar uma proposta similar para o meu negócio.`)}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn-secondary"
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      gap: "6px",
-                      fontSize: "0.825rem",
-                      padding: "8px 14px",
-                      textDecoration: "none",
-                    }}
-                    id={`project-${id}-whatsapp-btn`}
-                  >
-                    <span>Pedir Proposta no WhatsApp</span>
-                    <ArrowRight size={13} />
-                  </a>
+                {/* Card Body */}
+                <div className="p-6 sm:p-7 flex flex-col flex-1 justify-between">
+                  <div>
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className="w-9 h-9 rounded-lg bg-primary/10 border border-primary/30 flex items-center justify-center text-primary shrink-0">
+                        <Icon size={18} />
+                      </div>
+                      <h3
+                        id={`project-${id}-title`}
+                        className="font-heading font-700 text-xl text-text"
+                      >
+                        <a
+                          href={url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="hover:text-primary transition-colors"
+                        >
+                          {title}
+                        </a>
+                      </h3>
+                    </div>
+
+                    <p className="text-text-muted text-sm leading-relaxed mb-5">
+                      {description}
+                    </p>
+
+                    <div className="flex flex-wrap gap-2 mb-6">
+                      {tags.map((t) => (
+                        <span
+                          key={t}
+                          className="font-mono text-[11px] px-2.5 py-1 rounded-md bg-bg-elevated border border-border text-text-secondary"
+                        >
+                          {t}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Action Links */}
+                  <div className="flex items-center justify-between gap-3 pt-4 border-t border-border">
+                    <a
+                      href={url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn-primary text-xs py-2.5 px-4"
+                      id={`project-${id}-live-btn`}
+                    >
+                      <span>Ver Projecto Online</span>
+                      <ExternalLink size={14} />
+                    </a>
+
+                    <a
+                      href={getWhatsAppUrl(
+                        `Olá! Vi o projecto ${title} e gostaria de solicitar uma proposta semelhante para a minha empresa.`
+                      )}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 font-heading font-600 text-xs text-text-secondary hover:text-primary transition-colors"
+                      id={`project-${id}-whatsapp-btn`}
+                    >
+                      <span>Pedir Proposta</span>
+                      <ArrowUpRight size={14} />
+                    </a>
+                  </div>
                 </div>
-              </div>
-            </article>
-          ))}
+              </article>
+            )
+          )}
         </div>
       </div>
     </section>

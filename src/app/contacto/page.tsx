@@ -1,80 +1,113 @@
 import type { Metadata } from "next";
 import ContactForm from "@/components/ContactForm";
-import { Mail, Phone, MapPin, Clock, MessageCircle } from "lucide-react";
+import { Mail, Phone, MapPin, Clock, MessageCircle, ArrowUpRight, ShieldCheck } from "lucide-react";
 import { CONTACTS, getWhatsAppUrl } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: "Contacto",
+  title: "Contacto & Pedidos de Proposta",
   description:
-    "Entre em contacto com a Lisis Tecnologias e Serviços. Ligue para +258 84 464 7599, fale no WhatsApp (+258 87 464 7599) ou envie email para appbuilderleo@gmail.com.",
+    "Entre em contacto com a Lisis Tecnologias e Serviços em Maputo. Ligue para +258 84 464 7599, fale no WhatsApp (+258 87 464 7599) ou envie email para appbuilderleo@gmail.com.",
   alternates: { canonical: "/contacto" },
 };
 
 const contactInfo = [
   {
     icon: Phone,
-    label: "Chamadas",
+    label: "Chamadas Telefónicas",
     value: CONTACTS.phone.display,
     href: CONTACTS.phone.href,
-    badge: "Linha Direta",
+    badge: "Linha Directa",
   },
   {
     icon: MessageCircle,
-    label: "WhatsApp",
+    label: "WhatsApp Oficial",
     value: CONTACTS.whatsapp.display,
-    href: getWhatsAppUrl("Olá! Gostaria de falar com a equipa da Lisis Tecnologias e Serviços."),
-    badge: "Resposta Rápida",
+    href: getWhatsAppUrl(
+      "Olá! Gostaria de falar com a equipa da Lisis Tecnologias e Serviços."
+    ),
+    badge: "Resposta Imediata",
     isWhatsApp: true,
   },
   {
     icon: Mail,
-    label: "Email",
+    label: "Correio Electrónico",
     value: CONTACTS.email.address,
     href: CONTACTS.email.href,
+    badge: "Cadernos de Encargos",
   },
   {
     icon: MapPin,
-    label: "Localização",
+    label: "Sede Operacional",
     value: CONTACTS.location.display,
     href: CONTACTS.location.mapsUrl,
   },
   {
     icon: Clock,
-    label: "Horário",
+    label: "Horário de Expediente",
     value: CONTACTS.hours.display,
     href: null,
   },
 ];
 
+const faqs = [
+  {
+    q: "Como solicitar uma proposta técnica ou cotação para concurso?",
+    a: "Pode enviar os termos de referência ou caderno de encargos pelo formulário desta página, por email ou directamente pelo WhatsApp. A nossa equipa responde em menos de 24 horas úteis.",
+  },
+  {
+    q: "A Lisis presta suporte técnico e formação presencial após a entrega?",
+    a: "Sim. Todos os sistemas entregues incluem formação prática para os utilizadores e administradores, documentação técnica e opções de contrato de manutenção evolutiva e suporte (SLA).",
+  },
+  {
+    q: "Desenvolvem projectos fora da cidade de Maputo?",
+    a: "Sim. Atendemos instituições públicas, universidades e empresas em todas as províncias de Moçambique, combinando sessões presenciais e acompanhamento remoto contínuo.",
+  },
+];
+
 export default function ContactoPage() {
   return (
-    <div className="min-h-screen pt-28">
+    <div className="min-h-screen pt-28 pb-20">
       {/* Hero */}
-      <section className="py-20 bg-dots" aria-labelledby="contact-heading">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="section-tag mx-auto w-fit">Contacto</div>
-          <h1
-            id="contact-heading"
-            className="text-4xl lg:text-6xl font-heading font-700 text-white mt-4 mb-6"
-          >
-            Vamos <span className="text-gradient">conversar</span>
-          </h1>
-          <p className="text-text-muted text-xl max-w-2xl mx-auto">
-            Estamos prontos para ajudar o seu negócio a crescer. Preencha o
-            formulário ou contacte-nos directamente.
-          </p>
+      <section
+        className="py-16 lg:py-20 bg-dots border-b border-border"
+        aria-labelledby="contact-heading"
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-3xl">
+            <div className="section-tag mb-4">Canais Oficiais // Contacto</div>
+            <h1
+              id="contact-heading"
+              className="text-4xl sm:text-5xl lg:text-6xl font-heading font-700 text-text leading-tight mb-6"
+            >
+              Inicie uma conversa com a nossa{" "}
+              <span className="text-gradient">equipa de engenharia.</span>
+            </h1>
+            <p className="text-text-muted text-base sm:text-lg leading-relaxed">
+              Solicite uma proposta técnica, demonstração dos sistemas STOKA ou
+              Lisis School, ou agende uma reunião presencial em Maputo.
+            </p>
+          </div>
         </div>
       </section>
 
       {/* Main Content */}
-      <section className="py-12 pb-24" aria-label="Informações de contacto e formulário">
+      <section
+        className="py-16"
+        aria-label="Informações de contacto e formulário"
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-5 gap-10">
-            {/* Contact Info */}
-            <aside className="lg:col-span-2 space-y-4" aria-label="Informações de contacto">
-              <div className="glass-card p-8">
-                <h2 className="text-xl font-heading font-700 text-white mb-6">
-                  Dados da empresa
+          <div className="grid lg:grid-cols-12 gap-10 items-start">
+            {/* Contact Info Sidebar (5 cols) */}
+            <aside
+              className="lg:col-span-5 space-y-6"
+              aria-label="Informações de contacto"
+            >
+              <div className="arch-card p-7 sm:p-8 bg-bg-surface">
+                <span className="mono-index block mb-2">
+                  DIRECTÓRIO // CONTACTOS
+                </span>
+                <h2 className="text-xl font-heading font-700 text-text mb-6">
+                  Dados oficiais da empresa
                 </h2>
                 <ul className="space-y-5">
                   {contactInfo.map((item) => {
@@ -82,20 +115,38 @@ export default function ContactoPage() {
                     return (
                       <li key={item.label} className="flex items-start gap-4">
                         <div
-                          className="service-icon w-10 h-10 flex-shrink-0"
-                          style={item.isWhatsApp ? { background: "rgba(37,211,102,0.15)", borderColor: "rgba(37,211,102,0.4)" } : undefined}
+                          className="service-icon w-11 h-11 shrink-0"
+                          style={
+                            item.isWhatsApp
+                              ? {
+                                  background: "rgba(37,211,102,0.12)",
+                                  borderColor: "rgba(37,211,102,0.35)",
+                                  color: "#25D366",
+                                }
+                              : undefined
+                          }
                         >
-                          <Icon size={18} style={item.isWhatsApp ? { color: "#25D366" } : undefined} />
+                          <Icon size={19} />
                         </div>
                         <div className="flex-1">
-                          <div className="flex items-center gap-2 mb-1">
-                            <p className="text-xs text-text-muted font-600 uppercase tracking-wider">
+                          <div className="flex items-center gap-2 flex-wrap mb-1">
+                            <p className="text-xs font-mono text-text-muted uppercase tracking-wider">
                               {item.label}
                             </p>
                             {item.badge && (
                               <span
-                                className="text-[10px] px-2 py-0.5 rounded-full font-600"
-                                style={item.isWhatsApp ? { background: "rgba(37,211,102,0.2)", color: "#25D366" } : { background: "rgba(0,212,170,0.15)", color: "#00D4AA" }}
+                                className="text-[10px] font-mono px-2 py-0.5 rounded font-600"
+                                style={
+                                  item.isWhatsApp
+                                    ? {
+                                        background: "rgba(37,211,102,0.18)",
+                                        color: "#25D366",
+                                      }
+                                    : {
+                                        background: "var(--primary-tint)",
+                                        color: "var(--primary)",
+                                      }
+                                }
                               >
                                 {item.badge}
                               </span>
@@ -104,15 +155,32 @@ export default function ContactoPage() {
                           {item.href ? (
                             <a
                               href={item.href}
-                              className="text-white hover:text-primary transition-colors text-sm font-500 block"
-                              style={item.isWhatsApp ? { color: "#25D366" } : undefined}
-                              target={item.href.startsWith("http") ? "_blank" : undefined}
-                              rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                              className="text-text hover:text-primary transition-colors text-sm font-600 inline-flex items-center gap-1"
+                              style={
+                                item.isWhatsApp
+                                  ? { color: "#25D366" }
+                                  : undefined
+                              }
+                              target={
+                                item.href.startsWith("http")
+                                  ? "_blank"
+                                  : undefined
+                              }
+                              rel={
+                                item.href.startsWith("http")
+                                  ? "noopener noreferrer"
+                                  : undefined
+                              }
                             >
-                              {item.value}
+                              <span>{item.value}</span>
+                              {item.href.startsWith("http") && (
+                                <ArrowUpRight size={13} />
+                              )}
                             </a>
                           ) : (
-                            <p className="text-white text-sm font-500">{item.value}</p>
+                            <p className="text-text text-sm font-500">
+                              {item.value}
+                            </p>
                           )}
                         </div>
                       </li>
@@ -121,62 +189,61 @@ export default function ContactoPage() {
                 </ul>
               </div>
 
-              {/* Social Links */}
-              <div className="glass-card p-8">
-                <h3 className="text-white font-heading font-600 mb-4">
-                  Redes Sociais
-                </h3>
-                <div className="grid grid-cols-2 gap-3">
-                  {[
-                    { label: "LinkedIn", icon: "in", href: "#" },
-                    { label: "Instagram", icon: "📷", href: "#" },
-                    { label: "Twitter/X", icon: "𝕏", href: "#" },
-                    { label: "YouTube", icon: "▶", href: "#" },
-                  ].map(({ label, icon, href }) => (
-                    <a
-                      key={label}
-                      href={href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-2 p-3 rounded-lg border border-border hover:border-primary/40 hover:bg-primary/5 transition-all text-sm text-text-muted hover:text-primary cursor-pointer"
-                      aria-label={label}
-                    >
-                      <span className="text-base" aria-hidden="true">{icon}</span>
-                      {label}
-                    </a>
-                  ))}
+              {/* SLA / Institutional Guarantee Card */}
+              <div className="arch-card p-7 bg-bg-surface space-y-3">
+                <div className="flex items-center gap-2.5 text-primary">
+                  <ShieldCheck size={20} />
+                  <h3 className="font-heading font-700 text-base text-text">
+                    Atendimento a Concursos & Instituições
+                  </h3>
                 </div>
-              </div>
-
-              {/* Map placeholder */}
-              <div
-                className="glass-card overflow-hidden h-48 flex items-center justify-center"
-                style={{
-                  background:
-                    "linear-gradient(135deg, rgba(0,212,170,0.05), rgba(0,136,255,0.05))",
-                }}
-                role="img"
-                aria-label="Localização: Maputo, Moçambique"
-              >
-                <div className="text-center">
-                  <MapPin size={32} className="text-primary mx-auto mb-2" aria-hidden="true" />
-                  <p className="text-white font-heading font-600">Maputo</p>
-                  <p className="text-text-muted text-sm">Moçambique 🇲🇿</p>
-                </div>
+                <p className="text-text-muted text-xs sm:text-sm leading-relaxed">
+                  Fornecemos propostas técnicas estruturadas, documentação fiscal
+                  regularizada e referências comprovadas de mais de 7 anos de
+                  prestação de serviços ao Estado e sector privado.
+                </p>
               </div>
             </aside>
 
-            {/* Contact Form */}
-            <div className="lg:col-span-3">
-              <div className="glass-card p-8 lg:p-10">
-                <h2 className="text-2xl font-heading font-700 text-white mb-2">
-                  Envie uma mensagem
+            {/* Contact Form (7 cols) */}
+            <div className="lg:col-span-7">
+              <div className="arch-card p-8 sm:p-10 bg-bg-surface">
+                <span className="mono-index block mb-2">
+                  FORMULÁRIO DIRECTO // PROPOSTAS
+                </span>
+                <h2 className="text-2xl sm:text-3xl font-heading font-700 text-text mb-2">
+                  Envie os detalhes do seu projecto
                 </h2>
                 <p className="text-text-muted text-sm mb-8">
-                  Preencha o formulário e entraremos em contacto em até 24 horas.
+                  Preencha os campos abaixo para registar o seu pedido no nosso
+                  sistema ou envie directamente para o nosso WhatsApp.
                 </p>
                 <ContactForm />
               </div>
+            </div>
+          </div>
+
+          {/* FAQ Section */}
+          <div className="mt-16 pt-16 border-t border-border">
+            <div className="max-w-2xl mb-10">
+              <span className="mono-index block mb-2">
+                DÚVIDAS FREQUENTES // CONTRATAÇÃO
+              </span>
+              <h2 className="text-2xl sm:text-3xl font-heading font-700 text-text">
+                Perguntas frequentes
+              </h2>
+            </div>
+            <div className="grid md:grid-cols-3 gap-6">
+              {faqs.map(({ q, a }) => (
+                <div key={q} className="arch-card p-6 bg-bg-surface">
+                  <h3 className="font-heading font-700 text-base text-text mb-2.5">
+                    {q}
+                  </h3>
+                  <p className="text-text-muted text-xs sm:text-sm leading-relaxed">
+                    {a}
+                  </p>
+                </div>
+              ))}
             </div>
           </div>
         </div>

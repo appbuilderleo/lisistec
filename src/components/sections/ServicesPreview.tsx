@@ -1,196 +1,223 @@
 import Link from "next/link";
-import { Globe, Smartphone, LayoutDashboard, Headphones, GitMerge, ArrowRight, Palette } from "lucide-react";
+import {
+  Globe,
+  Smartphone,
+  LayoutDashboard,
+  Headphones,
+  GitMerge,
+  ArrowRight,
+  ArrowUpRight,
+  Palette,
+} from "lucide-react";
 import { getWhatsAppUrl } from "@/lib/constants";
 
 const services = [
   {
-    id: "design",
-    icon: Palette,
-    title: "Design, Logo & Branding",
-    description: "Criação de logotipos vetoriais, manuais de identidade visual completos, papelaria corporativa e posicionamento de marca.",
-    features: ["Criação de Logotipos", "Manual de Identidade Visual", "Branding & Mockups 3D"],
-    accentColor: "rgba(0,242,254,0.2)",
-    link: "/galeria",
-  },
-  {
-    id: "web",
-    icon: Globe,
-    title: "Desenvolvimento Web",
-    description: "Criamos websites e aplicações web modernas, rápidas e escaláveis usando as mais recentes tecnologias.",
-    features: ["Next.js & React", "APIs RESTful", "CMS & E-commerce"],
-    accentColor: "rgba(59,130,246,0.2)",
-    link: "/servicos#web",
-  },
-  {
-    id: "mobile",
-    icon: Smartphone,
-    title: "Aplicações Móveis",
-    description: "Desenvolvemos apps nativas e híbridas para iOS e Android que os seus utilizadores vão adorar.",
-    features: ["React Native", "iOS & Android", "UI/UX Premium"],
-    accentColor: "rgba(168,85,247,0.2)",
-    link: "/servicos#mobile",
-  },
-  {
     id: "sistemas",
+    code: "01",
     icon: LayoutDashboard,
-    title: "Sistemas de Gestão",
-    description: "ERP, CRM e sistemas de gestão personalizados para automatizar e otimizar os seus processos empresariais.",
-    features: ["ERP Customizado", "Relatórios em tempo real", "Multi-utilizador"],
-    accentColor: "rgba(0,212,170,0.15)",
+    title: "Sistemas de Gestão (ERP, CRM & POS)",
+    description:
+      "Plataformas à medida para controlo de facturação, inventário multi-loja, gestão académica, fluxos ministeriais e pipelines comerciais.",
+    features: [
+      "ERP e Ponto de Venda (POS) para retalho",
+      "CRM e portais de gestão institucional",
+      "Dashboards analíticos em tempo real",
+    ],
     link: "/servicos#sistemas",
   },
   {
-    id: "consultoria",
-    icon: Headphones,
-    title: "Consultoria e Suporte",
-    description: "Apoio técnico especializado e consultoria estratégica em tecnologia para o seu negócio crescer.",
-    features: ["Suporte 24/7", "Formação técnica", "Assessoria TI"],
-    accentColor: "rgba(249,115,22,0.2)",
-    link: "/servicos#consultoria",
+    id: "web",
+    code: "02",
+    icon: Globe,
+    title: "Portais Institucionais & Aplicações Web",
+    description:
+      "Websites corporativos, portais governamentais bilingues e plataformas web de alto desempenho optimizadas para segurança e SEO.",
+    features: [
+      "Arquitectura Next.js & React de alta velocidade",
+      "Portais para ministérios, feiras e consultoras",
+      "Conformidade técnica e alojamento resiliente",
+    ],
+    link: "/servicos#web",
+  },
+  {
+    id: "design",
+    code: "03",
+    icon: Palette,
+    title: "Design, Logotipos & Identidade Visual",
+    description:
+      "Construção de marcas corporativas completas: desenho vetorial de logotipos, manuais de normas (brandbooks), estacionário e sinalética de frota.",
+    features: [
+      "Logotipos 100% vetoriais e registo de marca",
+      "Manual de Identidade Visual (Pantone, CMYK, RGB)",
+      "Mockups 3D, fardamento e decoração de viaturas",
+    ],
+    link: "/galeria",
+  },
+  {
+    id: "mobile",
+    code: "04",
+    icon: Smartphone,
+    title: "Aplicações Móveis (iOS & Android)",
+    description:
+      "Aplicações móveis nativas e multiplataforma desenhadas para operar com fluidez mesmo em cenários de conectividade variável em Moçambique.",
+    features: [
+      "Apps iOS e Android com sincronização offline",
+      "Integração com pagamentos móveis e notificações",
+      "Interfaces intuitivas focadas na retenção",
+    ],
+    link: "/servicos#mobile",
   },
   {
     id: "integracao",
+    code: "05",
     icon: GitMerge,
-    title: "Integração de Sistemas",
-    description: "Conectamos os seus sistemas existentes para criar fluxos de trabalho automatizados e eficientes.",
-    features: ["APIs & Webhooks", "Automação", "Migração de dados"],
-    accentColor: "rgba(34,197,94,0.2)",
+    title: "Integração de Sistemas & APIs",
+    description:
+      "Interligação segura entre softwares legados, bases de dados, sistemas bancários, ERPs e plataformas de atendimento automático no WhatsApp.",
+    features: [
+      "APIs RESTful, Webhooks e microsserviços",
+      "Migração estruturada e saneamento de dados",
+      "Automação de processos operacionais",
+    ],
     link: "/servicos#integracao",
+  },
+  {
+    id: "consultoria",
+    code: "06",
+    icon: Headphones,
+    title: "Consultoria TI & Suporte Dedicado",
+    description:
+      "Acompanhamento técnico contínuo, auditoria de infraestrutura, formação de equipas operacionais e manutenção evolutiva de sistemas críticos.",
+    features: [
+      "SLAs de resposta rápida presencial e remota",
+      "Capacitação de equipas técnicas e utilizadores",
+      "Segurança, backups e monitorização contínua",
+    ],
+    link: "/servicos#consultoria",
   },
 ];
 
 export default function ServicesPreview() {
   return (
     <section
-      style={{ padding: "96px 0", position: "relative" }}
+      className="py-24 lg:py-28 relative"
       aria-labelledby="services-heading"
       id="services-section"
     >
-      <div style={{ maxWidth: "1280px", margin: "0 auto", padding: "0 24px" }}>
-        {/* Header */}
-        <div style={{ textAlign: "center", marginBottom: "64px" }}>
-          <div className="section-tag" style={{ margin: "0 auto 16px", display: "inline-flex" }}>
-            Os Nossos Serviços
-          </div>
-          <h2
-            id="services-heading"
-            style={{
-              fontFamily: "'Space Grotesk', sans-serif",
-              fontSize: "clamp(1.75rem, 4vw, 3rem)",
-              fontWeight: 700,
-              color: "#ffffff",
-              marginBottom: "16px",
-            }}
-          >
-            Soluções completas para o{" "}
-            <span className="text-gradient">seu negócio</span>
-          </h2>
-          <p style={{ color: "#8B9CC0", fontSize: "1.1rem", maxWidth: "640px", margin: "0 auto", lineHeight: 1.7 }}>
-            Oferecemos um conjunto completo de serviços de tecnologia para
-            transformar e acelerar o crescimento da sua empresa.
-          </p>
-        </div>
-
-        {/* Services Grid */}
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "24px" }}>
-          {services.map(({ id, icon: Icon, title, description, features, accentColor }) => (
-            <article
-              key={id}
-              className="glass-card"
-              style={{ padding: "32px", position: "relative", overflow: "hidden" }}
-              aria-labelledby={`service-${id}-title`}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid lg:grid-cols-12 gap-12 items-start">
+          {/* Left Sticky Editorial Column (4 cols) */}
+          <div className="lg:col-span-4 lg:sticky lg:top-28 space-y-6">
+            <div className="section-tag">01 // Capacidades Técnicas</div>
+            <h2
+              id="services-heading"
+              className="text-3xl sm:text-4xl font-heading font-700 text-text leading-tight"
             >
-              <div className="service-icon" style={{ marginBottom: "20px" }}>
-                <Icon size={24} />
-              </div>
-              <h3
-                id={`service-${id}-title`}
-                style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 700, fontSize: "1.15rem", color: "#ffffff", marginBottom: "12px" }}
-              >
-                {title}
-              </h3>
-              <p style={{ color: "#8B9CC0", fontSize: "0.9rem", lineHeight: 1.7, marginBottom: "20px" }}>
-                {description}
-              </p>
-              <ul style={{ display: "flex", flexDirection: "column", gap: "8px", marginBottom: "24px" }}>
-                {features.map((f) => (
-                  <li key={f} style={{ display: "flex", alignItems: "center", gap: "8px", fontSize: "0.875rem", color: "#8B9CC0" }}>
-                    <span style={{ width: "6px", height: "6px", borderRadius: "50%", background: "#00D4AA", flexShrink: 0 }} aria-hidden="true" />
-                    {f}
-                  </li>
-                ))}
-              </ul>
-              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "12px", marginTop: "auto" }}>
-                <Link
-                  href={id === "design" ? "/galeria" : `/servicos#${id}`}
-                  style={{ display: "inline-flex", alignItems: "center", gap: "6px", fontSize: "0.85rem", color: id === "design" ? "#00F2FE" : "#8B9CC0", fontWeight: 500, textDecoration: "none" }}
-                  aria-label={id === "design" ? "Ver Galeria de Design" : `Saber mais sobre ${title}`}
-                >
-                  {id === "design" ? "Ver Galeria" : "Detalhes"}
-                  <ArrowRight size={14} />
-                </Link>
-                <a
-                  href={getWhatsAppUrl(`Olá! Gostaria de solicitar uma proposta para o serviço: ${title}.`)}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style={{
-                    display: "inline-flex",
-                    alignItems: "center",
-                    gap: "6px",
-                    fontSize: "0.825rem",
-                    color: "#00D4AA",
-                    fontWeight: 600,
-                    textDecoration: "none",
-                    padding: "6px 12px",
-                    borderRadius: "6px",
-                    border: "1px solid rgba(0,212,170,0.3)",
-                    background: "rgba(0,212,170,0.08)",
-                  }}
-                  id={`service-${id}-whatsapp-btn`}
-                >
-                  Pedir Proposta
-                </a>
-              </div>
-            </article>
-          ))}
-
-          {/* CTA Card */}
-          <article
-            className="glass-card"
-            style={{ padding: "32px", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", textAlign: "center", borderStyle: "dashed" }}
-          >
-            <div
-              style={{ width: "56px", height: "56px", borderRadius: "50%", background: "rgba(0,212,170,0.1)", border: "1px solid rgba(0,212,170,0.3)", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "16px", fontSize: "24px" }}
-              aria-hidden="true"
-            >
-              🤝
-            </div>
-            <h3 style={{ color: "#ffffff", fontFamily: "'Space Grotesk', sans-serif", fontWeight: 700, fontSize: "1.1rem", marginBottom: "8px" }}>
-              Tem um projecto?
-            </h3>
-            <p style={{ color: "#8B9CC0", fontSize: "0.875rem", marginBottom: "20px" }}>
-              Vamos conversar sobre como podemos ajudar.
+              Da arquitectura de software ao{" "}
+              <span className="text-gradient">posicionamento visual</span> da
+              sua marca.
+            </h2>
+            <p className="text-text-muted text-base leading-relaxed">
+              Não entregamos peças isoladas. Construímos a infraestrutura
+              tecnológica e a identidade institucional que permitem a
+              ministérios, universidades e empresas operar com eficiência.
             </p>
-            <a
-              href={getWhatsAppUrl("Olá! Tenho um projecto e gostaria de solicitar uma proposta com a Lisis Tecnologias.")}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-primary"
-              style={{ fontSize: "0.875rem", padding: "10px 20px" }}
-              id="services-cta-btn"
-            >
-              Pedir Proposta no WhatsApp
-              <ArrowRight size={16} />
-            </a>
-          </article>
-        </div>
 
-        {/* View all */}
-        <div style={{ textAlign: "center", marginTop: "40px" }}>
-          <Link href="/servicos" className="btn-secondary" id="all-services-btn">
-            Ver Todos os Serviços
-            <ArrowRight size={18} />
-          </Link>
+            <div className="pt-2 flex flex-col sm:flex-row lg:flex-col gap-3">
+              <Link
+                href="/servicos"
+                className="btn-primary justify-between"
+                id="all-services-btn"
+              >
+                <span>Ver Catálogo Completo de Serviços</span>
+                <ArrowRight size={17} />
+              </Link>
+              <a
+                href={getWhatsAppUrl(
+                  "Olá! Gostaria de agendar um diagnóstico técnico ou solicitar proposta de serviços com a Lisis Tecnologias."
+                )}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-secondary justify-between"
+                id="services-whatsapp-cta"
+              >
+                <span>Solicitar Caderno de Encargos</span>
+                <ArrowUpRight size={17} />
+              </a>
+            </div>
+          </div>
+
+          {/* Right Services Matrix (8 cols) */}
+          <div className="lg:col-span-8 grid sm:grid-cols-2 gap-6">
+            {services.map(({ id, code, icon: Icon, title, description, features, link }) => (
+              <article
+                key={id}
+                className="arch-card p-7 flex flex-col justify-between bg-bg-surface"
+                aria-labelledby={`service-${id}-title`}
+              >
+                <div>
+                  <div className="flex items-center justify-between gap-4 mb-5">
+                    <div className="service-icon">
+                      <Icon size={22} />
+                    </div>
+                    <span className="mono-index text-xs px-2.5 py-1 rounded bg-bg-elevated border border-border">
+                      MOD // {code}
+                    </span>
+                  </div>
+
+                  <h3
+                    id={`service-${id}-title`}
+                    className="font-heading font-700 text-xl text-text mb-3"
+                  >
+                    {title}
+                  </h3>
+
+                  <p className="text-text-muted text-sm leading-relaxed mb-5">
+                    {description}
+                  </p>
+
+                  <ul className="space-y-2 mb-6 pt-4 border-t border-border">
+                    {features.map((f) => (
+                      <li
+                        key={f}
+                        className="flex items-center gap-2.5 text-xs text-text-secondary font-500"
+                      >
+                        <span
+                          className="w-1.5 h-1.5 rounded-full bg-primary shrink-0"
+                          aria-hidden="true"
+                        />
+                        <span>{f}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div className="flex items-center justify-between gap-3 pt-4 border-t border-border mt-auto">
+                  <Link
+                    href={link}
+                    className="inline-flex items-center gap-1.5 text-xs font-mono font-600 text-text-secondary hover:text-primary transition-colors"
+                  >
+                    <span>{id === "design" ? "Explorar Galeria" : "Especificações"}</span>
+                    <ArrowRight size={13} />
+                  </Link>
+
+                  <a
+                    href={getWhatsAppUrl(
+                      `Olá! Gostaria de solicitar uma proposta para o serviço: ${title}.`
+                    )}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 text-xs font-heading font-700 text-primary hover:underline"
+                    id={`service-${id}-whatsapp-btn`}
+                  >
+                    <span>Pedir Proposta</span>
+                    <ArrowUpRight size={14} />
+                  </a>
+                </div>
+              </article>
+            ))}
+          </div>
         </div>
       </div>
     </section>

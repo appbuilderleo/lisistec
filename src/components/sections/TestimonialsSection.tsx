@@ -1,158 +1,224 @@
 "use client";
-import { useState } from "react";
-import { Quote, ChevronLeft, ChevronRight, Star } from "lucide-react";
 
-const testimonials = [
+import { useState } from "react";
+import { Quote, ChevronLeft, ChevronRight, Building2, CheckCircle2 } from "lucide-react";
+
+const institutionalCases = [
   {
-    id: 1,
-    name: "Carlos Matsinhe",
-    role: "Director Geral",
-    company: "TradeCom Maputo",
-    text: "A Lisis transformou completamente a nossa operação digital. O sistema de gestão que desenvolveram reduziu os nossos custos operacionais em 40% e melhorou a eficiência da equipa significativamente.",
-    rating: 5,
+    id: "ccn",
+    code: "CASO // 01",
+    organization: "CCN Consultores Moçambique",
+    sector: "Consultoria Empresarial & Estratégica",
+    deliverable: "Portal Corporativo & Sistema CRM Dedicado",
+    quote:
+      "A implementação do novo portal institucional e do sistema CRM pela Lisis Tecnologias centralizou todo o nosso funil de propostas comerciais e o acompanhamento de clientes corporativos num único ambiente seguro.",
+    impact: [
+      "Centralização de 100% do histórico de clientes e propostas",
+      "Acesso seguro por níveis de permissão para a equipa de consultores",
+      "Presença digital alinhada com o posicionamento executivo da marca",
+    ],
   },
   {
-    id: 2,
-    name: "Ana Ferrão",
-    role: "Directora Académica",
-    company: "Escola Privada Horizonte",
-    text: "O Lisis School revolucionou a forma como gerimos a nossa escola. Agora os pais acompanham o progresso dos filhos em tempo real e a administração é muito mais ágil.",
-    rating: 5,
+    id: "cesta-cheia",
+    code: "CASO // 02",
+    organization: "Cesta Cheia Supermercado",
+    sector: "Retalho & Distribuição Alimentar",
+    deliverable: "Gestão Comercial, Ponto de Venda (POS) & Inventário",
+    quote:
+      "No retalho alimentar cada segundo na caixa conta. A solução implementada pela Lisis trouxe rapidez ao atendimento, rigor no controlo de stock e visibilidade diária sobre a facturação e reposição de produtos.",
+    impact: [
+      "Atendimento ágil em múltiplos terminais de ponto de venda",
+      "Controlo rigoroso de entradas, saídas e quebras de stock",
+      "Suporte técnico local sempre disponível em Maputo",
+    ],
   },
   {
-    id: 3,
-    name: "Hélder Machava",
-    role: "Empresário",
-    company: "Supermercado Modelo",
-    text: "Com o Stoka consigo controlar o stock de todas as minhas lojas num só lugar. O suporte da Lisis é excelente — respondem sempre rapidamente quando precisamos.",
-    rating: 5,
+    id: "educacao-uem",
+    code: "CASO // 03",
+    organization: "Ministério da Educação · Universidade Eduardo Mondlane",
+    sector: "Sector Público & Ensino Superior",
+    deliverable: "Plataformas Digitais & Sistemas Académicos",
+    quote:
+      "Projectos para o sector público e académico exigem conformidade técnica, estabilidade sob elevado volume de acessos e interfaces claras para estudantes, docentes e gestores públicos.",
+    impact: [
+      "Arquitectura preparada para milhares de utilizadores simultâneos",
+      "Digitalização e desmaterialização de fluxos administrativos",
+      "Documentação técnica completa e formação de equipas internas",
+    ],
+  },
+  {
+    id: "institucional-servicos",
+    code: "CASO // 04",
+    organization: "CEMOQE-MOÇ · AMEC · ML Services",
+    sector: "Institucional, Certificação & Serviços Corporativos",
+    deliverable: "Sistemas Digitais, Portais & Identidade Visual",
+    quote:
+      "A Lisis combina engenharia de software com design de comunicação. Desde sistemas operacionais até à padronização da identidade visual, cada entrega reflecte rigor técnico e conhecimento da realidade moçambicana.",
+    impact: [
+      "Padronização visual e tecnológica em múltiplos canais",
+      "Plataformas web rápidas e adaptadas a dispositivos móveis",
+      "Acompanhamento contínuo após a entrada em produção",
+    ],
   },
 ];
 
 export default function TestimonialsSection() {
   const [active, setActive] = useState(0);
-  const prev = () => setActive((a) => (a - 1 + testimonials.length) % testimonials.length);
-  const next = () => setActive((a) => (a + 1) % testimonials.length);
-  const t = testimonials[active];
+  const prev = () =>
+    setActive((a) => (a - 1 + institutionalCases.length) % institutionalCases.length);
+  const next = () =>
+    setActive((a) => (a + 1) % institutionalCases.length);
+  const current = institutionalCases[active];
 
   return (
     <section
-      style={{ padding: "96px 0", position: "relative" }}
+      className="py-24 lg:py-28 relative border-t border-border bg-bg-surface/40"
       aria-labelledby="testimonials-heading"
       id="testimonials"
     >
-      <div
-        aria-hidden="true"
-        style={{
-          position: "absolute",
-          inset: 0,
-          opacity: 0.4,
-          background: "radial-gradient(ellipse at center, rgba(0,212,170,0.04) 0%, transparent 70%)",
-          pointerEvents: "none",
-        }}
-      />
-      <div style={{ maxWidth: "896px", margin: "0 auto", padding: "0 24px", position: "relative" }}>
-        {/* Header */}
-        <div style={{ textAlign: "center", marginBottom: "64px" }}>
-          <div className="section-tag" style={{ margin: "0 auto 16px", display: "inline-flex" }}>Testemunhos</div>
-          <h2
-            id="testimonials-heading"
-            style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "clamp(1.75rem, 4vw, 2.5rem)", fontWeight: 700, color: "#ffffff" }}
-          >
-            O que dizem os nossos <span className="text-gradient">clientes</span>
-          </h2>
-        </div>
-
-        {/* Testimonial Card */}
-        <div
-          className="glass-card"
-          style={{ padding: "40px", textAlign: "center" }}
-          role="region"
-          aria-label="Testemunho actual"
-          aria-live="polite"
-        >
-          <Quote size={40} style={{ color: "rgba(0,212,170,0.3)", margin: "0 auto 24px" }} aria-hidden="true" />
-
-          {/* Stars */}
-          <div style={{ display: "flex", justifyContent: "center", gap: "4px", marginBottom: "24px" }} role="img" aria-label={`${t.rating} estrelas`}>
-            {Array.from({ length: t.rating }).map((_, i) => (
-              <Star key={i} size={18} style={{ color: "#00D4AA", fill: "#00D4AA" }} aria-hidden="true" />
-            ))}
-          </div>
-
-          <blockquote style={{ color: "#E2EAF4", fontSize: "1.1rem", lineHeight: 1.7, marginBottom: "32px", maxWidth: "640px", marginLeft: "auto", marginRight: "auto", fontStyle: "italic" }}>
-            &ldquo;{t.text}&rdquo;
-          </blockquote>
-
-          <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "12px" }}>
-            <div
-              style={{
-                width: "56px",
-                height: "56px",
-                borderRadius: "50%",
-                background: "linear-gradient(135deg, rgba(0,212,170,0.3), rgba(59,130,246,0.3))",
-                border: "1px solid rgba(0,212,170,0.3)",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                fontFamily: "'Space Grotesk', sans-serif",
-                fontWeight: 700,
-                fontSize: "1.25rem",
-                color: "#ffffff",
-              }}
-              aria-hidden="true"
-            >
-              {t.name[0]}
-            </div>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid lg:grid-cols-12 gap-10 items-start">
+          {/* Left Column: Selector List (5 cols) */}
+          <div className="lg:col-span-5 space-y-6">
             <div>
-              <p style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 700, color: "#ffffff" }}>{t.name}</p>
-              <p style={{ color: "#8B9CC0", fontSize: "0.875rem" }}>{t.role} · {t.company}</p>
+              <div className="section-tag mb-4">05 // Impacto Comprovado</div>
+              <h2
+                id="testimonials-heading"
+                className="text-3xl sm:text-4xl font-heading font-700 text-text leading-tight"
+              >
+                A confiança de quem move{" "}
+                <span className="text-gradient">Moçambique.</span>
+              </h2>
+              <p className="text-text-muted text-sm sm:text-base mt-3 leading-relaxed">
+                Seleccione uma instituição ou empresa abaixo para consultar o
+                âmbito técnico e os resultados alcançados em cada parceria.
+              </p>
+            </div>
+
+            <div
+              className="space-y-2.5"
+              role="tablist"
+              aria-label="Casos de clientes da Lisis"
+            >
+              {institutionalCases.map((item, idx) => {
+                const isSelected = idx === active;
+                return (
+                  <button
+                    key={item.id}
+                    type="button"
+                    role="tab"
+                    aria-selected={isSelected}
+                    onClick={() => setActive(idx)}
+                    className={`w-full text-left p-4 rounded-xl border transition-all cursor-pointer flex items-center justify-between gap-3 ${
+                      isSelected
+                        ? "bg-bg-surface border-primary shadow-card"
+                        : "bg-bg-elevated/60 border-border hover:border-primary/40"
+                    }`}
+                  >
+                    <div>
+                      <span className="font-mono text-[10px] uppercase tracking-wider text-primary block">
+                        {item.sector}
+                      </span>
+                      <span className="font-heading font-700 text-sm sm:text-base text-text mt-0.5 block">
+                        {item.organization}
+                      </span>
+                    </div>
+                    <span
+                      className={`font-mono text-xs px-2 py-1 rounded ${
+                        isSelected
+                          ? "bg-primary text-[#040D1A] font-700"
+                          : "text-text-muted"
+                      }`}
+                    >
+                      0{idx + 1}
+                    </span>
+                  </button>
+                );
+              })}
             </div>
           </div>
-        </div>
 
-        {/* Controls */}
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "16px", marginTop: "32px" }}>
-          <button
-            onClick={prev}
-            style={{ width: "40px", height: "40px", borderRadius: "50%", border: "1px solid rgba(0,212,170,0.15)", display: "flex", alignItems: "center", justifyContent: "center", color: "#8B9CC0", background: "transparent", cursor: "pointer", transition: "all 0.2s ease" }}
-            aria-label="Testemunho anterior"
-            id="testimonial-prev-btn"
-          >
-            <ChevronLeft size={18} />
-          </button>
+          {/* Right Column: Active Case Detail Card (7 cols) */}
+          <div className="lg:col-span-7">
+            <div
+              className="arch-card p-8 sm:p-10 bg-bg-surface"
+              role="region"
+              aria-live="polite"
+            >
+              <div className="flex flex-wrap items-center justify-between gap-3 mb-6 pb-5 border-b border-border">
+                <div className="flex items-center gap-3">
+                  <div className="w-11 h-11 rounded-xl bg-primary/10 border border-primary/30 flex items-center justify-center text-primary">
+                    <Building2 size={20} />
+                  </div>
+                  <div>
+                    <span className="mono-index block">{current.code}</span>
+                    <h3 className="font-heading font-700 text-xl text-text">
+                      {current.organization}
+                    </h3>
+                  </div>
+                </div>
+                <span className="tag">{current.deliverable}</span>
+              </div>
 
-          <div style={{ display: "flex", gap: "8px" }} role="tablist" aria-label="Seleccionar testemunho">
-            {testimonials.map((_, i) => (
-              <button
-                key={i}
-                onClick={() => setActive(i)}
-                style={{
-                  height: "8px",
-                  width: i === active ? "24px" : "8px",
-                  borderRadius: "999px",
-                  background: i === active ? "#00D4AA" : "rgba(0,212,170,0.15)",
-                  border: "none",
-                  cursor: "pointer",
-                  transition: "all 0.3s ease",
-                  padding: 0,
-                }}
-                aria-label={`Testemunho ${i + 1}`}
-                aria-selected={i === active}
-                role="tab"
-                id={`testimonial-tab-${i}`}
-              />
-            ))}
+              <div className="relative mb-8">
+                <Quote
+                  size={32}
+                  className="text-primary/25 mb-3"
+                  aria-hidden="true"
+                />
+                <blockquote className="text-text text-base sm:text-lg leading-relaxed font-500">
+                  &ldquo;{current.quote}&rdquo;
+                </blockquote>
+              </div>
+
+              <div className="p-5 rounded-xl bg-bg-elevated border border-border mb-6">
+                <p className="font-mono text-xs uppercase tracking-wider text-primary font-600 mb-3">
+                  Resultados & Entregáveis Técnicos
+                </p>
+                <ul className="space-y-2.5">
+                  {current.impact.map((point) => (
+                    <li
+                      key={point}
+                      className="flex items-start gap-2.5 text-xs sm:text-sm text-text-secondary"
+                    >
+                      <CheckCircle2
+                        size={16}
+                        className="text-primary shrink-0 mt-0.5"
+                      />
+                      <span>{point}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Controls */}
+              <div className="flex items-center justify-between pt-2">
+                <span className="font-mono text-xs text-text-muted">
+                  Caso {active + 1} de {institutionalCases.length}
+                </span>
+                <div className="flex items-center gap-2">
+                  <button
+                    type="button"
+                    onClick={prev}
+                    className="w-10 h-10 rounded-xl bg-bg-elevated border border-border hover:border-primary text-text-secondary hover:text-primary flex items-center justify-center transition-colors cursor-pointer"
+                    aria-label="Caso anterior"
+                    id="testimonial-prev-btn"
+                  >
+                    <ChevronLeft size={18} />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={next}
+                    className="w-10 h-10 rounded-xl bg-bg-elevated border border-border hover:border-primary text-text-secondary hover:text-primary flex items-center justify-center transition-colors cursor-pointer"
+                    aria-label="Próximo caso"
+                    id="testimonial-next-btn"
+                  >
+                    <ChevronRight size={18} />
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
-
-          <button
-            onClick={next}
-            style={{ width: "40px", height: "40px", borderRadius: "50%", border: "1px solid rgba(0,212,170,0.15)", display: "flex", alignItems: "center", justifyContent: "center", color: "#8B9CC0", background: "transparent", cursor: "pointer", transition: "all 0.2s ease" }}
-            aria-label="Próximo testemunho"
-            id="testimonial-next-btn"
-          >
-            <ChevronRight size={18} />
-          </button>
         </div>
       </div>
     </section>

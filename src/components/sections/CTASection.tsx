@@ -1,105 +1,209 @@
-import Link from "next/link";
-import { ArrowRight, MessageCircle, Phone } from "lucide-react";
+"use client";
+
+import { useState } from "react";
+import { ArrowUpRight, Phone, CheckCircle2, Sliders } from "lucide-react";
 import { CONTACTS, getWhatsAppUrl } from "@/lib/constants";
 
+const solutionOptions = [
+  {
+    id: "erp-pos",
+    label: "Sistema ERP / POS / CRM",
+    deliverables: [
+      "Arquitectura multi-utilizador e perfis de acesso",
+      "Controlo de vendas, stock, facturação ou pipeline comercial",
+      "Formação presencial/remota e suporte técnico dedicado",
+    ],
+    timeline: "Entrega faseada · 3 a 8 semanas",
+  },
+  {
+    id: "portal-web",
+    label: "Portal Institucional / Governamental",
+    deliverables: [
+      "Design editorial exclusivo (Modo Escuro & Claro)",
+      "Alta velocidade, segurança SSL e optimização Google (SEO)",
+      "Painel de gestão de conteúdos e suporte multilíngue",
+    ],
+    timeline: "Entrega rápida · 2 a 4 semanas",
+  },
+  {
+    id: "mobile-app",
+    label: "Aplicação Móvel (iOS & Android)",
+    deliverables: [
+      "Aplicação nativa/híbrida com suporte offline",
+      "Painel administrativo web e integração via API",
+      "Publicação oficial na App Store e Google Play",
+    ],
+    timeline: "Ciclo ágil · 4 a 10 semanas",
+  },
+  {
+    id: "branding",
+    label: "Logotipo & Manual de Identidade",
+    deliverables: [
+      "Logotipo 100% vetorial exclusivo + isotipo",
+      "Brandbook completo (Pantone, CMYK, RGB, tipografia)",
+      "Mockups 3D de papelaria, fardamento e frotas",
+    ],
+    timeline: "Entrega completa · 1 a 2 semanas",
+  },
+];
+
+const sectorOptions = [
+  "Governo / Instituição Pública",
+  "Retalho / Supermercado / Comércio",
+  "Educação / Universidade / Academia",
+  "Consultoria / Serviços Corporativos",
+];
+
 export default function CTASection() {
+  const [selectedSol, setSelectedSol] = useState(0);
+  const [selectedSector, setSelectedSector] = useState(0);
+
+  const activeSolution = solutionOptions[selectedSol];
+  const activeSector = sectorOptions[selectedSector];
+
+  const customWhatsAppMessage = `Olá! Usei o configurador no site da Lisis Tecnologias.\n- Solução pretendida: ${activeSolution.label}\n- Sector: ${activeSector}\nGostaria de receber uma proposta técnica.`;
+
   return (
     <section
-      style={{ padding: "96px 0", position: "relative", overflow: "hidden" }}
+      className="py-24 lg:py-28 relative overflow-hidden border-t border-border"
       aria-labelledby="cta-heading"
       id="cta-section"
     >
-      {/* Background */}
-      <div
-        aria-hidden="true"
-        style={{
-          position: "absolute",
-          inset: 0,
-          background: "linear-gradient(135deg, rgba(0,212,170,0.08) 0%, rgba(0,136,255,0.05) 50%, transparent 100%)",
-          pointerEvents: "none",
-        }}
-      />
-      <div className="bg-dots" aria-hidden="true" style={{ position: "absolute", inset: 0, opacity: 0.3 }} />
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="arch-card p-8 sm:p-12 lg:p-14 bg-bg-surface">
+          <div className="grid lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+            {/* Left: Interactive Configurator (7 cols) */}
+            <div className="lg:col-span-7 space-y-6">
+              <div className="section-tag">
+                <Sliders size={13} /> 06 // Configurador de Projecto
+              </div>
 
-      {/* Glow */}
-      <div
-        aria-hidden="true"
-        style={{
-          position: "absolute",
-          top: "50%",
-          left: "50%",
-          transform: "translate(-50%, -50%)",
-          width: "600px",
-          height: "300px",
-          borderRadius: "50%",
-          opacity: 0.2,
-          filter: "blur(48px)",
-          background: "radial-gradient(ellipse, #00D4AA, transparent)",
-          pointerEvents: "none",
-        }}
-      />
+              <h2
+                id="cta-heading"
+                className="text-3xl sm:text-4xl font-heading font-700 text-text leading-tight"
+              >
+                Configure o seu projecto e receba uma{" "}
+                <span className="text-gradient">proposta técnica.</span>
+              </h2>
 
-      <div style={{ maxWidth: "896px", margin: "0 auto", padding: "0 24px", textAlign: "center", position: "relative", zIndex: 1 }}>
-        <div className="glass-card" style={{ padding: "64px 48px" }}>
-          <div className="section-tag" style={{ margin: "0 auto 24px", display: "inline-flex" }}>Vamos começar</div>
-          <h2
-            id="cta-heading"
-            style={{
-              fontFamily: "'Space Grotesk', sans-serif",
-              fontSize: "clamp(1.75rem, 4vw, 3rem)",
-              fontWeight: 700,
-              color: "#ffffff",
-              lineHeight: 1.2,
-              marginBottom: "24px",
-            }}
-          >
-            Pronto para <span className="text-gradient">transformar</span>
-            <br />o seu negócio?
-          </h2>
-          <p style={{ color: "#8B9CC0", fontSize: "1.1rem", marginBottom: "40px", maxWidth: "512px", margin: "0 auto 40px", lineHeight: 1.7 }}>
-            Estamos prontos para ajudar o seu negócio a crescer com tecnologia
-            de ponta. Fale connosco hoje e receba uma proposta personalizada.
-          </p>
+              <p className="text-text-muted text-sm sm:text-base leading-relaxed">
+                Seleccione o tipo de solução e o sector da sua organização para
+                gerar o resumo técnico e falar directamente com a nossa equipa
+                de engenharia em Maputo.
+              </p>
 
-          <div style={{ display: "flex", flexWrap: "wrap", gap: "16px", justifyContent: "center" }}>
-            <a
-              href={getWhatsAppUrl("Olá! Gostaria de solicitar uma proposta para a Lisis Tecnologias e Serviços.")}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-primary"
-              style={{ fontSize: "1rem", padding: "14px 32px" }}
-              id="cta-contact-btn"
-            >
-              <MessageCircle size={20} />
-              Solicitar Proposta no WhatsApp
-            </a>
-            <a
-              href={CONTACTS.phone.href}
-              className="btn-secondary"
-              style={{ fontSize: "1rem", padding: "14px 32px" }}
-              id="cta-phone-btn"
-            >
-              <Phone size={20} />
-              Ligar ({CONTACTS.phone.display})
-            </a>
-          </div>
+              {/* Step 1: Solution Type */}
+              <div>
+                <p className="font-mono text-xs uppercase tracking-wider text-text-secondary font-600 mb-2.5">
+                  1. Qual é a necessidade principal?
+                </p>
+                <div className="grid sm:grid-cols-2 gap-2.5">
+                  {solutionOptions.map((opt, idx) => (
+                    <button
+                      key={opt.id}
+                      type="button"
+                      onClick={() => setSelectedSol(idx)}
+                      className={`text-left px-4 py-3 rounded-xl border text-xs sm:text-sm font-heading font-600 transition-all cursor-pointer ${
+                        selectedSol === idx
+                          ? "bg-primary text-[#040D1A] border-primary shadow-neon"
+                          : "bg-bg-elevated border-border text-text hover:border-primary/50"
+                      }`}
+                    >
+                      {opt.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
 
-          {/* Trust indicators */}
-          <div
-            style={{
-              display: "flex",
-              flexWrap: "wrap",
-              alignItems: "center",
-              justifyContent: "center",
-              gap: "32px",
-              marginTop: "48px",
-              paddingTop: "32px",
-              borderTop: "1px solid rgba(0,212,170,0.15)",
-            }}
-          >
-            {["✓ Proposta gratuita", "✓ Sem compromisso", "✓ Resposta em 24h", "✓ Suporte dedicado"].map((item) => (
-              <span key={item} style={{ fontSize: "0.875rem", color: "#8B9CC0" }}>{item}</span>
-            ))}
+              {/* Step 2: Sector */}
+              <div>
+                <p className="font-mono text-xs uppercase tracking-wider text-text-secondary font-600 mb-2.5">
+                  2. Sector de actuação
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {sectorOptions.map((sec, idx) => (
+                    <button
+                      key={sec}
+                      type="button"
+                      onClick={() => setSelectedSector(idx)}
+                      className={`px-3.5 py-2 rounded-lg border text-xs font-mono transition-all cursor-pointer ${
+                        selectedSector === idx
+                          ? "bg-primary/15 border-primary text-primary font-600"
+                          : "bg-bg-elevated border-border text-text-muted hover:text-text"
+                      }`}
+                    >
+                      {sec}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Right: Live Summary & Action Box (5 cols) */}
+            <div className="lg:col-span-5">
+              <div className="p-6 sm:p-8 rounded-2xl bg-bg-elevated border border-border-strong space-y-6">
+                <div className="flex items-center justify-between gap-2 pb-4 border-b border-border">
+                  <span className="mono-index">CADERNO TÉCNICO // RESUMO</span>
+                  <span className="font-mono text-xs text-primary font-600">
+                    {activeSolution.timeline}
+                  </span>
+                </div>
+
+                <div>
+                  <p className="text-xs font-mono text-text-muted uppercase">
+                    Configuração Seleccionada
+                  </p>
+                  <h3 className="font-heading font-700 text-xl text-text mt-1">
+                    {activeSolution.label}
+                  </h3>
+                  <p className="text-xs font-mono text-primary mt-1">
+                    Sector: {activeSector}
+                  </p>
+                </div>
+
+                <div>
+                  <p className="text-xs font-mono text-text-muted uppercase mb-2.5">
+                    Entregáveis Incluídos
+                  </p>
+                  <ul className="space-y-2.5">
+                    {activeSolution.deliverables.map((item) => (
+                      <li
+                        key={item}
+                        className="flex items-start gap-2.5 text-xs sm:text-sm text-text-secondary"
+                      >
+                        <CheckCircle2
+                          size={16}
+                          className="text-primary shrink-0 mt-0.5"
+                        />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div className="space-y-3 pt-2">
+                  <a
+                    href={getWhatsAppUrl(customWhatsAppMessage)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-primary w-full py-3.5 text-sm"
+                    id="cta-contact-btn"
+                  >
+                    <span>Solicitar Proposta no WhatsApp</span>
+                    <ArrowUpRight size={17} />
+                  </a>
+
+                  <a
+                    href={CONTACTS.phone.href}
+                    className="btn-secondary w-full py-3 text-sm"
+                    id="cta-phone-btn"
+                  >
+                    <Phone size={16} />
+                    <span>Ligar Directo ({CONTACTS.phone.display})</span>
+                  </a>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

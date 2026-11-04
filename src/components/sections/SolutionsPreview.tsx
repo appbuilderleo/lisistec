@@ -1,289 +1,257 @@
 import Link from "next/link";
-import { Briefcase, LayoutDashboard, Globe, ExternalLink, ArrowRight, Zap, CheckCircle2 } from "lucide-react";
+import Image from "next/image";
+import {
+  Briefcase,
+  LayoutDashboard,
+  Globe,
+  ExternalLink,
+  ArrowRight,
+  ArrowUpRight,
+  CheckCircle2,
+} from "lucide-react";
 import { getWhatsAppUrl } from "@/lib/constants";
 
 const solutions = [
   {
+    id: "maputo-facim",
+    code: "SOL // 01",
+    icon: Globe,
+    name: "Portal Oficial Maputo FACIM",
+    tagline: "Governo, Investimento & Potencialidades Económicas",
+    description:
+      "Plataforma digital com alcance internacional que apresenta as potencialidades económicas, oportunidades de investimento, sectores produtivos e infraestruturas da Província de Maputo em Português e Inglês.",
+    features: [
+      "Arquitectura bilingue (Português e Inglês) para investidores",
+      "Mapeamento interactivo dos sectores produtivos provinciais",
+      "Desempenho optimizado para acesso rápido em redes móveis",
+      "Catálogo estruturado de projectos estratégicos e turismo",
+    ],
+    badge: "Governo & Investimento",
+    url: "https://maputofacim-kappa.vercel.app/en",
+    heroImage: "/projects/facim-hero.png",
+  },
+  {
     id: "ccn-consultores",
+    code: "SOL // 02",
     icon: Briefcase,
     name: "CCN Consultores Moçambique",
-    tagline: "Site Institucional de Consultoria",
+    tagline: "Plataforma Institucional de Consultoria Estratégica",
     description:
-      "Site institucional oficial da Empresa de Consultoria CCN Consultores Moçambique. Apresenta de forma elegante os serviços corporativos, equipa técnica e áreas de actuação estratégica.",
+      "Portal corporativo oficial da CCN Consultores Moçambique. Estrutura as áreas de actuação técnica, portfólio de projectos, perfil institucional e captação directa de oportunidades comerciais.",
     features: [
-      "Design corporativo premium e profissional",
-      "Apresentação completa de serviços e equipa",
-      "Formulário de contacto e captação de clientes",
-      "Totalmente optimizado para mobile e SEO",
+      "Arquitectura de informação clara para clientes institucionais",
+      "Apresentação detalhada de especialidades e equipa técnica",
+      "Sistema integrado de pedidos de proposta e contacto",
+      "Optimização técnica de indexação nos motores de pesquisa",
     ],
-    color: "#00D4AA",
-    badge: "Consultoria",
+    badge: "Consultoria Empresarial",
     url: "https://ccnconsultores.com/",
     heroImage: "/projects/ccn-hero.png",
   },
   {
     id: "crm-ccn",
+    code: "SOL // 03",
     icon: LayoutDashboard,
-    name: "CRM CCN Consultores",
-    tagline: "Sistema Integrado de Gestão de Clientes",
+    name: "CRM Corporativo CCN Consultores",
+    tagline: "Sistema Integrado de Gestão Comercial e Clientes",
     description:
-      "Sistema integrado de gestão de clientes (CRM) desenvolvido para a empresa CCN Consultores. Permite gerir leads, histórico de interações, propostas comerciais e tarefas da equipa num ambiente seguro.",
+      "Aplicação web privada desenvolvida para centralizar a operação comercial da CCN Consultores: controlo de oportunidades, registo de interacções, envio de propostas e indicadores de desempenho da equipa.",
     features: [
-      "Autenticação segura e perfis de utilizador",
-      "Controlo de pipeline de vendas e propostas",
-      "Histórico centralizado de clientes e notas",
-      "Dashboard com métricas e indicadores de desempenho",
+      "Controlo de acesso seguro por perfil de consultor e direcção",
+      "Gestão visual do funil de vendas e estados de proposta",
+      "Histórico cronológico de reuniões, notas e documentos",
+      "Painel executivo com métricas de conversão em tempo real",
     ],
-    color: "#0088FF",
-    badge: "Sistema CRM",
+    badge: "Sistema de Gestão CRM",
     url: "https://crm.ccnconsultores.com/login",
     heroImage: "/projects/crm-hero.png",
-  },
-  {
-    id: "maputo-facim",
-    icon: Globe,
-    name: "Portal Maputo FACIM",
-    tagline: "Potencialidades da Província de Maputo",
-    description:
-      "Portal digital oficial com foco internacional que promove as potencialidades económicas, oportunidades de investimento, sectores produtivos e atracções turísticas da Província de Maputo.",
-    features: [
-      "Apresentação das potencialidades provinciais",
-      "Suporte a conteúdo em Inglês e Português",
-      "Navegação interactiva rápida e responsiva",
-      "Vitrine de atracção de investimentos estratégicos",
-    ],
-    color: "#9333EA",
-    badge: "Governo & Investimento",
-    url: "https://maputofacim-kappa.vercel.app/en",
-    heroImage: "/projects/facim-hero.png",
   },
 ];
 
 export default function SolutionsPreview() {
   return (
     <section
-      style={{
-        padding: "96px 0",
-        position: "relative",
-        background: "linear-gradient(180deg, transparent, rgba(0,212,170,0.02), transparent)",
-      }}
+      className="py-24 lg:py-28 relative border-t border-border bg-bg-surface/40"
       aria-labelledby="solutions-heading"
       id="solutions-section"
     >
-      <div style={{ maxWidth: "1280px", margin: "0 auto", padding: "0 24px" }}>
-        {/* Header */}
-        <div style={{ textAlign: "center", marginBottom: "64px" }}>
-          <div className="section-tag" style={{ margin: "0 auto 16px", display: "inline-flex", gap: "8px" }}>
-            <Zap size={14} />
-            Soluções Próprias e Em Produção
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Header Bar */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
+          <div>
+            <div className="section-tag mb-4">02 // Sistemas em Produção</div>
+            <h2
+              id="solutions-heading"
+              className="text-3xl sm:text-4xl lg:text-5xl font-heading font-700 text-text"
+            >
+              Soluções reais a operar no{" "}
+              <span className="text-gradient">mercado moçambicano.</span>
+            </h2>
           </div>
-          <h2
-            id="solutions-heading"
-            style={{
-              fontFamily: "'Space Grotesk', sans-serif",
-              fontSize: "clamp(1.75rem, 4vw, 3rem)",
-              fontWeight: 700,
-              color: "#ffffff",
-              marginBottom: "16px",
-            }}
-          >
-            Soluções que fazem a <span className="text-gradient">diferença</span>
-          </h2>
-          <p style={{ color: "#8B9CC0", fontSize: "1.1rem", maxWidth: "680px", margin: "0 auto", lineHeight: 1.7 }}>
-            Plataformas digitais reais desenvolvidas e implementadas pela Lisis Tecnologias, gerando impacto e eficiência para clientes em Moçambique.
-          </p>
+          <div className="max-w-md">
+            <p className="text-text-muted text-sm sm:text-base leading-relaxed mb-4">
+              Conheça plataformas desenvolvidas pela Lisis Tecnologias que já
+              apoiam instituições públicas, investidores e equipas de
+              consultoria todos os dias.
+            </p>
+            <Link
+              href="/solucoes"
+              className="inline-flex items-center gap-2 font-mono text-xs font-600 uppercase tracking-wider text-primary hover:underline"
+            >
+              <span>Ver todas as 6 soluções e produtos próprios</span>
+              <ArrowRight size={14} />
+            </Link>
+          </div>
         </div>
 
-        {/* Solutions Cards */}
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: "32px" }}>
-          {solutions.map(({ id, icon: Icon, name, tagline, description, features, color, badge, url, heroImage }) => (
-            <article
-              key={id}
-              className="glass-card"
-              style={{
-                overflow: "hidden",
-                display: "flex",
-                flexDirection: "column",
-                position: "relative",
-                transition: "all 0.3s ease",
-                padding: 0,
-              }}
-              aria-labelledby={`solution-${id}-title`}
-            >
-              {/* Hero cover screenshot */}
-              <a
-                href={url}
-                target="_blank"
-                rel="noopener noreferrer"
-                title={`Abrir ${name} em nova aba`}
-                style={{
-                  height: "200px",
-                  position: "relative",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  overflow: "hidden",
-                  textDecoration: "none",
-                  borderBottom: "1px solid rgba(255,255,255,0.08)",
-                  backgroundImage: `url(${heroImage})`,
-                  backgroundSize: "cover",
-                  backgroundPosition: "top center",
-                  backgroundRepeat: "no-repeat",
-                  flexShrink: 0,
-                }}
+        {/* Stacked Editorial Case Studies */}
+        <div className="space-y-10">
+          {solutions.map(
+            (
+              {
+                id,
+                code,
+                icon: Icon,
+                name,
+                tagline,
+                description,
+                features,
+                badge,
+                url,
+                heroImage,
+              },
+              index
+            ) => (
+              <article
+                key={id}
+                className="arch-card p-6 sm:p-8 lg:p-10 bg-bg-surface"
+                aria-labelledby={`solution-${id}-title`}
               >
-                {/* Dark overlay */}
-                <div style={{
-                  position: "absolute",
-                  inset: 0,
-                  background: "linear-gradient(to bottom, rgba(2,12,27,0.4) 0%, rgba(2,12,27,0.6) 100%)",
-                  transition: "background 0.3s ease",
-                }} />
+                <div className="grid lg:grid-cols-12 gap-8 lg:gap-10 items-center">
+                  {/* Screenshot Column (6 cols) */}
+                  <div
+                    className={`lg:col-span-6 ${
+                      index % 2 === 1 ? "lg:order-2" : ""
+                    }`}
+                  >
+                    <a
+                      href={url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      title={`Abrir ${name} em nova aba`}
+                      className="group block rounded-xl overflow-hidden border border-border bg-[#06101E] shadow-card"
+                    >
+                      {/* Browser Top Bar */}
+                      <div className="px-4 py-2.5 bg-[#091628] border-b border-white/10 flex items-center justify-between gap-2">
+                        <div className="flex items-center gap-1.5">
+                          <span className="w-2.5 h-2.5 rounded-full bg-rose-500/80" />
+                          <span className="w-2.5 h-2.5 rounded-full bg-amber-500/80" />
+                          <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/80" />
+                        </div>
+                        <span className="font-mono text-[11px] text-slate-400 truncate max-w-[220px] sm:max-w-xs">
+                          {url.replace(/^https?:\/\//, "")}
+                        </span>
+                        <span className="font-mono text-[10px] text-[#00D4AA] inline-flex items-center gap-1">
+                          ONLINE <ExternalLink size={11} />
+                        </span>
+                      </div>
 
-                {/* Glassmorphic icon badge */}
-                <div
-                  style={{
-                    position: "relative",
-                    zIndex: 2,
-                    width: "72px",
-                    height: "72px",
-                    borderRadius: "20px",
-                    background: "rgba(2,12,27,0.72)",
-                    backdropFilter: "blur(12px)",
-                    WebkitBackdropFilter: "blur(12px)",
-                    border: `1px solid ${color}55`,
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    boxShadow: `0 8px 32px rgba(0,0,0,0.5), 0 0 0 1px ${color}22`,
-                    transition: "transform 0.3s ease",
-                  }}
-                >
-                  <Icon size={30} style={{ color }} />
+                      {/* Unobscured High-Clarity Screenshot */}
+                      <div className="relative aspect-[16/10] w-full overflow-hidden">
+                        <Image
+                          src={heroImage}
+                          alt={`Interface do sistema ${name}`}
+                          fill
+                          sizes="(max-width: 1024px) 100vw, 50vw"
+                          className="object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                        />
+                      </div>
+                    </a>
+                  </div>
+
+                  {/* Content Column (6 cols) */}
+                  <div
+                    className={`lg:col-span-6 flex flex-col justify-between ${
+                      index % 2 === 1 ? "lg:order-1" : ""
+                    }`}
+                  >
+                    <div>
+                      <div className="flex flex-wrap items-center gap-3 mb-4">
+                        <span className="mono-index px-2.5 py-1 rounded bg-bg-elevated border border-border">
+                          {code}
+                        </span>
+                        <span className="tag">{badge}</span>
+                      </div>
+
+                      <div className="flex items-center gap-3 mb-2">
+                        <div className="w-10 h-10 rounded-xl bg-primary/10 border border-primary/30 flex items-center justify-center text-primary shrink-0">
+                          <Icon size={20} />
+                        </div>
+                        <h3
+                          id={`solution-${id}-title`}
+                          className="text-2xl sm:text-3xl font-heading font-700 text-text"
+                        >
+                          {name}
+                        </h3>
+                      </div>
+
+                      <p className="font-mono text-xs text-primary font-600 uppercase tracking-wider mb-4">
+                        {tagline}
+                      </p>
+
+                      <p className="text-text-muted text-sm sm:text-base leading-relaxed mb-6">
+                        {description}
+                      </p>
+
+                      {/* Features Grid */}
+                      <ul className="grid sm:grid-cols-2 gap-3 mb-8 pt-4 border-t border-border">
+                        {features.map((f) => (
+                          <li
+                            key={f}
+                            className="flex items-start gap-2.5 text-xs sm:text-sm text-text-secondary"
+                          >
+                            <CheckCircle2
+                              size={16}
+                              className="text-primary shrink-0 mt-0.5"
+                              aria-hidden="true"
+                            />
+                            <span>{f}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    {/* Actions */}
+                    <div className="flex flex-wrap items-center gap-3 pt-2">
+                      <a
+                        href={url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="btn-primary text-sm py-2.5 px-5"
+                        id={`solution-${id}-visit-btn`}
+                      >
+                        <span>Aceder à Plataforma</span>
+                        <ExternalLink size={15} />
+                      </a>
+
+                      <a
+                        href={getWhatsAppUrl(
+                          `Olá! Gostaria de solicitar uma proposta para uma solução semelhante a: ${name}.`
+                        )}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="btn-secondary text-sm py-2.5 px-5"
+                        id={`solution-${id}-whatsapp-btn`}
+                      >
+                        <span>Solicitar Solução Similar</span>
+                        <ArrowUpRight size={15} />
+                      </a>
+                    </div>
+                  </div>
                 </div>
-
-                {/* Badge top-right */}
-                <div
-                  style={{
-                    position: "absolute",
-                    top: "12px",
-                    right: "12px",
-                    zIndex: 2,
-                    background: "rgba(2,12,27,0.80)",
-                    backdropFilter: "blur(8px)",
-                    WebkitBackdropFilter: "blur(8px)",
-                    border: `1px solid ${color}44`,
-                    padding: "4px 10px",
-                    borderRadius: "6px",
-                    fontSize: "0.72rem",
-                    color,
-                    fontWeight: 700,
-                    letterSpacing: "0.03em",
-                  }}
-                >
-                  {badge}
-                </div>
-
-                {/* Bottom gradient */}
-                <div style={{
-                  position: "absolute",
-                  bottom: 0,
-                  left: 0,
-                  right: 0,
-                  height: "60px",
-                  background: "linear-gradient(to bottom, transparent, rgba(9,18,32,0.9))",
-                  zIndex: 1,
-                }} />
-              </a>
-
-              {/* Card body */}
-              <div style={{ padding: "28px 28px 32px", display: "flex", flexDirection: "column", flex: 1 }}>
-
-              {/* Title & Tagline */}
-              <h3
-                id={`solution-${id}-title`}
-                style={{
-                  fontFamily: "'Space Grotesk', sans-serif",
-                  fontWeight: 700,
-                  fontSize: "1.35rem",
-                  color: "#ffffff",
-                  marginBottom: "6px",
-                }}
-              >
-                <a
-                  href={url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style={{ color: "#ffffff", textDecoration: "none", transition: "color 0.2s" }}
-                  title={`Abrir ${name} em nova aba`}
-                >
-                  {name}
-                </a>
-              </h3>
-              <p style={{ color, fontSize: "0.875rem", fontWeight: 600, marginBottom: "16px" }}>{tagline}</p>
-              
-              <p style={{ color: "#8B9CC0", fontSize: "0.9rem", lineHeight: 1.7, marginBottom: "24px", flex: 1 }}>
-                {description}
-              </p>
-
-              {/* Features list */}
-              <ul style={{ display: "flex", flexDirection: "column", gap: "10px", marginBottom: "32px" }}>
-                {features.map((f) => (
-                  <li key={f} style={{ display: "flex", alignItems: "flex-start", gap: "10px", fontSize: "0.875rem", color: "#8B9CC0" }}>
-                    <CheckCircle2 size={16} style={{ color, flexShrink: 0, marginTop: "2px" }} />
-                    <span>{f}</span>
-                  </li>
-                ))}
-              </ul>
-
-              {/* Actions */}
-              <div style={{ display: "flex", flexDirection: "column", gap: "12px", marginTop: "auto" }}>
-                {/* External link button */}
-                <a
-                  href={url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn-primary"
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    gap: "8px",
-                    fontSize: "0.9rem",
-                    padding: "12px 20px",
-                    textDecoration: "none",
-                  }}
-                  id={`solution-${id}-visit-btn`}
-                  title={`Aceder a ${url} (abre em nova aba)`}
-                >
-                  <span>Visitar Solução Online</span>
-                  <ExternalLink size={16} />
-                </a>
-
-                {/* WhatsApp button */}
-                <a
-                  href={getWhatsAppUrl(`Olá! Gostaria de solicitar uma proposta para uma solução similar a: ${name}.`)}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn-secondary"
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    gap: "8px",
-                    fontSize: "0.85rem",
-                    padding: "10px 18px",
-                    textDecoration: "none",
-                  }}
-                  id={`solution-${id}-whatsapp-btn`}
-                >
-                  <span>Solicitar Solução Similar via WhatsApp</span>
-                  <ArrowRight size={14} />
-                </a>
-              </div>
-              </div>
-            </article>
-          ))}
+              </article>
+            )
+          )}
         </div>
       </div>
     </section>

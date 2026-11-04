@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Mail, Phone, MapPin, MessageCircle } from "lucide-react";
+import { Mail, Phone, MapPin, MessageCircle, ArrowUpRight } from "lucide-react";
 import { CONTACTS, getWhatsAppUrl } from "@/lib/constants";
 
 function LinkedinIcon({ size = 16 }: { size?: number }) {
@@ -38,26 +38,28 @@ function YoutubeIcon({ size = 16 }: { size?: number }) {
 }
 
 const services = [
-  { label: "Design & Branding", href: "/servicos#design" },
-  { label: "Desenvolvimento Web", href: "/servicos#web" },
-  { label: "Aplicações Móveis", href: "/servicos#mobile" },
-  { label: "Sistemas de Gestão", href: "/servicos#sistemas" },
-  { label: "Consultoria e Suporte", href: "/servicos#consultoria" },
-  { label: "Integração de Sistemas", href: "/servicos#integracao" },
+  { label: "Design & Identidade Visual", href: "/servicos#design" },
+  { label: "Desenvolvimento Web & Portais", href: "/servicos#web" },
+  { label: "Aplicações Móveis (iOS & Android)", href: "/servicos#mobile" },
+  { label: "Sistemas de Gestão (ERP / POS)", href: "/servicos#sistemas" },
+  { label: "Consultoria TI & Infraestrutura", href: "/servicos#consultoria" },
+  { label: "Integração de Sistemas & APIs", href: "/servicos#integracao" },
 ];
 
 const solutions = [
-  { label: "Lisis Assist", href: "/solucoes#assist" },
-  { label: "Lisis School", href: "/solucoes#school" },
-  { label: "Stoka", href: "/solucoes#stoka" },
+  { label: "STOKA · Ponto de Venda & Stock", href: "/solucoes#stoka" },
+  { label: "CRM CCN Consultores", href: "/solucoes#crm-ccn" },
+  { label: "Portal Maputo FACIM", href: "/solucoes#maputo-facim" },
+  { label: "Lisis School · Gestão Académica", href: "/solucoes#school" },
+  { label: "Lisis Assist · Atendimento Digital", href: "/solucoes#assist" },
 ];
 
 const company = [
-  { label: "Sobre Nós", href: "/sobre" },
-  { label: "Portfólio", href: "/portfolio" },
-  { label: "Galeria de Trabalhos", href: "/galeria" },
-  { label: "Blog", href: "/blog" },
-  { label: "Contacto", href: "/contacto" },
+  { label: "Sobre a Lisis (+7 Anos)", href: "/sobre" },
+  { label: "Portfólio em Produção", href: "/portfolio" },
+  { label: "Galeria de Design (9:16)", href: "/galeria" },
+  { label: "Artigos & Publicações", href: "/blog" },
+  { label: "Contactos & Propostas", href: "/contacto" },
 ];
 
 const socials = [
@@ -70,65 +72,89 @@ const socials = [
 export default function Footer() {
   return (
     <footer
-      style={{ position: "relative", borderTop: "1px solid rgba(0,212,170,0.15)", marginTop: "96px", background: "rgba(2,12,27,0.98)" }}
+      className="relative border-t border-border mt-24 bg-bg-surface transition-colors duration-300"
       role="contentinfo"
     >
-      {/* Top gradient line */}
+      {/* Top gradient hairline */}
       <div
         aria-hidden="true"
-        style={{ position: "absolute", top: 0, left: 0, right: 0, height: "1px", background: "linear-gradient(90deg, transparent, #00D4AA, transparent)" }}
+        className="absolute top-0 left-0 right-0 h-[1px]"
+        style={{ background: "linear-gradient(90deg, transparent, var(--primary), transparent)" }}
       />
 
-      <div style={{ maxWidth: "1280px", margin: "0 auto", padding: "64px 24px 32px" }}>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-10">
         {/* Main Grid */}
-        <div className="footer-grid">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 pb-12 border-b border-border">
           {/* Brand Column */}
-          <div>
-            <Link href="/" style={{ display: "inline-flex", alignItems: "center", gap: "12px", marginBottom: "20px" }} aria-label="Lisis Tecnologias - Página Inicial">
-              <Image src="/logolisisnova.png" alt="Lisis Tecnologias e Serviços" width={170} height={55} style={{ height: "40px", width: "auto", objectFit: "contain" }} />
+          <div className="lg:col-span-4">
+            <Link
+              href="/"
+              className="inline-flex items-center gap-3 mb-5 group"
+              aria-label="Lisis Tecnologias e Serviços - Página Inicial"
+            >
+              <div className="w-10 h-10 rounded-xl bg-[#061325] border border-[#00D4AA]/30 flex items-center justify-center p-1.5">
+                <Image
+                  src="/logolisisnova.png"
+                  alt="Lisis Tecnologias e Serviços"
+                  width={36}
+                  height={36}
+                  className="w-full h-full object-contain"
+                />
+              </div>
+              <div className="flex flex-col">
+                <span className="font-heading font-700 text-lg leading-none text-text">
+                  LISIS TECNOLOGIAS
+                </span>
+                <span className="font-mono text-[10px] tracking-[0.14em] uppercase text-primary mt-0.5">
+                  Engenharia Digital · Moçambique
+                </span>
+              </div>
             </Link>
-            <p style={{ color: "#8B9CC0", fontSize: "0.875rem", lineHeight: 1.7, marginBottom: "24px", maxWidth: "280px" }}>
-              Transformamos ideias em soluções digitais. Tecnologia, inovação e pessoas para um futuro mais eficiente.
+
+            <p className="text-text-muted text-sm leading-relaxed mb-6 max-w-sm">
+              Mais de 7 anos de experiência e mais de 15 projectos entregues para ministérios, universidades, consultoras e empresas de retalho em Moçambique.
             </p>
-            <ul style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
-              <li style={{ display: "flex", alignItems: "center", gap: "12px", fontSize: "0.875rem", color: "#8B9CC0" }}>
-                <Phone size={15} style={{ color: "#00D4AA", flexShrink: 0 }} />
+
+            <ul className="space-y-3 text-sm text-text-muted">
+              <li className="flex items-center gap-3">
+                <Phone size={15} className="text-primary shrink-0" />
                 <span>
                   Chamadas:{" "}
-                  <a href={CONTACTS.phone.href} style={{ color: "#8B9CC0", textDecoration: "none", transition: "color 0.2s ease" }}>
+                  <a href={CONTACTS.phone.href} className="text-text hover:text-primary font-500 transition-colors">
                     {CONTACTS.phone.display}
                   </a>
                 </span>
               </li>
-              <li style={{ display: "flex", alignItems: "center", gap: "12px", fontSize: "0.875rem", color: "#8B9CC0" }}>
-                <MessageCircle size={15} style={{ color: "#25D366", flexShrink: 0 }} />
+              <li className="flex items-center gap-3">
+                <MessageCircle size={15} className="text-[#25D366] shrink-0" />
                 <span>
                   WhatsApp:{" "}
                   <a
                     href={getWhatsAppUrl("Olá! Gostaria de falar com a Lisis Tecnologias e Serviços.")}
                     target="_blank"
                     rel="noopener noreferrer"
-                    style={{ color: "#25D366", textDecoration: "none", transition: "color 0.2s ease", fontWeight: 500 }}
+                    className="text-[#25D366] hover:underline font-600"
                   >
                     {CONTACTS.whatsapp.display}
                   </a>
                 </span>
               </li>
-              <li style={{ display: "flex", alignItems: "center", gap: "12px", fontSize: "0.875rem", color: "#8B9CC0" }}>
-                <Mail size={15} style={{ color: "#00D4AA", flexShrink: 0 }} />
+              <li className="flex items-center gap-3">
+                <Mail size={15} className="text-primary shrink-0" />
                 <span>
                   Email:{" "}
-                  <a href={CONTACTS.email.href} style={{ color: "#8B9CC0", textDecoration: "none", transition: "color 0.2s ease" }}>
+                  <a href={CONTACTS.email.href} className="text-text hover:text-primary transition-colors">
                     {CONTACTS.email.address}
                   </a>
                 </span>
               </li>
-              <li style={{ display: "flex", alignItems: "flex-start", gap: "12px", fontSize: "0.875rem", color: "#8B9CC0" }}>
-                <MapPin size={15} style={{ color: "#00D4AA", flexShrink: 0, marginTop: "2px" }} />
-                <span>Maputo, Moçambique</span>
+              <li className="flex items-start gap-3">
+                <MapPin size={15} className="text-primary shrink-0 mt-1" />
+                <span>{CONTACTS.location.display} · {CONTACTS.hours.display}</span>
               </li>
             </ul>
-            <div style={{ display: "flex", alignItems: "center", gap: "16px", marginTop: "24px" }}>
+
+            <div className="flex items-center gap-2.5 mt-6">
               {socials.map(({ icon: Icon, href, label }) => (
                 <a
                   key={label}
@@ -136,109 +162,133 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
-                  style={{ width: "36px", height: "36px", borderRadius: "8px", border: "1px solid rgba(0,212,170,0.15)", display: "flex", alignItems: "center", justifyContent: "center", color: "#8B9CC0", textDecoration: "none", transition: "all 0.2s ease" }}
+                  className="w-9 h-9 rounded-lg bg-bg-elevated border border-border hover:border-primary text-text-muted hover:text-primary flex items-center justify-center transition-all"
                 >
-                  <Icon size={16} />
+                  <Icon size={15} />
                 </a>
               ))}
             </div>
           </div>
 
           {/* Serviços */}
-          <div>
-            <h3 style={{ color: "#ffffff", fontFamily: "'Space Grotesk', sans-serif", fontWeight: 600, fontSize: "0.8rem", marginBottom: "20px", textTransform: "uppercase", letterSpacing: "0.08em" }}>
-              Serviços
+          <div className="lg:col-span-3">
+            <h3 className="text-text font-mono font-600 text-xs uppercase tracking-wider mb-5">
+              01 // Serviços
             </h3>
-            <ul style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+            <ul className="space-y-3">
               {services.map((item) => (
                 <li key={item.href}>
-                  <Link href={item.href} className="footer-link">{item.label}</Link>
+                  <Link href={item.href} className="footer-link">
+                    {item.label}
+                  </Link>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Soluções + Empresa */}
-          <div>
-            <h3 style={{ color: "#ffffff", fontFamily: "'Space Grotesk', sans-serif", fontWeight: 600, fontSize: "0.8rem", marginBottom: "20px", textTransform: "uppercase", letterSpacing: "0.08em" }}>
-              Soluções
+          {/* Soluções & Empresa */}
+          <div className="lg:col-span-2">
+            <h3 className="text-text font-mono font-600 text-xs uppercase tracking-wider mb-5">
+              02 // Soluções
             </h3>
-            <ul style={{ display: "flex", flexDirection: "column", gap: "12px", marginBottom: "32px" }}>
+            <ul className="space-y-2.5 mb-7">
               {solutions.map((item) => (
                 <li key={item.href}>
-                  <Link href={item.href} className="footer-link">{item.label}</Link>
+                  <Link href={item.href} className="footer-link">
+                    {item.label}
+                  </Link>
                 </li>
               ))}
             </ul>
-            <h3 style={{ color: "#ffffff", fontFamily: "'Space Grotesk', sans-serif", fontWeight: 600, fontSize: "0.8rem", marginBottom: "20px", textTransform: "uppercase", letterSpacing: "0.08em" }}>
-              Empresa
+
+            <h3 className="text-text font-mono font-600 text-xs uppercase tracking-wider mb-4">
+              03 // Institucional
             </h3>
-            <ul style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+            <ul className="space-y-2.5">
               {company.map((item) => (
                 <li key={item.href}>
-                  <Link href={item.href} className="footer-link">{item.label}</Link>
+                  <Link href={item.href} className="footer-link">
+                    {item.label}
+                  </Link>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Newsletter */}
-          <div>
-            <h3 style={{ color: "#ffffff", fontFamily: "'Space Grotesk', sans-serif", fontWeight: 600, fontSize: "0.8rem", marginBottom: "8px", textTransform: "uppercase", letterSpacing: "0.08em" }}>
-              Newsletter
+          {/* Direct Proposal & Newsletter */}
+          <div className="lg:col-span-3">
+            <h3 className="text-text font-mono font-600 text-xs uppercase tracking-wider mb-3">
+              04 // Iniciar Projecto
             </h3>
-            <p style={{ color: "#8B9CC0", fontSize: "0.875rem", marginBottom: "16px" }}>
-              Receba dicas e novidades tecnológicas.
+            <p className="text-text-muted text-sm leading-relaxed mb-4">
+              Precisa de um caderno de encargos, sistema à medida ou proposta técnica para concurso ou empresa?
             </p>
-            <form action="/api/newsletter" method="POST" style={{ display: "flex", flexDirection: "column", gap: "12px" }} aria-label="Subscrever newsletter">
-              <input
-                type="email"
-                name="email"
-                placeholder="O seu email"
-                required
-                className="form-input"
-                style={{ fontSize: "0.875rem" }}
-                aria-label="Email para newsletter"
-                id="footer-newsletter-email"
-              />
-              <button type="submit" className="btn-primary" style={{ fontSize: "0.875rem", padding: "10px 20px", justifyContent: "center" }} id="footer-newsletter-submit">
-                Subscrever
-              </button>
-            </form>
+            <a
+              href={getWhatsAppUrl("Olá! Gostaria de solicitar uma proposta técnica com a Lisis Tecnologias e Serviços.")}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-primary w-full text-sm py-2.5 mb-6"
+            >
+              <span>Pedir Proposta Técnica</span>
+              <ArrowUpRight size={15} />
+            </a>
+
+            <div className="p-4 rounded-xl bg-bg-elevated border border-border">
+              <p className="font-heading font-600 text-xs text-text mb-1">
+                Boletim Técnico Lisis
+              </p>
+              <p className="text-text-muted text-xs mb-3">
+                Actualizações sobre engenharia de software e transformação digital em Moçambique.
+              </p>
+              <form
+                action="/api/newsletter"
+                method="POST"
+                className="flex gap-2"
+                aria-label="Subscrever newsletter"
+              >
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="O seu email corporativo"
+                  required
+                  className="form-input text-xs py-2 px-3 bg-bg-surface"
+                  aria-label="Email para newsletter"
+                  id="footer-newsletter-email"
+                />
+                <button
+                  type="submit"
+                  className="btn-secondary text-xs py-2 px-3 shrink-0"
+                  id="footer-newsletter-submit"
+                >
+                  Subscrever
+                </button>
+              </form>
+            </div>
           </div>
         </div>
 
         {/* Bottom Bar */}
-        <div style={{ borderTop: "1px solid rgba(0,212,170,0.15)", paddingTop: "32px", display: "flex", flexWrap: "wrap", alignItems: "center", justifyContent: "space-between", gap: "16px" }}>
-          <p style={{ color: "#4A5E7A", fontSize: "0.75rem" }}>
+        <div className="pt-8 flex flex-wrap items-center justify-between gap-4 text-xs text-text-faint">
+          <p>
             © {new Date().getFullYear()} Lisis Tecnologias e Serviços. Todos os direitos reservados.
           </p>
-          <div style={{ display: "flex", alignItems: "center", gap: "24px" }}>
-            <Link href="/privacidade" style={{ color: "#4A5E7A", fontSize: "0.75rem", textDecoration: "none", transition: "color 0.2s" }}>Política de Privacidade</Link>
-            <Link href="/termos" style={{ color: "#4A5E7A", fontSize: "0.75rem", textDecoration: "none", transition: "color 0.2s" }}>Termos de Uso</Link>
-            <Link href="/crm/login" style={{ color: "#4A5E7A", fontSize: "0.75rem", textDecoration: "none", transition: "color 0.2s" }}>Área de Gestão (CRM)</Link>
+          <div className="flex flex-wrap items-center gap-6">
+            <Link href="/privacidade" className="hover:text-primary transition-colors">
+              Política de Privacidade
+            </Link>
+            <Link href="/termos" className="hover:text-primary transition-colors">
+              Termos de Uso
+            </Link>
+            <Link href="/crm/login" className="hover:text-primary transition-colors">
+              Área de Gestão (CRM)
+            </Link>
           </div>
-          <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-            <div style={{ width: "8px", height: "8px", borderRadius: "50%", background: "#00D4AA", animation: "pulse-neon 3s ease-in-out infinite" }} aria-hidden="true" />
-            <span style={{ color: "#4A5E7A", fontSize: "0.75rem" }}>Feito em Moçambique 🇲🇿</span>
+          <div className="flex items-center gap-2 font-mono text-[11px] text-text-muted">
+            <span className="w-2 h-2 rounded-full bg-primary inline-block" aria-hidden="true" />
+            <span>Maputo, Moçambique · Desde 2019</span>
           </div>
         </div>
       </div>
-
-      <style>{`
-        .footer-grid {
-          display: grid;
-          grid-template-columns: 1fr;
-          gap: 48px;
-          margin-bottom: 48px;
-        }
-        @media (min-width: 768px) {
-          .footer-grid { grid-template-columns: 1fr 1fr; }
-        }
-        @media (min-width: 1024px) {
-          .footer-grid { grid-template-columns: 2fr 1fr 1fr 1fr; }
-        }
-      `}</style>
     </footer>
   );
 }
