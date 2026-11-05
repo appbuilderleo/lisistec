@@ -45,3 +45,7 @@ prisma/generated/
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+
+# design motion source archive
+motion-source/
