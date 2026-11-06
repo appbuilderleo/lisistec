@@ -54,6 +54,16 @@ const heroShowcases = [
     metrics: "Catálogo Interactivo · Pedidos WhatsApp",
     tags: ["E-Commerce", "Logística Refrigerada", "Catálogo Digital"],
   },
+  {
+    id: "vilaflor",
+    code: "SYS // 05",
+    title: "Vila Flor · Casa de Praia em Ponta do Ouro",
+    client: "Hospitalidade & Turismo de Luxo em Moçambique",
+    image: "/projects/vilaflor-hero.png",
+    url: "https://vilaflor.vercel.app/",
+    metrics: "Airbnb Superhost · Reserva & Galeria",
+    tags: ["Turismo & Hotelaria", "Ponta do Ouro", "Alojamento"],
+  },
 ];
 
 export default function HeroSection() {

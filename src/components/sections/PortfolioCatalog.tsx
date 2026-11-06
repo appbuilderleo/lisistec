@@ -87,8 +87,21 @@ const projects = [
     year: "2026",
   },
   {
+    id: "vilaflor",
+    code: "PRJ // 06",
+    title: "Vila Flor · Casa de Praia Colonial em Ponta do Ouro",
+    category: "Sites & Plataformas Web",
+    client: "Hospitalidade & Turismo de Luxo em Moçambique",
+    description:
+      "Plataforma digital exclusiva para casa de praia colonial pé na areia em Ponta do Ouro. Apresenta acomodações de alto padrão, galeria imersiva, guia de experiências e integração oficial com Airbnb Superhost.",
+    tags: ["Turismo & Hotelaria", "Ponta do Ouro", "Alojamento de Luxo", "Next.js"],
+    image: "/projects/vilaflor-hero.png",
+    url: "https://vilaflor.vercel.app/",
+    year: "2026",
+  },
+  {
     id: "medspa",
-    code: "PRJ // 05",
+    code: "PRJ // 07",
     title: "MEDSPA · Clínica de Medicina Integrativa",
     category: "Sites & Plataformas Web",
     client: "MEDSPA Moçambique",
@@ -101,7 +114,7 @@ const projects = [
   },
   {
     id: "muliba",
-    code: "PRJ // 06",
+    code: "PRJ // 08",
     title: "MULIBA · Gastronomia & Encomendas Online",
     category: "Sites & Plataformas Web",
     client: "Restaurante Muliba",
@@ -114,7 +127,7 @@ const projects = [
   },
   {
     id: "convite",
-    code: "PRJ // 07",
+    code: "PRJ // 09",
     title: "Plataforma de Credenciamento & Convite RSVP",
     category: "Sites & Plataformas Web",
     client: "Eventos & Protocolo",
@@ -127,7 +140,7 @@ const projects = [
   },
   {
     id: "branding-lisis",
-    code: "PRJ // 08",
+    code: "PRJ // 10",
     title: "Arquitectura de Marca & Ecossistema Lisis Tech",
     category: "Design & Identidade Visual",
     client: "Lisis Tecnologias e Serviços",
@@ -140,7 +153,7 @@ const projects = [
   },
   {
     id: "cyan-software-logo",
-    code: "PRJ // 09",
+    code: "PRJ // 11",
     title: "Logo & Identidade Tech: Cyan Software",
     category: "Design & Identidade Visual",
     client: "Empresa de Software & Cloud",
@@ -153,7 +166,7 @@ const projects = [
   },
   {
     id: "real-estate-brand",
-    code: "PRJ // 10",
+    code: "PRJ // 12",
     title: "Brandbook & Mockups: Imobiliária Premium",
     category: "Design & Identidade Visual",
     client: "Consultoria Imobiliária & Investimentos",
@@ -166,7 +179,7 @@ const projects = [
   },
   {
     id: "red-tow-truck-branding",
-    code: "PRJ // 11",
+    code: "PRJ // 13",
     title: "Branding de Frota & Sinalética: Red Tow Truck",
     category: "Design & Identidade Visual",
     client: "Assistência Rodoviária & Logística",
@@ -179,7 +192,7 @@ const projects = [
   },
   {
     id: "cleaning-services-brand",
-    code: "PRJ // 12",
+    code: "PRJ // 14",
     title: "Manual & Identidade: Limpeza & Facilities",
     category: "Design & Identidade Visual",
     client: "Serviços Corporativos & Higienização",

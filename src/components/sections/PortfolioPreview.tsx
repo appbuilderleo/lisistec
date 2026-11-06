@@ -8,6 +8,8 @@ import {
   HeartPulse,
   HeartHandshake,
   UtensilsCrossed,
+  Palmtree,
+  Apple,
 } from "lucide-react";
 import { getWhatsAppUrl } from "@/lib/constants";
 
@@ -18,15 +20,39 @@ const projects = [
     title: "STOKA: Gestão de Vendas, Stock e PDV",
     category: "Retalho & Supermercados",
     description:
-      "Sistema comercial completo que integra ponto de venda (POS), controlo de stock multi-armazém, alerta de rotura e relatórios de caixa para supermercados, mercearias e lojas em Moçambique.",
+      "Sistema comercial completo que integra ponto de venda (POS), controlo de stock multi-armazém, alerta de rotura e relatórios de caixa para supermercados e lojas em Moçambique.",
     tags: ["Ponto de Venda", "Gestão de Stock", "Faturação", "Retalho"],
     url: "https://stoka-three.vercel.app/",
     icon: ShoppingCart,
     heroImage: "/projects/stoka-hero.png",
   },
   {
-    id: "medspa",
+    id: "vilaflor",
     code: "PRJ // 02",
+    title: "VILA FLOR: Casa de Praia em Ponta do Ouro",
+    category: "Turismo & Hotelaria",
+    description:
+      "Plataforma digital exclusiva para casa de praia colonial pé na areia em Ponta do Ouro. Apresenta acomodações de alto padrão, galeria imersiva e integração oficial com Airbnb Superhost.",
+    tags: ["Turismo & Hotelaria", "Ponta do Ouro", "Alojamento", "Next.js"],
+    url: "https://vilaflor.vercel.app/",
+    icon: Palmtree,
+    heroImage: "/projects/vilaflor-hero.png",
+  },
+  {
+    id: "frutas",
+    code: "PRJ // 03",
+    title: "FRUTAS: Distribuição & E-Commerce",
+    category: "Comércio & Distribuição",
+    description:
+      "Plataforma digital de distribuição de frutas selecionadas com catálogo dinâmico de produtos, cesto de compras e canal direto de pedidos automatizados via WhatsApp.",
+    tags: ["E-Commerce", "Agronegócio", "WhatsApp Checkout", "Catálogo"],
+    url: "https://frutas-zeta.vercel.app/",
+    icon: Apple,
+    heroImage: "/projects/frutas-hero.png",
+  },
+  {
+    id: "medspa",
+    code: "PRJ // 04",
     title: "MEDSPA: Clínica de Medicina Integrativa",
     category: "Saúde & Clínicas",
     description:
@@ -38,7 +64,7 @@ const projects = [
   },
   {
     id: "muliba",
-    code: "PRJ // 03",
+    code: "PRJ // 05",
     title: "MULIBA: Gastronomia & Encomendas Online",
     category: "Restauração & Comércio",
     description:
@@ -50,7 +76,7 @@ const projects = [
   },
   {
     id: "convite",
-    code: "PRJ // 04",
+    code: "PRJ // 06",
     title: "Plataforma de Convites & Credenciamento RSVP",
     category: "Eventos & Protocolo",
     description:
@@ -95,8 +121,8 @@ export default function PortfolioPreview() {
           </Link>
         </div>
 
-        {/* 2x2 Bento Showcase */}
-        <div className="grid md:grid-cols-2 gap-8">
+        {/* 6-Item Showcase */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.map(
             ({ id, code, title, category, description, tags, url, icon: Icon, heroImage }) => (
               <article
