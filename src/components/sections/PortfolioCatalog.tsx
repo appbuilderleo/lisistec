@@ -100,8 +100,21 @@ const projects = [
     year: "2026",
   },
   {
-    id: "medspa",
+    id: "livehotel",
     code: "PRJ // 07",
+    title: "LIVE HOTEL · Santuário Costeiro & Resort de Luxo",
+    category: "Sites & Plataformas Web",
+    client: "LIVE HOTEL · Hospitalidade & Resorts de Alto Padrão",
+    description:
+      "Plataforma digital imersiva com narrativa visual cinematográfica dividida em capítulos. Apresenta suites oceanfront, piscina infinita, santuário de bem-estar e motor de reservas diretas.",
+    tags: ["Hotelaria de Luxo", "Resort Costeiro", "Experiência Cinematográfica", "Reservas"],
+    image: "/projects/livehotel-hero.png",
+    url: "https://livehotel.vercel.app/",
+    year: "2026",
+  },
+  {
+    id: "medspa",
+    code: "PRJ // 08",
     title: "MEDSPA · Clínica de Medicina Integrativa",
     category: "Sites & Plataformas Web",
     client: "MEDSPA Moçambique",
@@ -114,7 +127,7 @@ const projects = [
   },
   {
     id: "muliba",
-    code: "PRJ // 08",
+    code: "PRJ // 09",
     title: "MULIBA · Gastronomia & Encomendas Online",
     category: "Sites & Plataformas Web",
     client: "Restaurante Muliba",
@@ -127,7 +140,7 @@ const projects = [
   },
   {
     id: "convite",
-    code: "PRJ // 09",
+    code: "PRJ // 10",
     title: "Plataforma de Credenciamento & Convite RSVP",
     category: "Sites & Plataformas Web",
     client: "Eventos & Protocolo",
@@ -140,7 +153,7 @@ const projects = [
   },
   {
     id: "branding-lisis",
-    code: "PRJ // 10",
+    code: "PRJ // 11",
     title: "Arquitectura de Marca & Ecossistema Lisis Tech",
     category: "Design & Identidade Visual",
     client: "Lisis Tecnologias e Serviços",
@@ -153,7 +166,7 @@ const projects = [
   },
   {
     id: "cyan-software-logo",
-    code: "PRJ // 11",
+    code: "PRJ // 12",
     title: "Logo & Identidade Tech: Cyan Software",
     category: "Design & Identidade Visual",
     client: "Empresa de Software & Cloud",
@@ -166,7 +179,7 @@ const projects = [
   },
   {
     id: "real-estate-brand",
-    code: "PRJ // 12",
+    code: "PRJ // 13",
     title: "Brandbook & Mockups: Imobiliária Premium",
     category: "Design & Identidade Visual",
     client: "Consultoria Imobiliária & Investimentos",
@@ -179,7 +192,7 @@ const projects = [
   },
   {
     id: "red-tow-truck-branding",
-    code: "PRJ // 13",
+    code: "PRJ // 14",
     title: "Branding de Frota & Sinalética: Red Tow Truck",
     category: "Design & Identidade Visual",
     client: "Assistência Rodoviária & Logística",
@@ -192,7 +205,7 @@ const projects = [
   },
   {
     id: "cleaning-services-brand",
-    code: "PRJ // 14",
+    code: "PRJ // 15",
     title: "Manual & Identidade: Limpeza & Facilities",
     category: "Design & Identidade Visual",
     client: "Serviços Corporativos & Higienização",

@@ -10,6 +10,7 @@ import {
   UtensilsCrossed,
   Palmtree,
   Apple,
+  Hotel,
 } from "lucide-react";
 import { getWhatsAppUrl } from "@/lib/constants";
 
@@ -27,10 +28,22 @@ const projects = [
     heroImage: "/projects/stoka-hero.png",
   },
   {
-    id: "vilaflor",
+    id: "livehotel",
     code: "PRJ // 02",
+    title: "LIVE HOTEL: Santuário Costeiro & Resort",
+    category: "Hospitalidade & Resorts",
+    description:
+      "Plataforma cinematográfica imersiva para resort costeiro de alto padrão. Narrativa visual com suites oceanfront, santuário de bem-estar e motor de reservas diretas.",
+    tags: ["Hotelaria de Luxo", "Resort", "Motor de Reservas", "Cinematográfico"],
+    url: "https://livehotel.vercel.app/",
+    icon: Hotel,
+    heroImage: "/projects/livehotel-hero.png",
+  },
+  {
+    id: "vilaflor",
+    code: "PRJ // 03",
     title: "VILA FLOR: Casa de Praia em Ponta do Ouro",
-    category: "Turismo & Hotelaria",
+    category: "Turismo & Alojamento",
     description:
       "Plataforma digital exclusiva para casa de praia colonial pé na areia em Ponta do Ouro. Apresenta acomodações de alto padrão, galeria imersiva e integração oficial com Airbnb Superhost.",
     tags: ["Turismo & Hotelaria", "Ponta do Ouro", "Alojamento", "Next.js"],
@@ -40,7 +53,7 @@ const projects = [
   },
   {
     id: "frutas",
-    code: "PRJ // 03",
+    code: "PRJ // 04",
     title: "FRUTAS: Distribuição & E-Commerce",
     category: "Comércio & Distribuição",
     description:
@@ -52,7 +65,7 @@ const projects = [
   },
   {
     id: "medspa",
-    code: "PRJ // 04",
+    code: "PRJ // 05",
     title: "MEDSPA: Clínica de Medicina Integrativa",
     category: "Saúde & Clínicas",
     description:
@@ -64,7 +77,7 @@ const projects = [
   },
   {
     id: "muliba",
-    code: "PRJ // 05",
+    code: "PRJ // 06",
     title: "MULIBA: Gastronomia & Encomendas Online",
     category: "Restauração & Comércio",
     description:
@@ -73,18 +86,6 @@ const projects = [
     url: "https://muliba.vercel.app/",
     icon: UtensilsCrossed,
     heroImage: "/projects/muliba-hero.png",
-  },
-  {
-    id: "convite",
-    code: "PRJ // 06",
-    title: "Plataforma de Convites & Credenciamento RSVP",
-    category: "Eventos & Protocolo",
-    description:
-      "Aplicação web interactiva para eventos corporativos e cerimónias, com confirmação de presença (RSVP) em tempo real, contagem decrescente e localização GPS.",
-    tags: ["Credenciamento RSVP", "Eventos", "Mobile First"],
-    url: "https://convite-two-beige.vercel.app/",
-    icon: HeartHandshake,
-    heroImage: "/projects/convite-hero.png",
   },
 ];
 

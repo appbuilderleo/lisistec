@@ -64,6 +64,16 @@ const heroShowcases = [
     metrics: "Airbnb Superhost · Reserva & Galeria",
     tags: ["Turismo & Hotelaria", "Ponta do Ouro", "Alojamento"],
   },
+  {
+    id: "livehotel",
+    code: "SYS // 06",
+    title: "LIVE HOTEL · Santuário Costeiro & Resort",
+    client: "Hospitalidade & Resorts de Alto Padrão",
+    image: "/projects/livehotel-hero.png",
+    url: "https://livehotel.vercel.app/",
+    metrics: "Experiência Cinematográfica · Oceanfront",
+    tags: ["Hotelaria de Luxo", "Resort", "Motor de Reservas"],
+  },
 ];
 
 export default function HeroSection() {
